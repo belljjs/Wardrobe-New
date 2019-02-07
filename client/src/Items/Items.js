@@ -3,9 +3,6 @@ import Item from '../Item/Item';
 import './Items.css'
 import '../global.css';
 
-
-
-
 const items = (props) => {
 
     const itemsShown = [...props.itemsShown]

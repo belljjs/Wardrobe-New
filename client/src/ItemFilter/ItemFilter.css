@@ -1,5 +1,3 @@
-import React from 'react';
-import './ItemFilter.css';
 .ItemFilter{
     display: flex;
     justify-content: center;
