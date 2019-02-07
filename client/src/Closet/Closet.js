@@ -8,18 +8,85 @@ import SelectedItems from '../SelectedItems/SelectedItems';
 
 class Closet extends Component {
     state = {
+        itemsAll: [],
         itemsShown: [],
         itemsSelected: [],
         itemsFilter: "All"
     }
+    componentWillMount(){
+        const itemsAll = [
+            { id: 0,
+              category: "Top",
+              color: "White",
+              season: "Summer",
+              name: "TopA" 
+            },
+            { id: 1,
+              category: "Top",
+              color: "White",
+              season: "Summer", 
+              name: "TopB" 
+            },
+            { id: 2,
+              category: "Top",
+              color: "White",
+              season: "Summer" ,
+              name: "TopC"
+            } ,
+            { id: 3,
+              category: "Bottom",
+              name: "BottomA",
+              color: "White",
+              season: "Summer", 
+            } ,
+      
+            { id: 4,
+              category: "Bottom",
+              name: "BottomB",
+              color: "White",
+              season: "Summer", 
+            } ,
+            { id: 5,
+              category: "Bottom",
+              name: "BottomC",
+              color: "White",
+              season: "Summer"
+             } ,
+            { id: 6,
+              category: "Dress",
+              color: "White",
+              season: "Summer" ,
+              name: "Dress1"
+            } ,
+            { id: 7,
+              category: "Shoes",
+              color: "White",
+              season: "Summer" ,
+              name: "Shoes1"
+            } ,
+            { id: 8,
+              category: "Bag",
+              color: "White",
+              season: "Summer",
+              name: "Bag1"  
+            } ,
+            { id: 9,
+              category: "Bag",
+              color: "White",
+              season: "Summer",
+              name: "Bag2"  
+            } ,
+          ];
 
+        this.setState({ itemsAll})
+    }
     freshItemsShown = (filter) => {
         console.log(".... freshItemsShown")
 
         // filtering props.itemsAll to create itemsShown
         console.log("filter in freshItemsShown",filter);
         
-        let itemsShown = [...this.props.itemsAll];
+        let itemsShown = [...this.state.itemsAll];
         // return new array (itemsShown) fitered by filter argument
         return  filter === "All" ? itemsShown : itemsShown.filter( item => item.category === filter);
     
@@ -94,17 +161,17 @@ class Closet extends Component {
     }
     render() {
         return (
-        <div>
-            <h3 className="title">Closet</h3>
-            <ItemFilter 
-                filterClicked={this.handleItemsFilterClicked}/>
-            <Items 
-                itemsShown={this.state.itemsShown}
-                itemsClicked={this.handleItemsShownClicked}    />
-            <SelectedItems 
-                itemsSelected={this.state.itemsSelected}
-                itemsSelectedClicked={this.handleItemsSelectedClicked} />
-        </div>
+            <div>
+                <h3 className="title">Closet</h3>
+                <ItemFilter 
+                    filterClicked={this.handleItemsFilterClicked}/>
+                <Items 
+                    itemsShown={this.state.itemsShown}
+                    itemsClicked={this.handleItemsShownClicked}    />
+                <SelectedItems 
+                    itemsSelected={this.state.itemsSelected}
+                    itemsSelectedClicked={this.handleItemsSelectedClicked} />
+            </div>
         );
     }
 }
