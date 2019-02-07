@@ -1,0 +1,12 @@
+import React from 'react';
+import './ItemFilter.css';
+.ItemFilter{
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 500px) {
+    .ItemFilter{
+        flex-flow: wrap;
+    }
+}
