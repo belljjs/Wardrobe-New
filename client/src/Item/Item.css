@@ -1,0 +1,15 @@
+.Item {
+    border: 2px solid grey;
+    border-radius: 8px;
+    padding: 8px, 16px;
+    margin: 5px 5px;
+    width: 10vw;
+    height: 10vw;
+    cursor: pointer;
+}
+@media (max-width: 600px) {
+    .Item{
+        width: 60px;
+        height: 60px;
+    }
+}
