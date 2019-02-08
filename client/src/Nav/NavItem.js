@@ -1,15 +1,15 @@
 import React from 'react';
 import "./Nav.css";
-import { Link } from 'react-router-dom'; 
+import { NavLink } from 'react-router-dom'; 
 
 
 const navItem = (props) => {
    
     return (
         <li className="NavItem"> 
-        <Link to={props.link}>
+        <NavLink to={props.link}>
              {props.children}
-         </Link>  
+         </NavLink>  
     </li>
     )
 }
