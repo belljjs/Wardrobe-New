@@ -3,12 +3,12 @@ import "./Nav.css";
 import NavItem from './NavItem';
 
 const nav = (props) => (
-    <div className="Nav">
-        <NavItem> Closet </NavItem>
-        <NavItem> Outfits </NavItem>
-        <NavItem> + </NavItem>
-        <NavItem> - </NavItem>
-    </div>
+    <ul className="Nav">
+        <NavItem link="closet" > Closet </NavItem>
+        <NavItem link="outfits" > Outfits </NavItem>
+        <NavItem link="addItem" > + </NavItem>
+        <NavItem link="deleteItem" > - </NavItem>
+    </ul>
 );
 
 export default nav;

@@ -14,6 +14,7 @@ class Closet extends Component {
         itemsFilter: "All"
     }
     componentWillMount(){
+        console.log(this.props);
         const itemsAll = [
             { id: 0,
               category: "Top",
@@ -166,6 +167,7 @@ class Closet extends Component {
                 <ItemFilter 
                     filterClicked={this.handleItemsFilterClicked}/>
                 <Items 
+                    
                     itemsShown={this.state.itemsShown}
                     itemsClicked={this.handleItemsShownClicked}    />
                 <SelectedItems 

@@ -2,12 +2,20 @@
     display: flex;
     justify-content: flex-end;
     align-content: center;
-
+    list-style: none;
+    text-decoration: none;
 }
 .NavItem{
+    list-style: none;
+    text-decoration: none;
     margin: 0 10px;
     font-weight: bold;
     font-size: 1.2rem;
+
+}
+
+.NavItem a {
+    text-decoration: none;
     color: rgb(82, 80, 80);
 
 }

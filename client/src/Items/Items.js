@@ -4,7 +4,7 @@ import './Items.css'
 import '../global.css';
 
 const items = (props) => {
-
+    // console.log(props);
     const itemsShown = [...props.itemsShown]
     const items = itemsShown.map( ({id, category, color, season, name},index) => 
             <Item 
