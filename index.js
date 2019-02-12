@@ -9,9 +9,12 @@ app.use((req, res, next) => {
 app.use(logger('dev'));
 
 
-app.get('/', (req, res) => {
-    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
-  });
+app.get('/test', (req, res, next) => {
+    res.json([
+      {id:1},
+      {id:2}
+    ])
+});
 
 const DOMAIN = 'localhost';
 const PORT = '4646';

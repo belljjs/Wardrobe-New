@@ -34,6 +34,7 @@ class AddItem extends Component {
             <div>
                 {redirect}
                 <h3 className="title">Add Item</h3>
+                
                 <Button clicked={this.postDataHandler}> SUBMIT </Button>
             </div>
         );
