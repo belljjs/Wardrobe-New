@@ -4,8 +4,8 @@
   "description": "React app on Node.js",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./bin/server",
+    "dev": "node ./bin/server"
   },
   "author": "Jessie Jung",
   "license": "ISC",
