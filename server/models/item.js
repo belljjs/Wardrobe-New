@@ -1,38 +1,32 @@
 
-const DEFAULT_PROPERTIES = {
-    itemId: 1,
-    user: " ",
-    season: " ",
-    occasion: " ",
-    category: " ",
-    color: " ",
-    get itemDate() {
-        return new Date()
-      },
-    image: " ",
-}
+const db = require('../database');
 
-class Item {
-    constructor(
-        { itemId,
-          user,
-          season,
-          occasion,
-          category,
-          color,
-          itemDate,
-          image
-        } = {} ) {
-          this.itemId = itemId || DEFAULT_PROPERTIES.itemId;
-          this.user =  user || DEFAULT_PROPERTIES.user;
-          this.season =  season || DEFAULT_PROPERTIES.season;
-          this.occasion = occasion || DEFAULT_PROPERTIES.occasion;
-          this.category = category || DEFAULT_PROPERTIES.category;
-          this.color = color || DEFAULT_PROPERTIES.color;
-          this.itemDate = itemDate || DEFAULT_PROPERTIES.itemDate;
-          this.image = image  || DEFAULT_PROPERTIES.image;
-
+class Items {
+    // if need some filtering, use parameter and use it in query
+    static retrieveALL (callback) {
+        db.query('SELECT city_name FROM cities', (err, res) => {
+            if (err.error) {
+                return callback(err)
+            };
+            callback(res);
+        } )
+        
     }
+    static insert (city, callback) {              
+        db.query('INSERT INTO cities (city_name) VALUES ($1)', [city], (err, res) => {
+            if (err.error)
+              return callback(err);
+            callback(res);
+          });
+    }
+    static insert (item, callback) {              
+        db.query('INSERT INTO cities (city_name) VALUES ($1)', [city], (err, res) => {
+            if (err.error)
+              return callback(err);
+            callback(res);
+          });
+    }
+
 }
 
-module.exports = Item;
+module.exports = Cities

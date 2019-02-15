@@ -24,11 +24,14 @@ code {
 }
 
 .centered {
-  text-align: center
+  text-align: center;
+}
+.left {
+  text-align: left;
 }
 
 .weather {
-  margin-top: 30px
+  margin-top: 30px;
 }
 
 .title {

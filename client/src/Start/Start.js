@@ -34,17 +34,15 @@ class Start extends Component {
    
     
       handleAddCity = async () => {
-        const response = await axios.post('/api/cities', { city: this.state.newCityName })
+        const response= await axios.post('/api/cities', { city: this.state.newCityName })
         console.log("response : ", response);
         this.getCityList();
         this.setState({ newCityName: "" });
-   
       };
       
       handleInputChange = (e) => {
         this.setState({newCityName: e.target.value});
       }
-    
     
       getWeather = async (city) => {
         console.log(city);
@@ -58,7 +56,6 @@ class Start extends Component {
           console.log("e.target.value: ",e.target.value);
         this.getWeather(e.target.value);
       }
-
     
       componentDidMount () {
         this.getCityList();   // get the cities in the begining
@@ -88,11 +85,7 @@ class Start extends Component {
                                  <Button color="primary" onClick={this.handleAddCity}>Add City</Button>
                             </InputGroupAddon>
                         </InputGroup>
-
-                    
                         <Weather data={this.state.weather}/>   
-
-                        
                 </Col>
                 <Col>
                    <h1 className="title" > Proposal </h1>
