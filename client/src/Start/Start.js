@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, InputGroup, Button, InputGroupAddon, Input, FormGroup,} from 'reactstrap';
 import Weather  from './Weather';
+import axios from 'axios';
 
 
 class Start extends Component {
@@ -24,28 +25,20 @@ class Start extends Component {
         });
       }
     
-      getCityList = () => {
-        fetch('/api/cities')    
-        .then(res => res.json())
-        .then(res => {
-          var cityList = res.map(r => r.city_name);
-          this.setState({ cityList });
-        });
-      };
+      getCityList = async () => {
+        const response = await axios('/api/cities')
+        console.log("response od get all city : ", response);
+        let cityList = response.data.map(r => r.city_name);
+        this.setState({ cityList});
+        };
+   
     
-      handleAddCity = () => {
-        fetch('/api/cities', {
-          method: 'post',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ city: this.state.newCityName })
-        })
-        // not specially meaningful
-        .then(res => res.json())  
-        .then(res => {
-          // update state cityList
-          this.getCityList();
-          this.setState({ newCityName: "" });
-        });
+      handleAddCity = async () => {
+        const response = await axios.post('/api/cities', { city: this.state.newCityName })
+        console.log("response : ", response);
+        this.getCityList();
+        this.setState({ newCityName: "" });
+   
       };
       
       handleInputChange = (e) => {
@@ -53,14 +46,12 @@ class Start extends Component {
       }
     
     
-      getWeather = (city) => {
+      getWeather = async (city) => {
         console.log(city);
-        fetch(`/api/weather/${city}`)
-        .then(res => res.json())
-        .then(weather => {
-          console.log(weather);
-          this.setState({ weather });
-        });
+        const response = await axios(`/api/weather/${city}`)
+        console.log("response of get weather: ", response);
+        this.setState({ weather: response.data});
+        
       }
     
       handleChangeCity = (e) => {
