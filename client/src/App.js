@@ -13,21 +13,11 @@ class App extends Component {
   state = {
     users: []
   }
-  componentDidMount() {
-    fetch('/test')
-      .then(res => res.json())
-      .then(users => this.setState({users}));
-  }
+
   render() {
     return (
       <div>
         <Layout>
-          <h1>Users</h1>
-          <ul>
-             {this.state.users.map(user => 
-                <li key={user.id}>User {user.id}</li>
-          )}
-          </ul>
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/start'  exact component={Start} />
