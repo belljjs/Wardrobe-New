@@ -35,6 +35,14 @@ code {
   color: rgb(4, 76, 85);
   font-size: 2rem  ;
   padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+.city-name {
+  color: rgb(114, 12, 106);
+  font-size: 1.5rem  ;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 }
 .subTitle {
   color: rgb(58, 57, 57);

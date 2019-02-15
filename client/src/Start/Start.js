@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import { Container, 
-    Row, Col, InputGroup, Button, InputGroupAddon, 
-    Input, FormGroup, InputGroupButtonDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
-} from 'reactstrap';
-
+import { Container, Row, Col, InputGroup, Button, InputGroupAddon, Input, FormGroup,} from 'reactstrap';
 import Weather  from './Weather';
 
 
@@ -74,10 +67,7 @@ class Start extends Component {
           console.log("e.target.value: ",e.target.value);
         this.getWeather(e.target.value);
       }
-      handleChangeCity2 = (city) => {
-        console.log("city",city);
-      this.getWeather(city);
-    }
+
     
       componentDidMount () {
         this.getCityList();   // get the cities in the begining
@@ -88,7 +78,6 @@ class Start extends Component {
           <Container>
             <Row>
                 <Col>
-                    
                         <h1 className="title">Current Weather</h1>
                         <FormGroup>
                             <Input type="select" onChange={this.handleChangeCity}>
@@ -102,7 +91,8 @@ class Start extends Component {
                             <Input 
                                 placeholder="New city name..."
                                 value={this.state.newCityName}
-                                onChange={this.handleInputChange}  />
+                                onChange={this.handleInputChange}
+                            />
                             <InputGroupAddon addonType="append">
                                  <Button color="primary" onClick={this.handleAddCity}>Add City</Button>
                             </InputGroupAddon>
