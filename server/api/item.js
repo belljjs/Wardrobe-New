@@ -1,13 +1,17 @@
 const { Router } = require('express');
 
 const router = new Router()
-const Item = require('../item')
+// const Item = require('../models/item');
 
-router.get('/new', (req, res, next) => {
-    newItem = new Item({color: "white", season: "summer"});
-    console.log('newItem',newItem)
 
-    res.json({item: newItem  })
-});
-
+router.post('/', (req,res) => {
+    const item = req.body.item;
+    // Items.insert(item, (err, result) => {
+    //     if (err) {
+    //         return res.json(err);
+    //     }
+    //     return res.json(result)
+    // })
+    console.log("item:", item)
+})
 module.exports = router;

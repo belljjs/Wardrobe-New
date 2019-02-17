@@ -32,8 +32,8 @@ class Database {
             client.query(query, params, (err, res) => {
                 done();
                 if (err) {
-                console.log(err.stack);
-                return callback({ error: 'Database error.' }, null);
+                    console.log(err.stack);
+                    return callback({ error: 'Database error.' }, null);
                 }
                 callback({}, res.rows);
             });

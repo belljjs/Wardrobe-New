@@ -89,6 +89,7 @@ class Start extends Component {
                 </Col>
                 <Col>
                    <h1 className="title" > Proposal </h1>
+     
                 </Col>
             </Row>
           </Container>

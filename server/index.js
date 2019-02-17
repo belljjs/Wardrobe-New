@@ -23,6 +23,7 @@ app.use(logger('dev'));
 // register middleware handling http request for cities
 app.use('/api/cities',               require('./api/cities'));
 app.use('/api/weather',              require('./api/weather'));
+app.use('/api/imageUpload',              require('./api/imageUpload'));
 //      👆 path(end point for http request)    👆 module handling the request
 
 
