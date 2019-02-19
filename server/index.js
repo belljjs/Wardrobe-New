@@ -4,7 +4,7 @@ const path = require('path');
 const logger = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
-var db = require('./database');
+var db = require('./db');
 const ENV = process.env.NODE_ENV;
 const PORT = process.env.PORT || 4646;
 const app = express();
@@ -23,7 +23,7 @@ app.use(logger('dev'));
 // register middleware handling http request for cities
 app.use('/api/cities',               require('./api/cities'));
 app.use('/api/weather',              require('./api/weather'));
-app.use('/api/imageUpload',              require('./api/imageUpload'));
+app.use('/api/item',                 require('./api/item'));
 //      👆 path(end point for http request)    👆 module handling the request
 
 
