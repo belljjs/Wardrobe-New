@@ -1,14 +1,16 @@
 import React from 'react';
 import "./Nav.css";
-import NavItem from './NavItem';
+// import NavItem from './NavItem';
+import { NavLink } from 'react-router-dom'; 
 
 const nav = (props) => (
-    <div className="Nav">
-        <NavItem> Closet </NavItem>
-        <NavItem> Outfits </NavItem>
-        <NavItem> + </NavItem>
-        <NavItem> - </NavItem>
-    </div>
+    <ul className="Nav">
+        <li><NavLink to='/start' > Start </NavLink></li>
+        <li><NavLink to='/closet' > Closet </NavLink></li>
+        <li><NavLink to='/outfits' > Outfits </NavLink></li>
+        <li><NavLink to='/addItem' > + </NavLink></li>
+        <li><NavLink to='/deleteItem' > - </NavLink></li>
+    </ul>
 );
 
 export default nav;

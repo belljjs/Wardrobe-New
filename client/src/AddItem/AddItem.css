@@ -1,0 +1,15 @@
+.fileImage {
+    width: 25vw;
+ 
+}
+@media(max-width: 770px) {
+ .fileImage {
+    width: 40vw;
+    }
+}
+
+.label {
+   text-align: "left";
+   width: "100%";
+   margin-bottom: "10px";
+}
