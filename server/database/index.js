@@ -30,7 +30,11 @@ class Database {
             const callback = args.length === 1 ? args[0] : args[1];
 
             client.query(query, params, (err, res) => {
+                console.log("*** Inside database client.query, query,params:",query, params);
                 done();
+                console.log("*** Inside database client.query, query,params:",query, params);
+                console.log("*** Inside database err:",err);
+
                 if (err) {
                     console.log(err.stack);
                     return callback({ error: 'Database error.' }, null);

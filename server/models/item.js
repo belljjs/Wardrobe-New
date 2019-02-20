@@ -1,7 +1,7 @@
 
-const db = require('../db');
+const db = require('../database');
 
-class Items {
+class Item {
     // if need some filtering, use parameter and use it in query
     static retrieveALL (callback) {
         db.query('SELECT * FROM items WHERE (user_id) IS ($1)', [user_id], (err, res) => {
@@ -21,27 +21,37 @@ class Items {
     //     } )
         
     // }
-    static insert (item, callback) {              
+    static insert (item, callback) {     
+        // object item = { cate.. : 'top' , ...}  
+        console.log( "In static insert, item:",item);    
+        let id = 
+        console.log( );    
+
         db.query(`INSERT INTO items 
                    (user_id, 
-                    category_id, 
-                    color_id, 
-                    season_id, 
-                    occasion_id, 
-                    imgURL, 
-                    imgName, 
-                    itemDate )                
+                    category, 
+                    color, 
+                    season, 
+                    occasion, 
+                    image_key, 
+                    image_location
+                    )                
                  VALUES 
-                    (item.user, 
-                    item.category, 
+                    ($1, $2, $3, $4, $5, $6, $7)`,
+                [
+                    2, 
+                    item.category,
                     item.color, 
                     item.season, 
                     item.occasion, 
-                    item.imgURL, 
-                    item.imgName)`, 
+                    item.imageKey, 
+                    item.imageLocation
+                ],
+
                 (err, res) => {
+                    console.log("res of insert item:",res)
                     if (err.error)
-                    return callback(err);
+                        return callback(err);
                     callback(res);
                  }
         );
@@ -49,4 +59,4 @@ class Items {
 }
 
 
-module.exports = Cities
+module.exports = Item
