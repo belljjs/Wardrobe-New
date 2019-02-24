@@ -7,7 +7,12 @@ const SSL = process.env.NODE_ENV === 'production';
 class Database {
     constructor () {
         this._pool = new Pool({
-            connectionString: CONNECTION_STRING,
+            user: 'postgres',
+            host: 'localhost',
+            database: 'wardrobe-db',
+            // password: 'minjin',
+            port: 5432,
+            // connectionString: CONNECTION_STRING,
             ssl: SSL
         });
 
@@ -30,9 +35,8 @@ class Database {
             const callback = args.length === 1 ? args[0] : args[1];
 
             client.query(query, params, (err, res) => {
-                console.log("*** Inside database client.query, query,params:",query, params);
                 done();
-                console.log("*** Inside database client.query, query,params:",query, params);
+                console.log("*** Inside database, query, params:",query, params);
                 console.log("*** Inside database err:",err);
 
                 if (err) {

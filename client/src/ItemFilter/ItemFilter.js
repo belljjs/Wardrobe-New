@@ -5,7 +5,7 @@ import Button from '../UI/Button/Button';
 
 const itemFilter = (props) => {
 
-    const filterArray = ['Top', 'Bottom', 'Dress', 'Shoes', 'Bag', "All"];
+    const filterArray = ['top', 'bottom', 'dress', 'shoes', 'bag', 'all'];
     const filters = filterArray.map( (filter,index) => 
         <Button 
             key={index} 

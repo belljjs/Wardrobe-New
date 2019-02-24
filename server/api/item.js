@@ -64,10 +64,24 @@ router.post( '/imageUpload', ( req, res ) => {
 	});
 });
 
-router.post( '/newItem', ( req, res ) => {
+router.get('/getImage/:imageId',  (req, res, next)=> {
+    var params = { 	
+			Bucket: 'wardrobe-belljjs', 
+			Key: req.params.imageId 
+		};
+    s3.getObject(params, function(err, data) {
+		if (err) {
+			console.log(err, err.stack); // an error occurred
+		} else {
+			console.log(data);           // successful response
+			res.writeHead(200, {'Content-Type': 'image/jpeg'});
+			res.write(data.Body, 'binary');
+			res.end(null, 'binary');
+		} 
+    });
+});
 
-	console.log("In router.post /newItem, req.body:", req.body);
-	
+router.post( '/newItem', ( req, res ) => {
 	const item = req.body.item;
     Item.insert(item, (err, result) => {
         if (err) {
@@ -77,4 +91,15 @@ router.post( '/newItem', ( req, res ) => {
     })
 })
 
+router.get('/itemsAll', (req,res) => {
+    Item.retrieveALL((err, result) => {
+        if (err) {
+			console.log("res.json(err):", res.json(err))
+            return res.json(err);
+		} else {
+			console.log("res.json(result):" ,res.json(result))
+			return res.json(result)
+		}
+    })
+})
 module.exports = router;

@@ -5,15 +5,16 @@ import './SelectedItems.css';
 const selectedItems = (props) => {
 
     //const itemsSelectedArray = [ ...props.itemsSelected];
-    const itemsSelected = props.itemsSelected.map(({id, category, color, season, name},index) =>
+    const itemsSelected = props.itemsSelected.map(({id, category, color, season, image_location},index) =>
         <Item 
             key={id}
             id={id}
             category={category}
             color={color}
             season={season}
-            name ={name}
-            clicked={props.itemsSelectedClicked.bind(this, index)}> {name}
+            image_location={image_location}
+            clicked={props.itemsSelectedClicked.bind(this, index)}>
+             {/* {category}{id} */}
         </Item>
     )
     return (

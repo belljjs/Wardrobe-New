@@ -21,7 +21,7 @@ app.use(logger('dev'));
 
 // router
 
-// register middleware handling http request for cities
+// register middleware handling http requests
 app.use('/api/cities',               require('./api/cities'));
 app.use('/api/weather',              require('./api/weather'));
 app.use('/api/item',                 require('./api/item'));

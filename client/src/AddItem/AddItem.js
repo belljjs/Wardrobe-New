@@ -21,7 +21,6 @@ class AddItem extends Component {
     }
 
     handleFileSelected = event => {
-        console.log("event.target.files[0]:",event.target.files[0]);
         this.setState({ 
             selectedFile: event.target.files[0] ,
             imageKey: URL.createObjectURL(event.target.files[0]) 
@@ -30,7 +29,6 @@ class AddItem extends Component {
 
     imageUpload = async () => {
         const imageData = new FormData();
-
             // This is setting 'this.state.selectedFile' to 'this.state.selectedFile.name'.
         imageData.append( 'itemImage', this.state.selectedFile, this.state.selectedFile.name);
         const res =  await axios.post('api/item/imageUpload/', imageData, {
@@ -41,24 +39,14 @@ class AddItem extends Component {
                     }
                 })
         if(res) {
-            console.log("************(In imageUpload) res.data:", res.data);
-            console.log("************(In imageUpload) res.error:", res.error);
             if (res.data.error ) {
-                console.log("res.data.error:",res.data.error);
-                console.log("res.data.error.code:",res.data.error.code);
-
                 if ( 'LIMIT_FILE_SIZE' === res.data.error.code ) {
-                    console.log("Size error")
                     this.showAlert( 'Max size: 2MB', 'violet' );
                 } else {
-                    console.log("File type error")
                     this.showAlert("File type error", 'violet' );
                 }
             }else {  
                 console.log( 'Success!- image Uploaded' );
-                // this.showAlert("image Uploaded", 'yellow' );
-
-                // to check res and use it to make item
                 this.setState({
                     imageKey: res.data.image,
                     imageLocation: res.data.location
@@ -67,7 +55,6 @@ class AddItem extends Component {
             }
         }
     }
-
 
     handleCatagoryChange= (e) => {
         this.setState({category: e.target.value })
@@ -88,8 +75,6 @@ class AddItem extends Component {
     createNewItem = async () => {
         this.inputValidation();
         if (this.state.validInput){
-            
-            console.log("States at the begining of createNewItem:", this.state);
             const newItem = {
                 category: this.state.category,
                 color: this.state.color,
@@ -98,50 +83,34 @@ class AddItem extends Component {
                 imageKey: this.state.imageKey,
                 imageLocation: this.state.imageLocation
             }
-
-            console.log("<<<<<< newItem:",newItem)
-
             const res= await axios.post('api/item/newItem/', {item : newItem })
-          
-            console.log("<<<<<< res:",res)
-
             if(res) {
-                console.log("************(In createNewItem) res.data:", res.data);
-                console.log("************(In createNewItem) res.error:", res.error);
-
                 if (res.data.error ) {
                     console.log("res.data.error:",res.data.error);
-                    console.log("res.data.error.code:",res.data.error.code);
                 }else {  
                     console.log( 'Success!' );
                     this.showAlert("Item Uploaded", 'yellow' );
                     this.setState({ submitted: true }) 
-                    console.log("State after new item insert : ", this.state);
                 }
             }
         } else {
             this.showAlert( "Please check input ", 'violet' );
             console.log("Input validation error! ");
         } 
-
     }
 
-    
     handleItemAdd = (e) => {
         if(this.state.selectedFile) {
             this.imageUpload()
             .then(res => {
-                console.log( "(~~ After image upload handleItemdd) res:", res)
                 this.createNewItem()
             })
             .catch( (error) => {
-                this.showAlert(  "(~~ After image upload) error:", error, 'red' );
+                this.showAlert(error, 'red' );
             });
         } else {
                 this.showAlert( "Please choose a file", 'violet' );
-                console.log("file is not selected! ");
         } 
-      
     };
 
     showAlert = ( message, background = '#3089cf' ) => {
