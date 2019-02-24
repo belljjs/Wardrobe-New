@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from '../Item/Item';
 import './Items.css'
-// import '../global.css';
+import '../index.css';
 
 const items = (props) => {
     // console.log(props);

@@ -1,0 +1,22 @@
+.title {
+    color: rgb(4, 76, 85);
+    font-size: 2rem  ;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+  }
+  
+  .city-name {
+    color: rgb(114, 12, 106);
+    font-size: 1.5rem  ;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+  }
+  .subTitle {
+    color: rgb(58, 57, 57);
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+  .Content {
+    margin-top: 12vh;
+  }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Items from '../Items/Items';
+import '../global.css' ;
 import ItemFilter from '../ItemFilter/ItemFilter';
 import SelectedItems from '../SelectedItems/SelectedItems';
 
