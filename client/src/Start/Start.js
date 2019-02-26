@@ -27,7 +27,7 @@ class Start extends Component {
     
       getCityList = async () => {
         const response = await axios('/api/cities')
-        console.log("response od get all city : ", response);
+        console.log("response of get all city : ", response);
         let cityList = response.data.map(r => r.city_name);
         this.setState({ cityList});
         };

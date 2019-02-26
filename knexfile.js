@@ -5,14 +5,17 @@ module.exports = {
   development: {
     client: "pg",
     connection: {
-      database: "wardrobe-db"
+      database: "wardrobe-db",
+      host: "localhost",
+      user:'postgres',
+      
     },
     migrations: {
       tableName: "migrations",
-      directory: "./db/migrations"
+      directory: "./database/migrations"
     },
     seeds: {
-      directory: "./db/seeds"
+      directory: "./database/seeds"
     }
   },
 

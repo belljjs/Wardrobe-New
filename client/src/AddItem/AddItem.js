@@ -9,82 +9,110 @@ import './AddItem.css';
 class AddItem extends Component {
 
     state = {
-        selectedFile: null,  //  for selectedFile.name
+        category: "" ,
+        color: "" ,
+        season: "" ,
+        occasion: "" ,
+        selectedFile: "",  //  for selectedFile.name
         submitted: false,
-        imageURL: null,    //  for image file url to be used for preview before image uploading
-        imageLocation: null    //  for image file url to be used for preview before image uploading
+        imageKey: null,    //  for image file url to be used for preview before image uploading
+        imageLocation: null,    //  for image file url to be used for preview before image uploading
+        validInput: false
     }
 
     handleFileSelected = event => {
-        console.log("event.target.files[0]:",event.target.files[0]);
         this.setState({ 
             selectedFile: event.target.files[0] ,
-            imageURL: URL.createObjectURL(event.target.files[0]) 
+            imageKey: URL.createObjectURL(event.target.files[0]) 
         })
     };
 
-
     imageUpload = async () => {
         const imageData = new FormData();
-
             // This is setting 'this.state.selectedFile' to 'this.state.selectedFile.name'.
         imageData.append( 'itemImage', this.state.selectedFile, this.state.selectedFile.name);
-        return axios.post('api/item/imageUpload/', imageData, {
+        const res =  await axios.post('api/item/imageUpload/', imageData, {
                     headers: {
                         'accept': 'application/json',
                         'Accept-Language': 'en-US,en;q=0.8',
                         'Content-Type': `multipart/form-data; boundary=${imageData._boundary}`,
                     }
                 })
-                .then(res => res.data)
-                .catch(err => console.error(err))
+        if(res) {
+            if (res.data.error ) {
+                if ( 'LIMIT_FILE_SIZE' === res.data.error.code ) {
+                    this.showAlert( 'Max size: 2MB', 'violet' );
+                } else {
+                    this.showAlert("File type error", 'violet' );
+                }
+            }else {  
+                console.log( 'Success!- image Uploaded' );
+                this.setState({
+                    imageKey: res.data.image,
+                    imageLocation: res.data.location
+                }) 
+                console.log("States after image upload:", this.state);
+            }
+        }
+    }
 
+    handleCatagoryChange= (e) => {
+        this.setState({category: e.target.value })
+    }
+    handleColorChange= (e) => {
+        this.setState({color: e.target.value })
+    }
+    handleSeasonChange= (e) => {
+        this.setState({season: e.target.value })
+    }
+    handleOccasionChange= (e) => {
+        this.setState({occasion: e.target.value })
+    }
+    inputValidation = () => {
+        this.setState({validInput: true})
+    }
+
+    createNewItem = async () => {
+        this.inputValidation();
+        if (this.state.validInput){
+            const newItem = {
+                category: this.state.category,
+                color: this.state.color,
+                season: this.state.season,
+                occasion: this.state.occasion,
+                imageKey: this.state.imageKey,
+                imageLocation: this.state.imageLocation
+            }
+            const res= await axios.post('api/item/newItem/', {item : newItem })
+            if(res) {
+                if (res.data.error ) {
+                    console.log("res.data.error:",res.data.error);
+                }else {  
+                    console.log( 'Success!' );
+                    this.showAlert("Item Uploaded", 'yellow' );
+                    this.setState({ submitted: true }) 
+                }
+            }
+        } else {
+            this.showAlert( "Please check input ", 'violet' );
+            console.log("Input validation error! ");
+        } 
     }
 
     handleItemAdd = (e) => {
-        
         if(this.state.selectedFile) {
             this.imageUpload()
             .then(res => {
-                if (res.error ) {
-                    console.log("res.error:",res.error);
-                    console.log("res.error.code:",res.error.code);
-                    if ( 'LIMIT_FILE_SIZE' === res.error.code ) {
-                        console.log("Size error")
-                        this.showAlert( 'Max size: 2MB', 'violet' );
-                    } else {
-                        console.log("File type error")
-                        this.showAlert("File type error", 'violet' );
-                    }
-                }else {  // Success
-                    console.log( 'Success!' );
-                    this.showAlert("File Uploaded", 'yellow' );
-
-                    // to check res and use it to make item
-                    this.setState({imageLocation: res.location}) 
-                }
+                this.createNewItem()
             })
             .catch( (error) => {
-                    this.showAlert( error, 'red' );
-            } );
+                this.showAlert(error, 'red' );
+            });
         } else {
                 this.showAlert( "Please choose a file", 'violet' );
-                console.log("file is not selected! ");
         } 
-
-		
-       
-
-             // create newItem//
-        // let newItem = {};
-        // const response = await axios.post('/api/item', {item: newItem});
-        //     console.log("response : ", response);
-        //     this.setState({submitted: true})
-           // this.props.history.push('/closet');
     };
 
-
-    
     showAlert = ( message, background = '#3089cf' ) => {
 		let alertContainer = document.querySelector( '#oc-alert-container' ),
 			alertEl = document.createElement( 'div' ),
@@ -121,50 +149,52 @@ class AddItem extends Component {
                                     <FormText color="muted">
                                         <p>Choose image file for the item to be added.</p>
                                     </FormText>
-                                    <img style={{marginTop: '2vh'}} className="fileImage" src={this.state.imageURL} alt=""/>
+                                    <img style={{marginTop: '2vh'}} className="fileImage" src={this.state.imageKey} alt=""/>
                                 </FormGroup>
                             </Col>
                             <Col style={{marginTop: '3vh'}}>
                                 <FormGroup style={{display: "flex"}}>
                                     <Label for="category"style={{width: "110px",textAlign: "left"}} >Category</Label>
-                                    <Input type="select" name="select" id="category">
-                                        <option>Top</option>
-                                        <option>Bottom</option>
-                                        <option>Dress</option>
-                                        <option>Shoes</option>
-                                        <option>Bag</option>
+                                    <Input type="select" name="select" id="category" onChange={this.handleCatagoryChange} value={this.state.category} >
+                                        <option></option>
+                                        <option>top</option>
+                                        <option>bottom</option>
+                                        <option>dress</option>
+                                        <option>bag</option>
+                                        <option>shoes</option>
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: "flex"}}>
                                     <Label for="color" style={{width: "110px", textAlign: "left"}}>Color</Label>
-                                    <Input type="select" name="select" id="color">
-                                        <option>White</option>
-                                        <option>Brown</option>
-                                        <option>Red</option>
-                                        <option>Green</option>
-                                        <option>Grey</option>
-                                        <option>Black</option>
+                                    <Input type="select" name="select" id="color" onChange={this.handleColorChange} value={this.state.color}>
+                                        <option></option>
+                                        <option>white</option>
+                                        <option>grey</option>
+                                        <option>black</option>
+                                        <option>beige</option>
+                                        <option>blue</option>
+                                        <option>red</option>
+                                        <option>green</option>
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: "flex"}}>
                                     <Label for="season"style={{width: "110px",textAlign: "left"}} >Season</Label>
-                                    <Input type="select" name="select" id="season">
-                                        <option>Top</option>
-                                        <option>Bottom</option>
-                                        <option>Dress</option>
-                                        <option>Shoes</option>
-                                        <option>Bag</option>
+                                    <Input type="select" name="select" id="season" onChange={this.handleSeasonChange} value={this.state.season}>
+                                        <option></option>
+                                        <option>summer</option>
+                                        <option>winters</option>
+                                        <option>spring/fall</option>
+                                        <option>all</option>
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: "flex"}}>
                                     <Label for="occasion" style={{width: "110px", textAlign: "left"}}>Occasion</Label>
-                                    <Input type="select" name="select" id="occasion">
-                                        <option>White</option>
-                                        <option>Brown</option>
-                                        <option>Red</option>
-                                        <option>Green</option>
-                                        <option>Grey</option>
-                                        <option>Black</option>
+                                    <Input type="select" name="select" id="occasion" onChange={this.handleOccasionChange} value={this.state.occasion}>
+                                        <option></option> 
+                                        <option>formal</option>
+                                        <option>casual</option>
+                                        <option>exercise</option>
+                                        <option>all</option>
                                     </Input>
                                 </FormGroup>
                                 <Button clicked={this.handleItemAdd}> SUBMIT </Button>

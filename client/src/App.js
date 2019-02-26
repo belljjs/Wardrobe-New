@@ -10,14 +10,15 @@ import AddItem from './AddItem/AddItem';
 import DeleteItem from './DeleteItem/DeleteItem';
 
 class App extends Component {
-  state = {
-    users: []
-  }
 
-  render() {
+    // if (!this.state.current_user) {
+    //   //
+    // }  
+    render() {
+
     return (
       <div>
-        <Layout>
+        <Layout >
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/start'  exact component={Start} />
