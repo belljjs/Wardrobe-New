@@ -97,7 +97,7 @@ router.get('/itemsAll', (req,res) => {
 			console.log( "---- error in Item.retrieveALL((err, res)")
             return res.json(err);
 		} else {
-			console.log("+++++ res.json(result) in Item.retrieveALL((err, res)" ,res.json(result))
+			console.log("+++++ result in Item.retrieveALL((err, res)" ,result)
 			return res.json(result)
 		}
     })
