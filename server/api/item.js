@@ -94,10 +94,10 @@ router.post( '/newItem', ( req, res ) => {
 router.get('/itemsAll', (req,res) => {
     Item.retrieveALL((err, result) => {
         if (err) {
-			console.log("res.json(err):", res.json(err))
+			console.log( "---- error in Item.retrieveALL((err, res)")
             return res.json(err);
 		} else {
-			console.log("res.json(result):" ,res.json(result))
+			console.log("+++++ res.json(result) in Item.retrieveALL((err, res)" ,res.json(result))
 			return res.json(result)
 		}
     })
