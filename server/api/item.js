@@ -64,22 +64,22 @@ router.post( '/imageUpload', ( req, res ) => {
 	});
 });
 
-router.get('/getImage/:imageId',  (req, res, next)=> {
-    var params = { 	
-			Bucket: 'wardrobe-belljjs', 
-			Key: req.params.imageId 
-		};
-    s3.getObject(params, function(err, data) {
-		if (err) {
-			console.log(err, err.stack); // an error occurred
-		} else {
-			console.log(data);           // successful response
-			res.writeHead(200, {'Content-Type': 'image/jpeg'});
-			res.write(data.Body, 'binary');
-			res.end(null, 'binary');
-		} 
-    });
-});
+// router.get('/getImage/:imageId',  (req, res, next)=> {
+//     var params = { 	
+// 			Bucket: 'wardrobe-belljjs', 
+// 			Key: req.params.imageId 
+// 		};
+//     s3.getObject(params, function(err, data) {
+// 		if (err) {
+// 			console.log(err, err.stack); // an error occurred
+// 		} else {
+// 			console.log(data);           // successful response
+// 			res.writeHead(200, {'Content-Type': 'image/jpeg'});
+// 			res.write(data.Body, 'binary');
+// 			res.end(null, 'binary');
+// 		} 
+//     });
+// });
 
 router.post( '/newItem', ( req, res ) => {
 	const item = req.body.item;
