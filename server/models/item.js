@@ -5,10 +5,14 @@ class Item {
 
     static retrieveALL (callback) {
         db.query(`SELECT * FROM items WHERE user_id = 2` , (err, res) => {
-            console.log("In retrieveAll: query result: ",res);
-            if (err.error) 
-                return callback(err);
-            callback(res);
+            console.log("++++ In retrieveAll: query res: ",res);
+            if (err.error) {
+                console.log("---- err in   db.query(`SELECT * FROM items ...");
+                return callback(err, null);
+            } else {
+                console.log("+++  db.query(`SELECT * FROM items ...");
+                callback(null, res);
+            }
         } )
     }
 
