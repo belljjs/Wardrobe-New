@@ -4,9 +4,8 @@ class Cities {
     // if need some filtering, use parameter and use it in query
     static retrieveALL (callback) {
         db.query('SELECT city_name FROM cities', (err, res) => {
-            if (err.error) {
-                return callback(err)
-            };
+            if (err.error) 
+                return callback(err);
             callback(res);
         } )
         
