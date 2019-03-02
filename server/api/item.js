@@ -64,6 +64,32 @@ router.post( '/imageUpload', ( req, res ) => {
 	});
 });
 
+
+
+router.post( '/newItem', Item.insert)
+router.get('/itemsAll', Item.retrieveALL)
+    
+// router.post( '/newItem', ( req, res ) => {
+// 	const item = req.body.item;
+//     Item.insert(item, (err, result) => {
+//         if (err) {
+//             return res.json(err);
+//         }
+//         return res.json(result)
+//     })
+// })
+
+// router.get('/itemsAll', (req,res) => {
+//     Item.retrieveALL((err, result) => {
+//         if (err) {
+// 			console.log( "---- error in Item.retrieveALL((err, res)")
+//             return res.json(err);
+// 		} else {
+// 			console.log("+++++ result in Item.retrieveALL((err, res)" ,result)
+// 			return res.json(result)
+// 		}
+//     })
+// })
 // router.get('/getImage/:imageId',  (req, res, next)=> {
 //     var params = { 	
 // 			Bucket: 'wardrobe-belljjs', 
@@ -80,28 +106,6 @@ router.post( '/imageUpload', ( req, res ) => {
 // 		} 
 //     });
 // });
-
-router.post( '/newItem', ( req, res ) => {
-	const item = req.body.item;
-    Item.insert(item, (err, result) => {
-        if (err) {
-            return res.json(err);
-        }
-        return res.json(result)
-    })
-})
-
-router.get('/itemsAll', (req,res) => {
-    Item.retrieveALL((err, result) => {
-        if (err) {
-			console.log( "---- error in Item.retrieveALL((err, res)")
-            return res.json(err);
-		} else {
-			console.log("+++++ result in Item.retrieveALL((err, res)" ,result)
-			return res.json(result)
-		}
-    })
-})
 module.exports = router;
 
 

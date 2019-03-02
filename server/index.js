@@ -37,7 +37,7 @@ app.use(passport.session());
 app.use(cors());
 
 
- app.get('/', requireAuth, (req,res) => res.redirect('/api/start'));
+app.get('/', requireAuth, (req,res) => res.redirect('/api/start'));
 
 app.use('/api/cities',               require('./api/cities'));
 app.use('/api/weather',              require('./api/weather'));

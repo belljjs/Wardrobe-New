@@ -9,6 +9,7 @@ const verifyUser = ( email) => {
     return db.oneOrNone(query, [email])
 }
 
+
 // used in jwtLogin
 const findUserById = (id) => {
     console.log("++++ In findUserByID, id:", id);
