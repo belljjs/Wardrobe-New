@@ -3,7 +3,7 @@ import Layout from './Layout/Layout';
 import { Route, Switch } from 'react-router-dom';
 
 import Home from './Home/Home';
-import Closet from './Closet/Closet';
+import Closet from './containers/Closet/Closet';
 import Start from './Start/Start'
 import Outfits from './Outfits/Outfits'
 import AddItem from './AddItem/AddItem';

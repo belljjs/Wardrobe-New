@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Items from '../Items/Items';
-import '../global.css' ;
-import ItemFilter from '../ItemFilter/ItemFilter';
-import SelectedItems from '../SelectedItems/SelectedItems';
+import Items from '../../components/Items/Items';
+import '../../global.css' ;
+import ItemFilter from '../../components/ItemFilter/ItemFilter';
+import SelectedItems from '../../components/SelectedItems/SelectedItems';
 
 //import Modal from '../UI/Modal/Modal';
 

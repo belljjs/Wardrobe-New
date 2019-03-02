@@ -12,7 +12,9 @@ class Item {
     }   
 
     static insert (req, res, next) {
-        console.log( "In  insert: item:",item);    
+        console.log("req.body:",req.body);
+        const item = req.body.item;            
+
         db.query(`INSERT INTO items 
                    (user_id, 
                     category, 
