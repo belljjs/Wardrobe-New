@@ -12,7 +12,7 @@ class Closet extends Component {
         itemsAll: [],
         itemsShown: [],
         itemsSelected: [],
-        itemsFilter: ""
+        itemsFilter: "all"
     }
    
     freshItemsShown = (filter) => {
