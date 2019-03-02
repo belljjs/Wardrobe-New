@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import axios from 'axios';
 // import { Redirect } from 'react-router-dom'
-import Button from '../UI/Button/Button';
+import Button from '../../UI/Button/Button';
 import $ from 'jquery';
 import './AddItem.css';
 

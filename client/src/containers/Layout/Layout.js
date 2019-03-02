@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Layout.css'
 import axios from 'axios';
-import Toolbar from '../Toolbar/Toolbar';
+import Toolbar from '../../components/Toolbar/Toolbar';
 
 class Layout extends Component {
   state = {

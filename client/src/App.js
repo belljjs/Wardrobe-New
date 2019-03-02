@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Layout from './Layout/Layout';
+import Layout from './containers/Layout/Layout';
 import { Route, Switch } from 'react-router-dom';
 
-import Home from './Home/Home';
+import Home from './containers/Home/Home';
 import Closet from './containers/Closet/Closet';
-import Start from './Start/Start'
-import Outfits from './Outfits/Outfits'
-import AddItem from './AddItem/AddItem';
-import DeleteItem from './DeleteItem/DeleteItem';
+import Start from './containers/Start/Start'
+import Outfits from './containers/Outfits/Outfits'
+import AddItem from './containers/AddItem/AddItem';
+import DeleteItem from './containers/DeleteItem/DeleteItem';
 
 class App extends Component {
 
