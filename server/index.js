@@ -13,6 +13,7 @@ const session = require('express-session');
 
 const passport = require('passport');
 const passportServices = require('./services/passport');
+require('./services/passport');
 const requireAuth = passport.authenticate('jwt', {session:false});
 
 const PORT = process.env.PORT || 4646;
@@ -50,7 +51,7 @@ app.use('/api/authentication',       require('./api/authentication'));
 //   next(createError(404));
 // });
 
-// // error handler
+// error handler
 // app.use(function(err, req, res, next) {
 //   // set locals, only providing error in development
 //   res.locals.message = err.message;

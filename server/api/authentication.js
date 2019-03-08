@@ -11,11 +11,13 @@ const Auth = require('../controller/authentication');
 const router = express.Router();
 const start = require('./start');
 
-                 // passport-jwt
+// 'requireAuth' (use passport-jwt) :  for protected route ( start, ....)
 router.get('/', requireAuth, (req,res) => res.redirect('/start'));
 
 router.post('/sign-up', Auth.signup);
-                        // passport-local
+
+// 'requireSignIn' (passport-local) : create token
+// 'Auth.signin' : send token
 router.post('/sign-in', requireSignIn, Auth.signin);  
 
 

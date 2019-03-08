@@ -10,7 +10,8 @@ const nav = (props) => (
         <li><NavLink to='/addItem' > + </NavLink></li>
         <li><NavLink to='/deleteItem' > - </NavLink></li>
         <li><NavLink to='/signIn' > SignIn </NavLink></li>
-        <li><NavLink to='/signOut' > SignOut </NavLink></li>
+        <li><NavLink to='/signUp' > SignUp </NavLink></li>
+        {/* <li><NavLink to='/signOut' > SignOut </NavLink></li> */}
     </ul>
 );
 

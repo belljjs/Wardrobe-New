@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 
 const tokenForUser = (user) => {
     const timestamp = new Date().getTime();
+    console.log(" *** In tokenForUser, timestamp:", timestamp);
     // need to hide password later !!
     return jwt.encode({sub: user.id, iat: timestamp}, "supersecret")
 }
@@ -18,7 +19,7 @@ const signin = (req,res,next) => {
 
 const signup = (req,res,next) => {
     console.log("+++ in controller/signup, req.body:", req.body);
-    const {first_name, last_name, email, password} = req.body;
+    const {firstName, lastName, email, password} = req.body;
     saltRounds = 12
 
     if(!email || !password) {
@@ -26,7 +27,7 @@ const signup = (req,res,next) => {
     }
     bcrypt.hash(password,saltRounds)
     .then(hash => {
-        return createUser(first_name, last_name, email, hash)
+        return createUser(firstName, lastName, email, hash)
                .then(newUser => {
                    res.json({token: tokenForUser(newUser), userId: newUser.id});
                })

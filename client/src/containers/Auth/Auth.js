@@ -2,12 +2,27 @@ import React, { Component } from 'react';
 import Button from '../../UI/Button/Button';
 import { Form, Label, Input } from 'reactstrap';
 import './Auth.css';
+import '../../global.css' ;
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 
 class Auth extends Component {
     state = {
         controls: {
+            firstName: {
+                value: '',
+                validation: {
+                    required: true,
+                },
+                valid: false,
+            },
+            lastName: {
+                value: '',
+                validation: {
+                    required: true,
+                },
+                valid: false,
+            },
             email: {
                 value: '',
                 validation: {
@@ -47,7 +62,12 @@ class Auth extends Component {
     submitHandler= (event)=>{
         console.log("**** In submitHandler")
         event.preventDefault();
-        this.props.onAuth( this.state.controls.email.value, this.state.controls.password.value );
+        console.log("controls before onAuth:", this.state.controls);
+        this.props.onAuth( 
+            this.state.controls.firstName.value, 
+            this.state.controls.lastName.value, 
+            this.state.controls.email.value, 
+            this.state.controls.password.value );
 
     }
 
@@ -62,11 +82,41 @@ class Auth extends Component {
         };
         this.setState({ controls: updatedControls });
     }
+    componentDidMount () {
+        console.log("props:",this.props)
+        if (this.props.location.hash === "#up") {
+            this.setState({isSignup : true})
+        } else {
+            this.setState({isSignup : false})
+        }
+         
+
+    }
     render() {
+        let nameControl = null;
+        let title = "Sign In";
+        if (this.props.location.pathname === "/signUp") {
+            title = "Sign Up"
+            nameControl = (
+                <div> 
+                    <div className="Control">
+                        <Label>First Name</Label>
+                        <Input type="text" name="firstName" value={this.state.controls.firstName.value} onChange={(e) => this.inputChangeHandler(e,"firstName")}></Input>
+                    </div>
+                    <div className="Control">
+                        <Label>Last Name</Label>
+                        <Input type="text" name="lastName" value={this.state.controls.lastName.value} onChange={(e) => this.inputChangeHandler(e,'lastName')}></Input>
+                    </div>
+                </div>
+            )     
+        } 
        
+
         return (
             <div className="Auth">
+                <h3 className="title">{title}</h3>
                 <Form>
+                    {nameControl}
                     <div className="Control">
                         <Label>Email</Label>
                         <Input type="email" name="email" value={this.state.controls.email.value} onChange={(e) => this.inputChangeHandler(e,"email")}></Input>
@@ -85,7 +135,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: ( email, password) => dispatch( actions.auth( email, password) ),
+        onAuth: (firstName,lastName, email, password) => dispatch( actions.auth(firstName,lastName, email, password) ),
         // onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
     };
 };

@@ -8,11 +8,12 @@ const bcrypt = require('bcrypt');
 
 const localOptions = {usernameField: 'email'};
 
+// console.log(" +++++ IN LocalStrategy ")
+// console.log(" +++++ IN LocalStrategy email:", email);
+// console.log(" +++++ IN LocalStrategy password:", password);
+// console.log(" +++++ IN LocalStrategy done:", done);
+
 const localLogin = new LocalStrategy(localOptions, (email,password, done) => {
-    console.log(" +++++ IN LocalStrategy ")
-    console.log(" +++++ IN LocalStrategy email:", email);
-    console.log(" +++++ IN LocalStrategy password:", password);
-    console.log(" +++++ IN LocalStrategy done:", done);
      return verifyUser(email)
             .then(validUser => {
                 console.log(" +++++++++ befor bcrypt, password:",password);
