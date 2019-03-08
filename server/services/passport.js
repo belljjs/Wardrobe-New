@@ -26,19 +26,19 @@ const localLogin = new LocalStrategy(localOptions, (email,password, done) => {
                     return done(null, false);
                 })
                 .catch(err => {
-                    console.log(" error Inside :",err)
+                    console.log(" error in password :",err)
                     done(err. false)
                 })
             })
             .catch(err => {
-                console.log(" error Outside :",err)
-                
+                console.log(" error in email :",err)
                 done(err. false)
             })
  })
 
  const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    // hide the password later!!
     secretOrKey: "supersecret"
   };
 

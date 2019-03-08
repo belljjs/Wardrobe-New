@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 
 const tokenForUser = (user) => {
     const timestamp = new Date().getTime();
+    // need to hide password later !!
     return jwt.encode({sub: user.id, iat: timestamp}, "supersecret")
 }
 
@@ -12,7 +13,7 @@ const signin = (req,res,next) => {
     console.log("+++ in controller/signin, req.body:", req.body);
     console.log("+++ in controller/signin, req.user:", req.user);
 
-    res.send({token: tokenForUser(req.user) })
+    res.send({token: tokenForUser(req.user), userId: req.user.id })
 }
 
 const signup = (req,res,next) => {
@@ -27,7 +28,7 @@ const signup = (req,res,next) => {
     .then(hash => {
         return createUser(first_name, last_name, email, hash)
                .then(newUser => {
-                   res.json({totken: tokenForUser(newUser)});
+                   res.json({token: tokenForUser(newUser), userId: newUser.id});
                })
                .catch(err => {
                 console.log("Sign up error:", err)
