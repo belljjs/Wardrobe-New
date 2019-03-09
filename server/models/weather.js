@@ -9,8 +9,8 @@ class Weather {
           json: true
         }).then((res) => {
           callback(res);
-        }).catch((err) => {
-          console.log(err);
+        }).catch((error) => {
+          console.log(error);
           callback({ error: 'Could not reach OpenWeatherMap API.' });
         });
       }

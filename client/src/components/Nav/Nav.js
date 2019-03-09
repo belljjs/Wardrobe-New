@@ -9,8 +9,8 @@ const nav = (props) => (
         <li><NavLink to='/outfits' > Outfits </NavLink></li>
         <li><NavLink to='/addItem' > + </NavLink></li>
         <li><NavLink to='/deleteItem' > - </NavLink></li>
-        <li><NavLink to='/signIn' > SignIn </NavLink></li>
-        <li><NavLink to='/signUp' > SignUp </NavLink></li>
+        <li><NavLink to='/signIn#in' > Account </NavLink></li>
+        {/* <li><NavLink to='/signUp#up' > SignUp </NavLink></li> */}
         {/* <li><NavLink to='/signOut' > SignOut </NavLink></li> */}
     </ul>
 );

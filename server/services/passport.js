@@ -14,26 +14,26 @@ const localOptions = {usernameField: 'email'};
 // console.log(" +++++ IN LocalStrategy done:", done);
 
 const localLogin = new LocalStrategy(localOptions, (email,password, done) => {
+    console.log("Inside localLogin....")
      return verifyUser(email)
             .then(validUser => {
-                console.log(" +++++++++ befor bcrypt, password:",password);
-                console.log(" +++++++++ befor bcrypt, validUser:",validUser);
-                console.log(" +++++++++ befor bcrypt, validUser.pw:",validUser.pw);
                 bcrypt.compare(password, validUser.pw)
                 .then(validPassword => {
                     if (validPassword) {
+                        console.log("====== Valid user input====");
+                        console.log(validUser);
                         return done(null, validUser)
                     }
                     return done(null, false);
                 })
-                .catch(err => {
-                    console.log(" error in password :",err)
-                    done(err. false)
+                .catch(error => {
+                    console.log(" error in password :", error)
+                    done(error. false)
                 })
             })
-            .catch(err => {
-                console.log(" error in email :",err)
-                done(err. false)
+            .catch(error => {
+                console.log(" error in email :", error)
+                done(error. false)
             })
  })
 
@@ -51,7 +51,7 @@ const localLogin = new LocalStrategy(localOptions, (email,password, done) => {
                 }
                 return done(null, false);
             })
-            .catch(err => done(err. false))
+            .catch(error => done(error. false))
 })
 
 passport.use(jwtLogin);

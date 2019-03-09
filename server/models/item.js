@@ -8,7 +8,7 @@ class Item {
 
         db.any('SELECT * FROM items WHERE user_id = 2')
         .then( data =>  res.json(data))
-        .catch( err =>  res.json(err)  )
+        .catch( error =>  res.json(error)  )
     }   
 
     static insert (req, res, next) {
@@ -36,7 +36,7 @@ class Item {
                     item.imageLocation
                 ])
         .then( data =>  res.json(data))
-        .catch( err =>  res.json(err)  )
+        .catch( error =>  res.json(error)  )
     }
 
     // static retrieveALL (callback) {

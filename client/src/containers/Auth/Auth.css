@@ -13,6 +13,10 @@
 }
 
 .Control {
-    padding-bottom: 5vh;
+    padding-bottom: 2vh;
     text-align: left;
+}
+.Mode {
+   margin-top: 5vh;
+
 }

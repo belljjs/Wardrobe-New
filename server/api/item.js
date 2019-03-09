@@ -82,7 +82,7 @@ router.get('/itemsAll', Item.retrieveALL)
 // router.get('/itemsAll', (req,res) => {
 //     Item.retrieveALL((err, result) => {
 //         if (err) {
-// 			console.log( "---- error in Item.retrieveALL((err, res)")
+// 			console.log( "---- error in Item.retrieveALL((, res)")
 //             return res.json(err);
 // 		} else {
 // 			console.log("+++++ result in Item.retrieveALL((err, res)" ,result)
@@ -97,7 +97,7 @@ router.get('/itemsAll', Item.retrieveALL)
 // 		};
 //     s3.getObject(params, function(err, data) {
 // 		if (err) {
-// 			console.log(err, err.stack); // an error occurred
+// 			console.log(err, .stack); // an error occurred
 // 		} else {
 // 			console.log(data);           // successful response
 // 			res.writeHead(200, {'Content-Type': 'image/jpeg'});

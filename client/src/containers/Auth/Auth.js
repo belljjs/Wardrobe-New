@@ -67,7 +67,8 @@ class Auth extends Component {
             this.state.controls.firstName.value, 
             this.state.controls.lastName.value, 
             this.state.controls.email.value, 
-            this.state.controls.password.value );
+            this.state.controls.password.value,
+            this.state.isSignup );
 
     }
 
@@ -82,20 +83,17 @@ class Auth extends Component {
         };
         this.setState({ controls: updatedControls });
     }
-    componentDidMount () {
-        console.log("props:",this.props)
-        if (this.props.location.hash === "#up") {
-            this.setState({isSignup : true})
-        } else {
-            this.setState({isSignup : false})
-        }
-         
-
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return {isSignup: !prevState.isSignup};
+        });
     }
+
+
     render() {
         let nameControl = null;
-        let title = "Sign In";
-        if (this.props.location.pathname === "/signUp") {
+        let title = "Sign in";
+        if (this.state.isSignup) {
             title = "Sign Up"
             nameControl = (
                 <div> 
@@ -110,11 +108,14 @@ class Auth extends Component {
                 </div>
             )     
         } 
-       
+
+        let notice = this.props.error || this.props.message || null;
+        notice = <p> {notice}</p>
 
         return (
             <div className="Auth">
                 <h3 className="title">{title}</h3>
+                {notice}
                 <Form>
                     {nameControl}
                     <div className="Control">
@@ -128,16 +129,32 @@ class Auth extends Component {
                     
                     <Button  clicked={this.submitHandler}> Submit </Button>
                 </Form>
+                <div className="Mode">
+                    <div> {this.state.isSignup ? "Go back to Sign In" : 'Create a new account'} </div>
+                    <Button clicked={this.switchAuthModeHandler}
+                        >{this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button>
+                </div>
+                <p>{this.state.isSignup}</p>
+
             </div>
         );
     }
 }
-
+const mapStateToProps = state => {
+    return {
+        // loading: state.auth.loading,
+        error: state.error,
+        message: state.message
+        // isAuthenticated: state.auth.token !== null,
+        // buildingBurger: state.burgerBuilder.building,
+        // authRedirectPath: state.auth.authRedirectPath
+    };
+};
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (firstName,lastName, email, password) => dispatch( actions.auth(firstName,lastName, email, password) ),
+        onAuth: (firstName,lastName, email, password, isSignup ) => dispatch( actions.auth(firstName,lastName, email, password, isSignup) ),
         // onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
     };
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
