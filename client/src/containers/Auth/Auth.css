@@ -18,5 +18,8 @@
 }
 .Mode {
    margin-top: 5vh;
-
+   background-color: lightgrey; 
+   border-radius: 3px;
+   padding: 10px 0px 20px 0px;
+   font-weight: bold;
 }

@@ -29,9 +29,9 @@ class App extends Component {
             <Route path='/addItem' exact component={AddItem} />
             <Route path='/deleteItem' exact component={DeleteItem} />
           
-            <Route path='/signUp' exact component={Auth} />
-            <Route path='/signOut' exact component={Auth} />
-            <Route path='/signIn' exact component={Auth} />
+            {/* <Route path='/signUp' exact component={Auth} />
+            <Route path='/signOut' exact component={Auth} /> */}
+            <Route path='/auth' exact component={Auth} />
           </Switch>
         </Layout>
       </div>

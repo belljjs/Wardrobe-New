@@ -15,7 +15,11 @@ const signin = (req,res,next) => {
     console.log( " varified user : ", req.user );
 
     const {email, password} = req.body;
-    res.send({token: tokenForUser(req.user), userId: req.user.id, message:"Successfully logged in" })
+    res.send({
+        token: tokenForUser(req.user), 
+        userId: req.user.id, 
+        message:"Successfully signed in"
+    })
     
 }
 
@@ -23,23 +27,27 @@ const signup = (req,res,next) => {
     const {firstName, lastName, email, password} = req.body;
     saltRounds = 12
     if(!email || !password || !firstName ) {
-        res.json({error: 'Please provide a name, an email and a password' })
+        res.send({message: 'Please provide a name, an email and a password' })
     }
 
-    console.log("Inside controller/signup ....")
+    console.log("Before bcrypt.hash ....")
 
     bcrypt.hash(password,saltRounds)
     .then(hash => {
-        console.log("Inside .then after bcrypt.hash....")
+        console.log("Inside .then after bcrypt.hash, hash:", hash);
 
         return createUser(firstName, lastName, email, hash)
                .then(newUser => {
                 console.log("Inside .then after createUser....")
-                   res.json({token: tokenForUser(newUser), userId: newUser.id});
+                   res.json({
+                       token: tokenForUser(newUser), 
+                       userId: newUser.id,
+                       message:"Successfully signed up"
+                    });
                })
                .catch(error => {
                  console.log("Sign up error in createUser : ", error)
-                res.send({error: 'Error during sign up'});
+                res.send({error:error.detail});
             })
     })
     .catch(error => {
