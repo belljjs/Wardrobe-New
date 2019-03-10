@@ -4,6 +4,7 @@ import { Form, Label, Input } from 'reactstrap';
 import './Auth.css';
 import '../../global.css' ;
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import * as actions from "../../store/actions/index";
 
 class Auth extends Component {
@@ -40,7 +41,7 @@ class Auth extends Component {
                 valid: false,
             }
         },
-        isSignup: true
+        isSignup: false
     }
 
     checkValidity ( value, rules ) {
@@ -94,7 +95,7 @@ class Auth extends Component {
         let nameControl = null;
         let title = "Sign in";
         if (this.state.isSignup) {
-            title = "Sign Up"
+            title = "Sign up"
             nameControl = (
                 <div> 
                     <div className="Control">
@@ -112,8 +113,14 @@ class Auth extends Component {
         let notice = this.props.error || this.props.message || null;
         notice = <p> {notice}</p>
 
+        let authRedirect = null
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to='/start' />
+        }
+
         return (
             <div className="Auth">
+                {authRedirect}
                 <h3 className="title">{title}</h3>
                 {notice}
                 <Form>
@@ -130,11 +137,11 @@ class Auth extends Component {
                     <Button  clicked={this.submitHandler}> Submit </Button>
                 </Form>
                 <div className="Mode">
-                    <div> {this.state.isSignup ? "Go back to Sign In" : 'Create a new account'} </div>
+                    <div> {this.state.isSignup ? "Go back to Sign In" :'Create a new account' } </div>
                     <Button clicked={this.switchAuthModeHandler}
                         >{this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button>
                 </div>
-                <p>{this.state.isSignup}</p>
+               
 
             </div>
         );
@@ -144,8 +151,8 @@ const mapStateToProps = state => {
     return {
         // loading: state.auth.loading,
         error: state.error,
-        message: state.message
-        // isAuthenticated: state.auth.token !== null,
+        message: state.message,
+        isAuthenticated: state.token !== null,
         // buildingBurger: state.burgerBuilder.building,
         // authRedirectPath: state.auth.authRedirectPath
     };

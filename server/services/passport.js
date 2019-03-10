@@ -13,8 +13,10 @@ const localOptions = {usernameField: 'email'};
 // console.log(" +++++ IN LocalStrategy password:", password);
 // console.log(" +++++ IN LocalStrategy done:", done);
 
-const localLogin = new LocalStrategy(localOptions, (email,password, done) => {
-     return verifyUser(email)
+const localLogin = new LocalStrategy(
+    localOptions, 
+    (email,password, done) => {
+         return verifyUser(email)
             .then(validUser => {
                 bcrypt.compare(password, validUser.pw)
                 .then(validPassword => {
@@ -27,12 +29,12 @@ const localLogin = new LocalStrategy(localOptions, (email,password, done) => {
                 })
                 .catch(error => {
                     console.log(" error in password :", error)
-                    done(error. false)
+                    done(error, false)
                 })
             })
             .catch(error => {
                 console.log(" error in email :", error)
-                done(error. false)
+                done(error, false)
             })
  })
 

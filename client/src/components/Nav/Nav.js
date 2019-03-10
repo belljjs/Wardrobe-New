@@ -4,14 +4,21 @@ import { NavLink } from 'react-router-dom';
 
 const nav = (props) => (
     <ul className="Nav">
-        <li><NavLink to='/start' > Start </NavLink></li>
-        <li><NavLink to='/closet' > Closet </NavLink></li>
-        <li><NavLink to='/outfits' > Outfits </NavLink></li>
-        <li><NavLink to='/addItem' > + </NavLink></li>
-        <li><NavLink to='/deleteItem' > - </NavLink></li>
-        <li><NavLink to='/auth' > Account </NavLink></li>
-        {/* <li><NavLink to='/signUp#up' > SignUp </NavLink></li> */}
-        {/* <li><NavLink to='/signOut' > SignOut </NavLink></li> */}
+        { props.isAuthenticated
+            ? 
+            <div className="Nav">
+                <li><NavLink to='/start' > Start </NavLink></li>
+                <li><NavLink to='/closet' > Closet </NavLink></li>
+                <li><NavLink to='/outfits' > Outfits </NavLink></li>
+                <li><NavLink to='/addItem' > + </NavLink></li>
+                <li><NavLink to='/deleteItem' > - </NavLink></li>
+                <li><NavLink to='/signOut' > SignOut </NavLink></li>
+             </div>
+            : 
+            <div  className="Nav">
+                <li><NavLink to='/auth' >Account </NavLink></li>
+            </div>
+        }
     </ul>
 );
 

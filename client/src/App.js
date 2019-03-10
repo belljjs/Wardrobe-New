@@ -9,6 +9,7 @@ import Outfits from './containers/Outfits/Outfits'
 import AddItem from './containers/AddItem/AddItem';
 import DeleteItem from './containers/DeleteItem/DeleteItem';
 import Auth from './containers/Auth/Auth';
+import SignOut from './containers/Auth/SignOut';
 
 
 class App extends Component {
@@ -28,9 +29,7 @@ class App extends Component {
             <Route path='/outfits' exact component={Outfits} />
             <Route path='/addItem' exact component={AddItem} />
             <Route path='/deleteItem' exact component={DeleteItem} />
-          
-            {/* <Route path='/signUp' exact component={Auth} />
-            <Route path='/signOut' exact component={Auth} /> */}
+            <Route path='/signOut' exact component={SignOut} /> 
             <Route path='/auth' exact component={Auth} />
           </Switch>
         </Layout>

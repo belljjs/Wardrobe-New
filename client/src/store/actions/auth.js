@@ -23,18 +23,18 @@ export const authFail = (error) => {
     };
 }
 
-export const logout = () => {
+export const signOut = () => {
     // localStorage.removeItem('token');
     // localStorage.removeItem('expirationDate');
     // localStorage.removeItem('userId');
     return {
-        type: actionTypes.AUTH_LOGOUT
+        type: actionTypes.AUTH_SIGNOUT
     };
 };
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
-            dispatch(logout());
+            dispatch(signOut());
         }, expirationTime * 1000);
     };
 };
