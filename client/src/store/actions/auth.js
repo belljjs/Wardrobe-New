@@ -22,6 +22,23 @@ export const authFail = (error) => {
         error: error
     };
 }
+
+export const logout = () => {
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('expirationDate');
+    // localStorage.removeItem('userId');
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    };
+};
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logout());
+        }, expirationTime * 1000);
+    };
+};
+
 export const auth = (firstName, lastName, email, password, isSignup) => {
     return dispatch => {
         console.log("*** In auth dispatch, isSignup : ", isSignup)
@@ -42,16 +59,18 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
          axios.post(url, authData)
              .then(response => {
                  console.log("response:",response);
+                 console.log("response:",response.request.response);
                 //  const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
                 //  localStorage.setItem('token', response.data.idToken);
                 //  localStorage.setItem('expirationDate', expirationDate);
                 //  localStorage.setItem('userId', response.data.localId);
+                
                  dispatch(authSuccess(response.data.token, response.data.userId, response.data.message ));
-                //  dispatch(checkAuthTimeout(response.data.expiresIn));
+                 dispatch(checkAuthTimeout(3600)); // 1 hour 
              })
              .catch(error => {
                  // Here axios wrap response with error object
-
+                console.log("error in request:", error)       
                  dispatch(authFail(error.response.data));
              });
      };

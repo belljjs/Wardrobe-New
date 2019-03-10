@@ -10,7 +10,6 @@ const initialState = {
     // authRedirectPath: '/'
 };
 
-
 const authStart = ( state, action ) => {
     return updateObject( state, { error: null, loading: true } );
 };
@@ -34,7 +33,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { token: null, userId: null });
+    return updateObject(state, { token: null, userId: null, message: null, error: null });
 };
 
 const reducer = ( state = initialState, action ) => {

@@ -14,7 +14,6 @@ const localOptions = {usernameField: 'email'};
 // console.log(" +++++ IN LocalStrategy done:", done);
 
 const localLogin = new LocalStrategy(localOptions, (email,password, done) => {
-    console.log("Inside localLogin....")
      return verifyUser(email)
             .then(validUser => {
                 bcrypt.compare(password, validUser.pw)

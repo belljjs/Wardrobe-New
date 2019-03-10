@@ -21,6 +21,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "http-errors": "^1.7.2",
+    "jsonwebtoken": "^8.5.0",
     "jwt-simple": "^0.5.5",
     "knex": "^0.16.3",
     "morgan": "^1.9.1",
