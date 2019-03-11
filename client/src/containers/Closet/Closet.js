@@ -91,8 +91,20 @@ class Closet extends Component {
         this.setState({ itemsSelected: itemsSelected, itemsShown: itemsShown}  ) 
     }
 
+    // const res= await axios.post(
+    //     'api/item/newItem/', 
+    //     {item : newItem, userId: localStorage.userId },
+    //     {headers: {autorization: localStorage.token}}
+    // )
+
+
+
     getItems = async () => {
-        const response = await axios('/api/item/itemsAll')
+        const response = await axios.get(
+            '/api/item/itemsAll',
+            // {headers: {'authorization': localStorage.token}},
+            {params: {userId: localStorage.userId  }}
+        )
 
         console.log("response of <itemsAll> : ", response);
         console.log("response.data of <itemsAll>: ", response.data);
@@ -107,6 +119,9 @@ class Closet extends Component {
       }
 
     render() {
+    console.log(" **** In Closet, this.state.itemsShown:",this.state.itemsShown)
+    console.log(" **** In Closet, this.state.itemsAll:",this.state.itemsAll)
+        
         return (
             <div>
                 <h3 className="title">Closet</h3>

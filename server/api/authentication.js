@@ -11,7 +11,7 @@ const router = express.Router();
 const start = require('./start');
 
 // 'requireAuth' (use passport-jwt) :  for protected route ( start, ....)
-router.get('/', requireAuth, (req,res) => res.redirect('/start'));
+// router.get('/', requireAuth, (req,res) => res.redirect('/start'));
 
 // 'Auth.signup' calls 'createUser' & 'tokenForUser'
 router.post('/sign-up', Auth.signup);

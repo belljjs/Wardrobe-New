@@ -83,7 +83,11 @@ class AddItem extends Component {
                 imageKey: this.state.imageKey,
                 imageLocation: this.state.imageLocation
             }
-            const res= await axios.post('api/item/newItem/', {item : newItem })
+            const res= await axios.post(
+                'api/item/newItem/', 
+                {item : newItem, userId: localStorage.userId },
+                {headers: {autorization: localStorage.token}}
+            )
             if(res) {
                 if (res.data.error ) {
                     console.log("res.data.error:",res.data.error);

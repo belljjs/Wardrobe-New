@@ -42,7 +42,7 @@ class App extends Component {
             <Route path='/deleteItem' exact component={DeleteItem} />
             <Route path='/signOut' exact component={SignOut} /> 
             {/* for any path unknown */}
-            <Redirect to='/' />
+            <Redirect to='/start' />
           </Switch>
         )
       }

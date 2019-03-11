@@ -79,7 +79,7 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
  };
 
 // Used in app.js to check authentication status to sign in user automatically (for the case of refresh)
-// if there is valid token. (for the case of refresh)
+// if there is valid token. (for the case of reload the app)
 
 export const authCheckState = () => {
     return dispatch => {
