@@ -24,9 +24,9 @@ export const authFail = (error) => {
 }
 
 export const signOut = () => {
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('expirationDate');
-    // localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate');
+    localStorage.removeItem('userId');
     return {
         type: actionTypes.AUTH_SIGNOUT
     };
@@ -58,15 +58,17 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
          console.log("url:", url)
          axios.post(url, authData)
              .then(response => {
-                 console.log("response:",response);
-                 console.log("response:",response.request.response);
-                //  const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-                //  localStorage.setItem('token', response.data.idToken);
-                //  localStorage.setItem('expirationDate', expirationDate);
-                //  localStorage.setItem('userId', response.data.localId);
+                console.log("response:",response);
+                const expirationDate = new Date(new Date().getTime() + response.data.exp * 1000);
+                console.log("expirationDate:",expirationDate);
                 
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('expirationDate', expirationDate);
+                localStorage.setItem('userId', response.data.userId);
+
+                // pass on the token!
                  dispatch(authSuccess(response.data.token, response.data.userId, response.data.message ));
-                 dispatch(checkAuthTimeout(3600)); // 1 hour 
+                 dispatch(checkAuthTimeout(response.data.exp)); 
              })
              .catch(error => {
                  // Here axios wrap response with error object
@@ -75,3 +77,32 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
              });
      };
  };
+
+// Used in app.js to check authentication status to sign in user automatically (for the case of refresh)
+// if there is valid token. (for the case of refresh)
+
+export const authCheckState = () => {
+    return dispatch => {
+        const token = localStorage.getItem('token');
+        // just to make sure
+        if (!token) {
+            dispatch(signOut());
+
+        // check expiration 
+        } else { 
+            //string --> date type
+            const expirationDate = new Date(localStorage.getItem('expirationDate'));
+            // expired 
+            if (expirationDate <= new Date()) { 
+                dispatch(signOut());
+            // then need authSuccess 
+            } else { 
+                const userId = localStorage.getItem('userId');
+                dispatch(authSuccess(token, userId));
+                // calculate time remained 
+                const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000 ;
+                dispatch(checkAuthTimeout(expirationTime));
+            }   
+        }
+    };
+};

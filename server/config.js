@@ -1,0 +1,4 @@
+
+const key = {
+    secret: "supersecret"
+}

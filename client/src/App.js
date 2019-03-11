@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './containers/Layout/Layout';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch,withRouter } from 'react-router-dom';
 
 import Home from './containers/Home/Home';
 import Closet from './containers/Closet/Closet';
@@ -10,13 +10,17 @@ import AddItem from './containers/AddItem/AddItem';
 import DeleteItem from './containers/DeleteItem/DeleteItem';
 import Auth from './containers/Auth/Auth';
 import SignOut from './containers/Auth/SignOut';
+import {connect} from 'react-redux';
+import * as actions from './store/actions/index';
+
 
 
 class App extends Component {
 
-    // if (!this.state.current_user) {
-    //   //
-    // }  
+    componentDidMount () {
+      this.props.onCheckAutoSignIn()
+    }
+
     render() {
 
     return (
@@ -38,5 +42,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    onCheckAutoSignIn: () => dispatch( actions.authCheckState() )
+  }
+}
+// withRouter let the props passed down to app 
+export default withRouter(connect(null,mapDispatchToProps)(App));
 

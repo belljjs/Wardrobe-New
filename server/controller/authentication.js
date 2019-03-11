@@ -5,23 +5,28 @@ const { createUser } = require('../models/auth/signUp');
 const bcrypt = require('bcrypt');
 
 const tokenForUser = (user) => {
-    const timestamp = new Date().getTime();
-    console.log(" *** In tokenForUser, timestamp:", timestamp);
-
+    // const timestamp = new Date().getTime();
+    
+    const payload = {
+        sub: user.id, 
+        iat: new Date().getTime(), 
+        exp: 3600 
+    }
 
     // need to hide password later !!   --- config ???
-    return jwt.sign({sub: user.id, iat: timestamp, expiresIn: '60m' }, "supersecret")
+    return jwt.sign(payload, "supersecret");
 }
 
 const signin = (req,res,next) => {
     console.log( " In controller starting signin... ");
     console.log( " varified user : ", req.user );
-
+   
     const {email, password} = req.body;
     res.send({
         token: tokenForUser(req.user), 
         userId: req.user.id, 
-        message: "Successfully signed in"
+        message: "Successfully signed in",
+        exp: 3600
     })
     
 }
