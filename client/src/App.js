@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './containers/Layout/Layout';
-import { Route, Switch,withRouter } from 'react-router-dom';
+import { Route, Switch,withRouter , Redirect} from 'react-router-dom';
 
 import Home from './containers/Home/Home';
 import Closet from './containers/Closet/Closet';
@@ -22,23 +22,43 @@ class App extends Component {
     }
 
     render() {
+      // default routes - unauthenticated 
+      let routes = (
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/auth' exact component={Auth} />
+          {/* for any path unknown */}
+          <Redirect to='/' />
+        </Switch>
+      )
 
-    return (
-      <div>
-        <Layout >
+      if (this.props.isAuthenticated) {
+        routes = (
           <Switch>
-            <Route path='/' exact component={Home} />
             <Route path='/start'  exact component={Start} />
             <Route path='/closet' exact component={Closet} />
             <Route path='/outfits' exact component={Outfits} />
             <Route path='/addItem' exact component={AddItem} />
             <Route path='/deleteItem' exact component={DeleteItem} />
             <Route path='/signOut' exact component={SignOut} /> 
-            <Route path='/auth' exact component={Auth} />
+            {/* for any path unknown */}
+            <Redirect to='/' />
           </Switch>
+        )
+      }
+
+    return (
+      <div>
+        <Layout >
+          {routes}
         </Layout>
       </div>
     );
+  }
+}
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.token !== null
   }
 }
 
@@ -48,5 +68,5 @@ const mapDispatchToProps = dispatch => {
   }
 }
 // withRouter let the props passed down to app 
-export default withRouter(connect(null,mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App));
 

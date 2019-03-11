@@ -5,7 +5,7 @@ class Item {
         
     static retrieveALL (req, res, next) {
         console.log( "In  retrieveAll,")   
-
+        // ***** replace 2 (user_id) ---> id of authenticated user
         db.any('SELECT * FROM items WHERE user_id = 2')
         .then( data =>  res.json(data))
         .catch( error =>  res.json(error)  )
