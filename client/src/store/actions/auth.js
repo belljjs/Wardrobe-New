@@ -33,7 +33,9 @@ export const signOut = () => {
 };
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
+        console.log("expirationTime:",expirationTime)
         setTimeout(() => {
+            console.log("sign out at checkAuthTime");
             dispatch(signOut());
         }, expirationTime * 1000);
     };
@@ -68,7 +70,7 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
 
                 // pass on the token!
                  dispatch(authSuccess(response.data.token, response.data.userId, response.data.message ));
-                 dispatch(checkAuthTimeout(response.data.exp)); 
+                 // dispatch(checkAuthTimeout(response.data.exp)); 
              })
              .catch(error => {
                  // Here axios wrap response with error object
@@ -86,6 +88,8 @@ export const authCheckState = () => {
         const token = localStorage.getItem('token');
         // just to make sure
         if (!token) {
+            console.log("signout1   at authCheckState !token");
+
             dispatch(signOut());
 
         // check expiration 
@@ -94,6 +98,7 @@ export const authCheckState = () => {
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
             // expired 
             if (expirationDate <= new Date()) { 
+                console.log("signout2   at authCheckState expired");
                 dispatch(signOut());
             // then need authSuccess 
             } else { 
@@ -101,7 +106,7 @@ export const authCheckState = () => {
                 dispatch(authSuccess(token, userId));
                 // calculate time remained 
                 const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000 ;
-                dispatch(checkAuthTimeout(expirationTime));
+                // dispatch(checkAuthTimeout(expirationTime));
             }   
         }
     };

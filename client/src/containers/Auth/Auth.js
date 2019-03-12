@@ -16,6 +16,8 @@ class Auth extends Component {
                     required: true,
                 },
                 valid: false,
+                invalidMessage: "Required",
+                info: "required"
             },
             lastName: {
                 value: '',
@@ -23,6 +25,7 @@ class Auth extends Component {
                     required: true,
                 },
                 valid: false,
+                invalidMessage: ""
             },
             email: {
                 value: '',
@@ -31,6 +34,8 @@ class Auth extends Component {
                     isEmail: true
                 },
                 valid: false,
+                invalidMessage: "Need email format",
+                info: "required"
             },
             password: {
                 value: '',
@@ -39,9 +44,12 @@ class Auth extends Component {
                     minLength: 3
                 },
                 valid: false,
-            }
+                invalidMessage: " Too short password",
+                info: "required"
+            },
         },
-        isSignup: false
+        isSignup: false,
+        submitResult: ""
     }
 
     checkValidity ( value, rules ) {
@@ -49,7 +57,7 @@ class Auth extends Component {
 
         if ( rules.required ) {
             isValid = (value.trim() !== '') && isValid;
-        }
+        } 
         if ( rules.minLength ) {
             isValid = (value.length >= rules.minLength) && isValid
         }
@@ -59,37 +67,67 @@ class Auth extends Component {
         }
         return isValid;
     }
+    validAllControls = ()=>{
+        let controlsArr =[]
+        const controls = {...this.state.controls}
+
+        if(!this.state.isSignup) {
+            delete controls.firstName;
+            delete controls.lastName;
+        }
+        controlsArr = 
+            Object.keys(controls).map(key => {
+                return {[key]: controls[key]};
+            })
+        let validAll = false
+        let allTrue = true; // find false
+        controlsArr.forEach(obj =>{
+            const inner = Object.values(obj);
+            allTrue = inner[0].valid && allTrue ;
+        })
+        if(allTrue) 
+        { validAll = true }
+        return validAll;
+    }
 
     submitHandler= (event)=>{
         console.log("**** In submitHandler")
         event.preventDefault();
-        console.log("controls before onAuth:", this.state.controls);
-        this.props.onAuth( 
-            this.state.controls.firstName.value, 
-            this.state.controls.lastName.value, 
-            this.state.controls.email.value, 
-            this.state.controls.password.value,
-            this.state.isSignup );
-
+        if (this.validAllControls()){
+            console.log("Allcontrols are valid:", this.state.controls);
+            console.log("controls before onAuth:", this.state.controls);
+            this.props.onAuth( 
+                this.state.controls.firstName.value, 
+                this.state.controls.lastName.value, 
+                this.state.controls.email.value, 
+                this.state.controls.password.value,
+                this.state.isSignup );
+            this.setState({submitResult: ""})
+            
+        } else {
+            this.setState({submitResult: "Invalid Input. Please try again."})
+        }
     }
 
     inputChangeHandler= (event, controlName)=>{
+        const validCheck = this.checkValidity( event.target.value, this.state.controls[controlName].validation )
+
         const updatedControls = {
             ...this.state.controls,
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                valid: this.checkValidity( event.target.value, this.state.controls[controlName].validation ),
+                valid: validCheck,
+                info: validCheck ? "" : this.state.controls[controlName].invalidMessage
             }
         };
-        this.setState({ controls: updatedControls });
+        this.setState({ controls: updatedControls});
     }
     switchAuthModeHandler = () => {
         this.setState(prevState => {
             return {isSignup: !prevState.isSignup};
         });
     }
-
 
     render() {
         let nameControl = null;
@@ -99,7 +137,7 @@ class Auth extends Component {
             nameControl = (
                 <div> 
                     <div className="Control">
-                        <Label>First Name</Label>
+                        <Label>First Name</Label> <span className="info">{this.state.controls.firstName.info} </span>
                         <Input type="text" name="firstName" value={this.state.controls.firstName.value} onChange={(e) => this.inputChangeHandler(e,"firstName")}></Input>
                     </div>
                     <div className="Control">
@@ -109,28 +147,30 @@ class Auth extends Component {
                 </div>
             )     
         } 
-
+       
+        
         let notice = this.props.error || this.props.message || null;
         notice = <p> {notice}</p>
 
-        let authRedirect = null
-        if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to='/start' />
-        }
+        // let authRedirect = null
+        // if (this.props.isAuthenticated) {
+        //     authRedirect = <Redirect to='/start' />
+        // }
 
         return (
             <div className="Auth">
-                {authRedirect}
+                {/* {authRedirect} */}
                 <h3 className="title">{title}</h3>
+                <h5>{this.state.submitResult}</h5>
                 {notice}
                 <Form>
                     {nameControl}
                     <div className="Control">
-                        <Label>Email</Label>
+                        <Label>Email</Label> <span className="info">{this.state.controls.email.info} </span>
                         <Input type="email" name="email" value={this.state.controls.email.value} onChange={(e) => this.inputChangeHandler(e,"email")}></Input>
                     </div>
                     <div className="Control">
-                        <Label>Password</Label>
+                        <Label>Password</Label> <span className="info">{this.state.controls.password.info} </span>
                         <Input type="password" name="password" value={this.state.controls.password.value} onChange={(e) => this.inputChangeHandler(e,'password')}></Input>
                     </div>
                     
@@ -149,12 +189,10 @@ class Auth extends Component {
 }
 const mapStateToProps = state => {
     return {
-        // loading: state.auth.loading,
         error: state.error,
         message: state.message,
         isAuthenticated: state.token !== null,
-        // buildingBurger: state.burgerBuilder.building,
-        // authRedirectPath: state.auth.authRedirectPath
+
     };
 };
 const mapDispatchToProps = dispatch => {

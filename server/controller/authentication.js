@@ -33,12 +33,14 @@ const signin = (req,res,next) => {
 
 const signup = (req,res,next) => {
     const {firstName, lastName, email, password} = req.body;
+    const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     saltRounds = 12
     if(!email || !password || !firstName ) {
-        res.send({message: 'Please provide a first_name, an email and a password' })
+        res.status(400).send({message: 'Please provide a first_name, an email and a password' })
+    } else if ( pattern.test( email )) {
+        res.status(400).send({message: 'Please provide valid email type' })
     }
 
-    console.log("Before bcrypt.hash ....")
 
     bcrypt.hash(password,saltRounds)
     .then(hash => {
@@ -47,16 +49,17 @@ const signup = (req,res,next) => {
         return createUser(firstName, lastName, email, hash)
                .then(newUser => {
                     console.log("Inside .then after createUser....")
-                        res.json({
-                            token: tokenForUser(newUser), 
-                            userId: newUser.id,
-                            message:"Successfully signed up"
-                        });
+                    res.json({
+                        token: tokenForUser(newUser), 
+                        userId: newUser.id,
+                        message:"Successfully signed up",
+                        exp: 3600
+                    });
                })
                .catch(error => {
-                 console.log("Sign up error in createUser : ", error.detail)
-                res.send({message: error.detail});
-                // return next(error);
+                    console.log("Sign up error in createUser : ", error.detail)
+                    res.send({message: error.detail});
+                   // return next(error);
         })
     })
     .catch(error => {

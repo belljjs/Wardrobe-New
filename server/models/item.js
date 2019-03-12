@@ -1,31 +1,19 @@
-
 const db = require('../database/index');
 
 class Item {
-        
     static retrieveALL (req, res, next) {
-        console.log( "In  retrieveAll,")   
-        console.log("req.url:",req.url);
-
         const url = new URL("localhost:4646/api/items/" + req.url);
         const userId = url.searchParams.get("userId");
         console.log("userId:",userId);
-
-       
-
-
-  
 
         db.any(`SELECT * FROM items WHERE user_id = ${userId}`)
         .then( data =>  res.json(data))
         .catch( error =>  res.json(error)  )
     }   
-
     static insert (req, res, next) {
         console.log("req.body:",req.body);
         const item = req.body.item;  
         const userId = req.body.userId;  
-
 
         db.query(`INSERT INTO items 
                    (user_id, 
@@ -50,7 +38,6 @@ class Item {
         .then( data =>  res.json(data))
         .catch( error =>  res.json(error)  )
     }
-
 }
 
 module.exports = Item

@@ -45,11 +45,16 @@ const localLogin = new LocalStrategy(
   };
 
  const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
+     console.log("jwtOptions:",jwtOptions);
+     console.log("payload:",payload);
     return findUserById(payload.sub)
            .then(foundUser => {
+
                 if (foundUser) {
+                    console.log("User Found!")
                     return done(null, validUser)
                 }
+                console.log("User Not Found!")
                 return done(null, false);
             })
             .catch(error => done(error. false))
