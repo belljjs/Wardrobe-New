@@ -7,7 +7,6 @@ export const authStart = () => {
         type: actionTypes.AUTH_START
     };
 };
-
 export const authSuccess = (token, userId, message) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
@@ -17,12 +16,13 @@ export const authSuccess = (token, userId, message) => {
      };
 }
 export const authFail = (error) => {
+    console.log("In authFail action, error:", error)
+
     return {
         type: actionTypes.AUTH_FAIL,
         error: error
     };
 }
-
 export const signOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
@@ -40,7 +40,6 @@ export const checkAuthTimeout = (expirationTime) => {
         }, expirationTime * 1000);
     };
 };
-
 export const auth = (firstName, lastName, email, password, isSignup) => {
     return dispatch => {
         console.log("*** In auth dispatch, isSignup : ", isSignup)
@@ -73,41 +72,43 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
                  // dispatch(checkAuthTimeout(response.data.exp)); 
              })
              .catch(error => {
-                 // Here axios wrap response with error object
-                console.log("error in request:", error)       
-                 dispatch(authFail(error.response.data));
+                // Here axios wrap response with error object
+                console.log("error in request:", error)  
+                console.log("error.response.data:", error.response.data)  
+                //error.response.data - text sent from server as 'error.detail'
+                dispatch(authFail(error.response.data));
              });
      };
  };
 
-// Used in app.js to check authentication status to sign in user automatically (for the case of refresh)
+// Used in app.js to check authentication status to sign in user automatically 
 // if there is valid token. (for the case of reload the app)
 
-export const authCheckState = () => {
-    return dispatch => {
-        const token = localStorage.getItem('token');
-        // just to make sure
-        if (!token) {
-            console.log("signout1   at authCheckState !token");
+// export const authCheckState = () => {
+//     return dispatch => {
+        
+//         const token = localStorage.getItem('token');
+//         // just to make sure
+//         if (!token) {
+//             console.log("signout1   at authCheckState !token");
+//             dispatch(signOut());
 
-            dispatch(signOut());
-
-        // check expiration 
-        } else { 
-            //string --> date type
-            const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            // expired 
-            if (expirationDate <= new Date()) { 
-                console.log("signout2   at authCheckState expired");
-                dispatch(signOut());
-            // then need authSuccess 
-            } else { 
-                const userId = localStorage.getItem('userId');
-                dispatch(authSuccess(token, userId));
-                // calculate time remained 
-                const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000 ;
-                // dispatch(checkAuthTimeout(expirationTime));
-            }   
-        }
-    };
-};
+//         // check expiration 
+//         } else { 
+//             //string --> date type
+//             const expirationDate = new Date(localStorage.getItem('expirationDate'));
+//             // expired 
+//             if (expirationDate <= new Date()) { 
+//                 console.log("signout2   at authCheckState expired");
+//                 dispatch(signOut());
+//             // then need authSuccess 
+//             } else { 
+//                 const userId = localStorage.getItem('userId');
+//                 dispatch(authSuccess(token, userId));
+//                 // calculate time remained 
+//                 const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000 ;
+//                 // dispatch(checkAuthTimeout(expirationTime));
+//             }   
+//         }
+//     };
+// };

@@ -17,9 +17,9 @@ import * as actions from './store/actions/index';
 
 class App extends Component {
 
-    componentDidMount () {
-      this.props.onCheckAutoSignIn()
-    }
+    // componentDidMount () {
+    //   this.props.onCheckAutoSignIn()
+    // }
 
     render() {
       // default routes - unauthenticated 
@@ -65,7 +65,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCheckAutoSignIn: () => dispatch( actions.authCheckState() )
+    // onCheckAutoSignIn: () => dispatch( actions.authCheckState() )
   }
 }
 // withRouter let the props passed down to app 

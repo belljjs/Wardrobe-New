@@ -31,41 +31,32 @@ const signin = (req,res,next) => {
     
 }
 
-const signup = (req,res,next) => {
+const signup = async(req,res,next) => {
     const {firstName, lastName, email, password} = req.body;
-    const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     saltRounds = 12
-    if(!email || !password || !firstName ) {
-        res.status(400).send({message: 'Please provide a first_name, an email and a password' })
-    } else if ( pattern.test( email )) {
-        res.status(400).send({message: 'Please provide valid email type' })
+    try{
+        const hash = await bcrypt.hash(password,saltRounds);
+        console.log("hash:",hash);
+
+        const newUser = await createUser(firstName, lastName, email, hash)
+        console.log("newUser:",newUser);
+
+        console.log("Successfully user created")
+
+        const token = tokenForUser(newUser)
+
+        res.send({
+            token: token, 
+            userId: newUser.id,
+            message:"Successfully signed up",
+            exp: 3600
+        });
+
     }
-
-
-    bcrypt.hash(password,saltRounds)
-    .then(hash => {
-        console.log("Inside .then after bcrypt.hash, hash:", hash);
-
-        return createUser(firstName, lastName, email, hash)
-               .then(newUser => {
-                    console.log("Inside .then after createUser....")
-                    res.json({
-                        token: tokenForUser(newUser), 
-                        userId: newUser.id,
-                        message:"Successfully signed up",
-                        exp: 3600
-                    });
-               })
-               .catch(error => {
-                    console.log("Sign up error in createUser : ", error.detail)
-                    res.send({message: error.detail});
-                   // return next(error);
-        })
-    })
-    .catch(error => {
-        console.log("Sign up error in bcrypt.hash : ", error)
-        return next(error);
-    })
+    catch(error) {
+        console.log("Sign up error ", error.detail, " ---------")
+        res.status(400).send(error.detail);
+    }
 }
 
 module.exports = { signin, signup }

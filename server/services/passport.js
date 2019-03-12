@@ -21,8 +21,8 @@ const localLogin = new LocalStrategy(
                 bcrypt.compare(password, validUser.pw)
                 .then(validPassword => {
                     if (validPassword) {
-                        console.log("====== Valid user input====");
-                        console.log(validUser);
+                        console.log("====== email and password is correct====");
+                        console.log("validUser:",validUser);
                         return done(null, validUser)
                     }
                     return done(null, false);
