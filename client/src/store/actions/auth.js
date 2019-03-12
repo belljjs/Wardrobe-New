@@ -84,31 +84,31 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
 // Used in app.js to check authentication status to sign in user automatically 
 // if there is valid token. (for the case of reload the app)
 
-// export const authCheckState = () => {
-//     return dispatch => {
+export const authCheckState = () => {
+    return dispatch => {
         
-//         const token = localStorage.getItem('token');
-//         // just to make sure
-//         if (!token) {
-//             console.log("signout1   at authCheckState !token");
-//             dispatch(signOut());
+        const token = localStorage.getItem('token');
+        // just to make sure
+        if (!token) {
+            console.log("signout1   at authCheckState !token");
+            dispatch(signOut());
 
-//         // check expiration 
-//         } else { 
-//             //string --> date type
-//             const expirationDate = new Date(localStorage.getItem('expirationDate'));
-//             // expired 
-//             if (expirationDate <= new Date()) { 
-//                 console.log("signout2   at authCheckState expired");
-//                 dispatch(signOut());
-//             // then need authSuccess 
-//             } else { 
-//                 const userId = localStorage.getItem('userId');
-//                 dispatch(authSuccess(token, userId));
-//                 // calculate time remained 
-//                 const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000 ;
-//                 // dispatch(checkAuthTimeout(expirationTime));
-//             }   
-//         }
-//     };
-// };
+        // check expiration 
+        } else { 
+            //string --> date type
+            const expirationDate = new Date(localStorage.getItem('expirationDate'));
+            // expired 
+            if (expirationDate <= new Date()) { 
+                console.log("signout2   at authCheckState expired");
+                dispatch(signOut());
+            // then need authSuccess 
+            } else { 
+                const userId = localStorage.getItem('userId');
+                dispatch(authSuccess(token, userId));
+                // calculate time remained 
+                const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000 ;
+                // dispatch(checkAuthTimeout(expirationTime));
+            }   
+        }
+    };
+};

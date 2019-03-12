@@ -2,5 +2,5 @@ export {
     auth,
     signOut,
     // setAuthRedirectPath,
-    // authCheckState
+    authCheckState
 } from './auth';
