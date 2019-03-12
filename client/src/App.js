@@ -28,14 +28,14 @@ class App extends Component {
           <Route path='/' exact component={Home} />
           <Route path='/auth' exact component={Auth} />
           {/* for any path unknown */}
-          {/* <Redirect to='/' /> */}
+          <Redirect to='/' />
         </Switch>
       )
 
       if (this.props.isAuthenticated) {
         routes = (
           <Switch>
-             <Route path='/auth' exact component={Auth} />
+             {/* <Route path='/auth' exact component={Auth} /> */}
             <Route path='/start'  exact component={Start} />
             <Route path='/closet' exact component={Closet} />
             <Route path='/outfits' exact component={Outfits} />
@@ -43,7 +43,7 @@ class App extends Component {
             <Route path='/deleteItem' exact component={DeleteItem} />
             <Route path='/signOut' exact component={SignOut} /> 
             {/* for any path unknown */}
-            {/* <Redirect to='/start' /> */}
+            <Redirect to='/start' />
           </Switch>
         )
       }
