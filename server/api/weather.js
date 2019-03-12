@@ -8,9 +8,9 @@ var router = express.Router();
 router.get('/:city', (req, res) => {
   var city = req.params.city;
 
-  Weather.retrieveByCity(city, (err, weather) => {
-    if (err) 
-      return res.json(err);
+  Weather.retrieveByCity(city, (error, weather) => {
+    if (error) 
+      return res.json(error);
     return res.json(weather);
   });
 });

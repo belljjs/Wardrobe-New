@@ -1,11 +1,13 @@
 import React from 'react';
 import Item from '../Item/Item';
 import './Items.css'
-import '../index.css';
+import '../../index.css';
 
 const items = (props) => {
     // console.log(props);
+    console.log("**** In Items, props.itemsShown:",props.itemsShown)
     const itemsShown = [...props.itemsShown]
+    
     const items = itemsShown.map( ({id, category, color, season, occasion, image_location},index) => 
             <Item 
                 key={id}

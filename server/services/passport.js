@@ -8,49 +8,56 @@ const bcrypt = require('bcrypt');
 
 const localOptions = {usernameField: 'email'};
 
-const localLogin = new LocalStrategy(localOptions, (email,password, done) => {
-    console.log(" +++++ IN LocalStrategy ")
-    console.log(" +++++ IN LocalStrategy email:", email);
-    console.log(" +++++ IN LocalStrategy password:", password);
-    console.log(" +++++ IN LocalStrategy done:", done);
-     return verifyUser(email)
+// console.log(" +++++ IN LocalStrategy ")
+// console.log(" +++++ IN LocalStrategy email:", email);
+// console.log(" +++++ IN LocalStrategy password:", password);
+// console.log(" +++++ IN LocalStrategy done:", done);
+
+const localLogin = new LocalStrategy(
+    localOptions, 
+    (email,password, done) => {
+         return verifyUser(email)
             .then(validUser => {
-                console.log(" +++++++++ befor bcrypt, password:",password);
-                console.log(" +++++++++ befor bcrypt, validUser:",validUser);
-                console.log(" +++++++++ befor bcrypt, validUser.pw:",validUser.pw);
                 bcrypt.compare(password, validUser.pw)
                 .then(validPassword => {
                     if (validPassword) {
+                        console.log("====== email and password is correct====");
+                        console.log("validUser:",validUser);
                         return done(null, validUser)
                     }
                     return done(null, false);
                 })
-                .catch(err => {
-                    console.log(" error Inside :",err)
-                    done(err. false)
+                .catch(error => {
+                    console.log(" error in password :", error)
+                    done(error, false)
                 })
             })
-            .catch(err => {
-                console.log(" error Outside :",err)
-                
-                done(err. false)
+            .catch(error => {
+                console.log(" error in email :", error)
+                done(error, false)
             })
  })
 
  const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    // hide the password later!!
     secretOrKey: "supersecret"
   };
 
  const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
+     console.log("jwtOptions:",jwtOptions);
+     console.log("payload:",payload);
     return findUserById(payload.sub)
            .then(foundUser => {
+
                 if (foundUser) {
+                    console.log("User Found!")
                     return done(null, validUser)
                 }
+                console.log("User Not Found!")
                 return done(null, false);
             })
-            .catch(err => done(err. false))
+            .catch(error => done(error. false))
 })
 
 passport.use(jwtLogin);

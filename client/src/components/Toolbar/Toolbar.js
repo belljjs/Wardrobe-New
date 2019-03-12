@@ -12,7 +12,7 @@ const toolbar=(props) => (
             <p className='MainTitle'>My Wardrobe</p>
         </div>
         <div className="DesktopOnly">
-           <Nav />
+           <Nav isAuthenticated={props.isAuth}/>
         </div>
     </header>
 );

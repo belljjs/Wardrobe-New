@@ -14,7 +14,7 @@ class Cities {
     static retrieveALL (req, res, next) {
         db.any('SELECT city_name FROM cities')
         .then( data =>  res.json(data))
-        .catch( err =>  res.json(err)  )
+        .catch( error =>  res.json(error)  )
     }   
 
     // static insert (city, callback) {              
@@ -29,7 +29,7 @@ class Cities {
         const city = req.body.city;            
         db.one('INSERT INTO cities (city_name) VALUES ($1)', [city]) 
          .then( data =>  res.json(data))
-         .catch(err =>  res.json(err)  )
+         .catch(error =>  res.json(error)  )
     };
 }
 

@@ -13,7 +13,8 @@ const session = require('express-session');
 
 const passport = require('passport');
 const passportServices = require('./services/passport');
-const requireAuth = passport.authenticate('jwt', {session:false});
+require('./services/passport');
+
 
 const PORT = process.env.PORT || 4646;
 const app = express();
@@ -37,20 +38,18 @@ app.use(passport.session());
 app.use(cors());
 
 
-app.get('/', requireAuth, (req,res) => res.redirect('/api/start'));
+// app.get('/', (req,res) => res.redirect('/api/start'));
 
-app.use('/api/cities',               require('./api/cities'));
-app.use('/api/weather',              require('./api/weather'));
-app.use('/api/item',                 require('./api/item'));
-//app.use('/api/start',                require('./api/start'));
-app.use('/api/authentication',       require('./api/authentication'));
-//      👆 path(end point for http request)    👆 module handling the request
+app.use('/api/cities',         require('./api/cities'));
+app.use('/api/weather',        require('./api/weather'));
+app.use('/api/item',           require('./api/item'));
+app.use('/api/authentication', require('./api/authentication'));
 
 // app.use(function(req, res, next) {
 //   next(createError(404));
 // });
 
-// // error handler
+// error handler
 // app.use(function(err, req, res, next) {
 //   // set locals, only providing error in development
 //   res.locals.message = err.message;
@@ -62,7 +61,6 @@ app.use('/api/authentication',       require('./api/authentication'));
 // });
 
 const DOMAIN = 'localhost';
-// const PORT = '4646';
 app.listen(PORT, DOMAIN, () => {
   console.log(`🖥 Server listenning on http://${DOMAIN}:${PORT}`);
 });

@@ -4,6 +4,10 @@ const multerS3 = require( 'multer-s3' );
 const multer = require('multer');
 const path = require( 'path' );
 const Item = require('../models/item');
+const passport = require('passport');
+const passportServices = require('../services/passport');
+const requireAuth = passport.authenticate('jwt', {session:false});
+
 
 const router = express.Router();
 
@@ -64,48 +68,20 @@ router.post( '/imageUpload', ( req, res ) => {
 	});
 });
 
+router.post( '/newItem',   Item.insert)
+router.get('/itemsAll',  Item.retrieveALL)
 
+// router.post( 
+// 	'/newItem',  
+// 	passport.authenticate('jwt', {session:false}),  
+// 	Item.insert)
 
-router.post( '/newItem', Item.insert)
-router.get('/itemsAll', Item.retrieveALL)
+// router.get(
+// 	'/itemsAll',  
+// 	passport.authenticate('jwt', {session:false}),   
+// 	Item.retrieveALL)
     
-// router.post( '/newItem', ( req, res ) => {
-// 	const item = req.body.item;
-//     Item.insert(item, (err, result) => {
-//         if (err) {
-//             return res.json(err);
-//         }
-//         return res.json(result)
-//     })
-// })
 
-// router.get('/itemsAll', (req,res) => {
-//     Item.retrieveALL((err, result) => {
-//         if (err) {
-// 			console.log( "---- error in Item.retrieveALL((err, res)")
-//             return res.json(err);
-// 		} else {
-// 			console.log("+++++ result in Item.retrieveALL((err, res)" ,result)
-// 			return res.json(result)
-// 		}
-//     })
-// })
-// router.get('/getImage/:imageId',  (req, res, next)=> {
-//     var params = { 	
-// 			Bucket: 'wardrobe-belljjs', 
-// 			Key: req.params.imageId 
-// 		};
-//     s3.getObject(params, function(err, data) {
-// 		if (err) {
-// 			console.log(err, err.stack); // an error occurred
-// 		} else {
-// 			console.log(data);           // successful response
-// 			res.writeHead(200, {'Content-Type': 'image/jpeg'});
-// 			res.write(data.Body, 'binary');
-// 			res.end(null, 'binary');
-// 		} 
-//     });
-// });
 module.exports = router;
 
 
