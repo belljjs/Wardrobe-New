@@ -12,7 +12,7 @@ const selectedItems = (props) => {
     } 
     console.log("props.isModal,title :", props.isModal, title);
 
-    const itemsSelected = props.itemsSelected.map(({id, category, color, season, image_location},index) =>
+    const itemsSelected = props.itemsSelected.map(({id, category, color, season, image_location}, index) =>
         <Item 
             isModal = {props.isModal}
             key={id}

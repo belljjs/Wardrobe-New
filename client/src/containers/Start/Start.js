@@ -26,7 +26,7 @@ class Start extends Component {
       }
     
       getCityList = async () => {
-        const response = await axios('/api/cities')
+        const response = await axios('/api/cities', {params: {userId: localStorage.userId  }})
         console.log("response of get all city : ", response);
         let cityList = response.data.map(r => r.city_name);
         this.setState({ cityList});
