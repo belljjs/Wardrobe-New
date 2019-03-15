@@ -3,23 +3,31 @@ import Item from '../Item/Item';
 import './SelectedItems.css';
 
 const selectedItems = (props) => {
+    let title = "SELECTED ITEMS";
+    let clicked = (index)=>props.itemsSelectedClicked(index);
+   
+    if(props.isModal === "true") {
+        title = "";
+        clicked = null
+    } 
+    console.log("props.isModal,title :", props.isModal, title);
 
-    //const itemsSelectedArray = [ ...props.itemsSelected];
     const itemsSelected = props.itemsSelected.map(({id, category, color, season, image_location},index) =>
         <Item 
+            isModal = {props.isModal}
             key={id}
             id={id}
             category={category}
             color={color}
             season={season}
             image_location={image_location}
-            clicked={props.itemsSelectedClicked.bind(this, index)}>
-             {/* {category}{id} */}
+            clicked={clicked}>
         </Item>
     )
     return (
+
         <div>
-            <p className="subTitle"> SELECTED ITEMS </p> 
+            <p className="subTitle"> {title} </p> 
             <div className="SelectedItems">
                 {itemsSelected}
             </div>

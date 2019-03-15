@@ -4,6 +4,9 @@ import Items from '../../components/Items/Items';
 import '../../global.css' ;
 import ItemFilter from '../../components/ItemFilter/ItemFilter';
 import SelectedItems from '../../components/SelectedItems/SelectedItems';
+import { Button, ButtonToolbar } from 'reactstrap';
+import ClosetModal from "../../UI/Modal/Modal";
+
 
 //import Modal from '../UI/Modal/Modal';
 
@@ -12,7 +15,8 @@ class Closet extends Component {
         itemsAll: [],
         itemsShown: [],
         itemsSelected: [],
-        itemsFilter: "all"
+        itemsFilter: "all",
+        modalShow: false
     }
    
     freshItemsShown = (filter) => {
@@ -121,7 +125,9 @@ class Closet extends Component {
     render() {
     console.log(" **** In Closet, this.state.itemsShown:",this.state.itemsShown)
     console.log(" **** In Closet, this.state.itemsAll:",this.state.itemsAll)
-        
+
+    let modalClose = () => this.setState({ modalShow: false });
+
         return (
             <div>
                 <h3 className="title">Closet</h3>
@@ -131,8 +137,27 @@ class Closet extends Component {
                     itemsShown={this.state.itemsShown}
                     itemsClicked={this.handleItemsShownClicked}    />
                 <SelectedItems 
+                    isModal="false"
                     itemsSelected={this.state.itemsSelected}
                     itemsSelectedClicked={this.handleItemsSelectedClicked} />
+                <ButtonToolbar>
+                    {/* <Button
+                        // variant="primary"
+                        onClick={() => this.setState({ modalShow: true })}
+                        >
+                     </Button> */}
+            
+
+                    <ClosetModal
+                        show="true"
+                        onHide={modalClose}>
+                        <SelectedItems 
+                            isModal= "true"
+                            itemsSelected={this.state.itemsSelected}
+                            itemsSelectedClicked={this.handleItemsSelectedClicked}
+                         />
+                    </ClosetModal>
+                </ButtonToolbar>
             </div>
         );
     }

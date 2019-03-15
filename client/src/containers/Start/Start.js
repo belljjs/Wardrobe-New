@@ -34,7 +34,8 @@ class Start extends Component {
    
     
       handleAddCity = async () => {
-        const response= await axios.post('/api/cities', { city: this.state.newCityName })
+        console.log("localStorage.userId:",localStorage.userId)
+        const response= await axios.post('/api/cities', { city: this.state.newCityName, userId: localStorage.userId })
         console.log("response : ", response);
         this.getCityList();
         this.setState({ newCityName: "" });

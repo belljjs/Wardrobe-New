@@ -19,15 +19,20 @@
     height: inherit;
 }
 
-@media (max-width: 499px) {
-    .DesktopOnly {
-        display: none;
-    }
-}
+
 
 .MainTitle {
     font-weight: bold;
     font-size : 2rem;
     color: rgb(2, 139, 163);
     margin: 0 20px;
+}
+.Logo {
+    height: 80%;
+}
+
+@media (max-width: 499px) {
+    .DesktopOnly {
+        display: none;
+    }
 }
