@@ -5,6 +5,7 @@ import '../../global.css' ;
 import ItemFilter from '../../components/ItemFilter/ItemFilter';
 import SelectedItems from '../../components/SelectedItems/SelectedItems';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import ClosetModal from "../../UI/ClosetModal/ClosetModal";
 
 
 //import Modal from '../UI/Modal/Modal';
@@ -16,8 +17,6 @@ class Closet extends Component {
         itemsSelected: [],
         itemsFilter: "all",
         modal: false,
-        unmountOnClose: true,
-        returnFocusAfterClose: false
     }
    
     freshItemsShown = (filter) => {
@@ -128,11 +127,6 @@ class Closet extends Component {
         }));
     }
 
-    changeUnmountOnClose(e) {
-        let value = e.target.value;
-        this.setState({ unmountOnClose: JSON.parse(value) });
-    }
-
     render() {
 
     const closeBtn = <button className="close" onClick={this.modalToggle}>&times;</button>;
@@ -149,14 +143,23 @@ class Closet extends Component {
                     magnifierClicked={this.modalToggle}
                     itemsSelected={this.state.itemsSelected}
                     itemsSelectedClicked={this.handleItemsSelectedClicked} />
-                <div> 
-                    {/* <Button onClick={this.modalToggle}>{this.props.buttonLabel}</Button> */}
+                <ClosetModal 
+                    modal={this.state.modal} 
+                    modalToggle={this.modalToggle} 
+                    
+                        
+                        itemsSelected={this.state.itemsSelected}
+                        itemsSelectedClicked={this.handleItemsSelectedClicked}>
+                    
+                </ClosetModal>
+
+                {/* <div> 
                     <Modal 
                         isOpen={this.state.modal} 
                         toggle={this.modalToggle} 
                         className={this.props.className} 
-                        returnFocusAfterClose={this.state.returnFocusAfterClose}>
-                        <ModalHeader toggle={this.modalToggle} close={closeBtn}> Outfit </ModalHeader>
+                        returnFocusAfterClose={false}>
+                        <ModalHeader toggle={this.modalToggle} close={closeBtn}> New Outfit </ModalHeader>
                         <ModalBody>
                             <SelectedItems     
                                 isModal= "true"
@@ -165,11 +168,11 @@ class Closet extends Component {
                             />
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="primary" onClick={this.modalToggle}>Do Something</Button>{' '}
+                            <Button color="primary" onClick={this.modalToggle}>Save Outfit</Button>{' '}
                             <Button color="secondary" onClick={this.modalToggle}>Cancel</Button>
                         </ModalFooter>
                     </Modal>
-                </div>           
+                </div>            */}
             </div>
         );
     }
