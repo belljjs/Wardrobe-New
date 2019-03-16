@@ -4,8 +4,7 @@ import Items from '../../components/Items/Items';
 import '../../global.css' ;
 import ItemFilter from '../../components/ItemFilter/ItemFilter';
 import SelectedItems from '../../components/SelectedItems/SelectedItems';
-import { Button, ButtonToolbar } from 'reactstrap';
-import ClosetModal from "../../UI/Modal/Modal";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 //import Modal from '../UI/Modal/Modal';
@@ -16,7 +15,9 @@ class Closet extends Component {
         itemsShown: [],
         itemsSelected: [],
         itemsFilter: "all",
-        modalShow: false
+        modal: false,
+        unmountOnClose: true,
+        returnFocusAfterClose: false
     }
    
     freshItemsShown = (filter) => {
@@ -121,13 +122,20 @@ class Closet extends Component {
     componentDidMount () {
         this.getItems();   // get all items of currnet_user in the begining
       }
+    modalToggle=()=> {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    }
+
+    changeUnmountOnClose(e) {
+        let value = e.target.value;
+        this.setState({ unmountOnClose: JSON.parse(value) });
+    }
 
     render() {
-    console.log(" **** In Closet, this.state.itemsShown:",this.state.itemsShown)
-    console.log(" **** In Closet, this.state.itemsAll:",this.state.itemsAll)
 
-    let modalClose = () => this.setState({ modalShow: false });
-
+    const closeBtn = <button className="close" onClick={this.modalToggle}>&times;</button>;
         return (
             <div>
                 <h3 className="title">Closet</h3>
@@ -138,26 +146,30 @@ class Closet extends Component {
                     itemsClicked={this.handleItemsShownClicked}    />
                 <SelectedItems 
                     isModal="false"
+                    magnifierClicked={this.modalToggle}
                     itemsSelected={this.state.itemsSelected}
                     itemsSelectedClicked={this.handleItemsSelectedClicked} />
-                <ButtonToolbar>
-                    {/* <Button
-                        // variant="primary"
-                        onClick={() => this.setState({ modalShow: true })}
-                        >
-                     </Button> */}
-            
-
-                    <ClosetModal
-                        show="true"
-                        onHide={modalClose}>
-                        <SelectedItems 
-                            isModal= "true"
-                            itemsSelected={this.state.itemsSelected}
-                            itemsSelectedClicked={this.handleItemsSelectedClicked}
-                         />
-                    </ClosetModal>
-                </ButtonToolbar>
+                <div> 
+                    {/* <Button onClick={this.modalToggle}>{this.props.buttonLabel}</Button> */}
+                    <Modal 
+                        isOpen={this.state.modal} 
+                        toggle={this.modalToggle} 
+                        className={this.props.className} 
+                        returnFocusAfterClose={this.state.returnFocusAfterClose}>
+                        <ModalHeader toggle={this.modalToggle} close={closeBtn}> Outfit </ModalHeader>
+                        <ModalBody>
+                            <SelectedItems     
+                                isModal= "true"
+                                itemsSelected={this.state.itemsSelected}
+                                itemsSelectedClicked={this.handleItemsSelectedClicked}
+                            />
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.modalToggle}>Do Something</Button>{' '}
+                            <Button color="secondary" onClick={this.modalToggle}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
+                </div>           
             </div>
         );
     }

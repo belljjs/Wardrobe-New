@@ -1,9 +1,14 @@
 import React from 'react';
 import Item from '../Item/Item';
+import Magnify from '../../UI/Magnify/Magnify';
 import './SelectedItems.css';
 
 const selectedItems = (props) => {
-    let title = "SELECTED ITEMS";
+    let title = 
+         <div className="inline">
+             <p className="subTitle"> SELECTED ITEMS </p> 
+             <Magnify clicked={props.magnifierClicked}/>
+        </div>
     let clicked = (index)=>props.itemsSelectedClicked(index);
    
     if(props.isModal === "true") {
@@ -27,7 +32,7 @@ const selectedItems = (props) => {
     return (
 
         <div>
-            <p className="subTitle"> {title} </p> 
+            {title}
             <div className="SelectedItems">
                 {itemsSelected}
             </div>
