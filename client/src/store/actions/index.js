@@ -4,3 +4,7 @@ export {
     // setAuthRedirectPath,
     authCheckState
 } from './auth';
+
+export {
+    weatherStore
+} from './weatherStore';
