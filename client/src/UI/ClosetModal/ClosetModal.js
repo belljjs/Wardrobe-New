@@ -15,8 +15,8 @@ class ClosetModal extends React.Component {
           size="lg" 
           centered
           isOpen={this.props.modal} 
-          toggle={this.props.modalToggle} 
-          returnFocusAfterClose={false}>
+          toggle={this.props.modalToggle} >
+          {/* returnFocusAfterClose={false}> */}
           <ModalHeader toggle={this.props.modalToggle} close={closeBtn}> New Outfit </ModalHeader>
           <ModalBody>
               <SelectedItems     
@@ -26,7 +26,7 @@ class ClosetModal extends React.Component {
               />
           </ModalBody>
           <ModalFooter>
-              <Button color="primary" onClick={this.props.modalToggle}>Save Outfit</Button>{' '}
+              <Button color="primary" onClick={this.props.outfitSaveClicked}>Save Outfit</Button>{' '}
               <Button color="secondary" onClick={this.props.modalToggle}>Cancel</Button>
           </ModalFooter>
       </Modal>

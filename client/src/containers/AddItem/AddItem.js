@@ -85,7 +85,9 @@ class AddItem extends Component {
             }
             const res= await axios.post(
                 'api/item/newItem/', 
+                // req.body
                 {item : newItem, userId: localStorage.userId },
+                // for authorization
                 {headers: {autorization: localStorage.token}}
             )
             if(res) {

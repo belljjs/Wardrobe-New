@@ -33,6 +33,7 @@ class App extends Component {
       )
 
       if (this.props.isAuthenticated) {
+        console.log("isAuthenticated is true...")
         routes = (
           <Switch>
              {/* <Route path='/auth' exact component={Auth} /> */}
@@ -58,8 +59,9 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => {
+  console.log(" In App mapStateToProps.. stat:",state)
   return {
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.auth.token !== null
   }
 }
 

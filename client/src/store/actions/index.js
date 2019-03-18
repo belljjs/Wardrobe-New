@@ -7,4 +7,4 @@ export {
 
 export {
     weatherStore
-} from './weatherStore';
+} from './weather';

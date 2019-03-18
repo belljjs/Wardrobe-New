@@ -12,6 +12,8 @@ const initialState = {
 
 
 const weatherStore = (state, action) => {
+    console.log("**** In weather reducer, before state:",state);
+
     return updateObject( state, { 
         weatherName: action.weatherName ,
         weatherIcon: action.weatherIcon ,
@@ -20,12 +22,16 @@ const weatherStore = (state, action) => {
      } );
 };
 
-const weatherReducer = ( state = initialState, action ) => {
+const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case actionTypes.WEATHER_STORE: return weatherStore(state, action);
+        case actionTypes.WEATHER_STORE: {
+            const result = weatherStore(state, action);
+            console.log("**** result:",result)
+            return result;
+        }
         default:
             return state;
     }
 };
 
-export default ({weatherInfo: weatherReducer});
+export default reducer;
