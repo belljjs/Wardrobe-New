@@ -10,7 +10,7 @@ class ShowOutfits extends Component {
         outfitsAll: []
     }
 
-    handleoutfitsAllClicked = () =>  {
+    outfitDeletHandler = () =>  {
 
     }
     
@@ -40,7 +40,7 @@ class ShowOutfits extends Component {
                 <h3 className="title">Outfits</h3>
                 <Outfits 
                     outfitsAll={this.state.outfitsAll}
-                    outfitsClicked={this.handleoutfitsAllClicked}    />
+                    outfitDeleteClicked={this.outfitDeletHandler}    />
             </div>
         )
     }

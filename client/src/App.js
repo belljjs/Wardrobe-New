@@ -12,7 +12,11 @@ import Auth from './containers/Auth/Auth';
 import SignOut from './containers/Auth/SignOut';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faIgloo} from '@fortawesome/free-solid-svg-icons'
 
+// library.add(faIgloo)
 
 
 class App extends Component {
