@@ -1,21 +1,45 @@
 const db = require('../database/index');
 
 class Outfit {
-    static retrieveALL (req, res, next) {
+
+     static async retrieveAll (req, res, next) {
         const userId = req.query.userId;
-        db.any(`SELECT cities.city_name 
-                FROM user_cities
-                JOIN cities ON user_cities.city_id = cities.id
-                WHERE user_cities.user_id = 16 `, [userId])
-        .then( data =>  res.json(data))
-        .catch( error =>  res.json(error)  )
-    }   
+        console.log("userId :",userId )
+        try{
+            const outfitList = await db.any(`
+                    SELECT *
+                    FROM outfits
+                    WHERE outfits.user_id = $1` , [userId])
+
+            for(let outfit of outfitList){
+                // outfit.items =[];
+                let outfitId = outfit.id
+                try{
+                    const itemsForAnOutfit = await db.any(`
+                            SELECT outfit_items.item_id, items.image_location
+                            FROM outfit_items
+                            JOIN items ON outfit_items.item_id = items.id
+                            WHERE outfit_items.outfit_id = $1` , [outfitId])
+
+                    outfit.items =[...itemsForAnOutfit]
+                }
+                catch(error){
+                    res.json(error); 
+                }
+            }
+            res.json(outfitList );
+        }
+        catch(error) {
+            res.json(error);
+        }
+    }
+
     static retrieveOne (req, res, next) {
         const userId = req.query.userId;
         db.any(`SELECT cities.city_name 
                 FROM user_cities
                 JOIN cities ON user_cities.city_id = cities.id
-                WHERE user_cities.user_id = 16 `, [userId])
+                WHERE user_cities.user_id = $1 `, [userId])
         .then( data =>  res.json(data))
         .catch( error =>  res.json(error)  )
     } 
@@ -30,7 +54,6 @@ class Outfit {
         let outfitId = null;
         try{
             console.log("*In outer Try");
-            
             let res = await db.one(`INSERT INTO outfits 
                     (
                     user_id,
@@ -56,11 +79,10 @@ class Outfit {
             outfitId = res.id;
 
             console.log("=== outfitId:",outfitId)
-            // res.json(res)
             
             for(let itemId of itemIds){
                 console.log("===item id:",itemId)
-
+                
                 try{
                     res = await db.one('INSERT INTO outfit_items (outfit_id, item_id) VALUES ($1, $2) RETURNING *', [outfitId, itemId]) 
                     console.log("Each row of outfit_items:", res);
@@ -70,7 +92,8 @@ class Outfit {
                     // res.json(error) 
                 }
             }
-
+            res.json(res)
+            
         }catch(error){
             res.json(error) 
         }

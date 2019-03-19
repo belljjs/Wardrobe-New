@@ -6,8 +6,8 @@ const passportServices = require('../services/passport');
 const requireAuth = passport.authenticate('jwt', {session:false});
 const router = express.Router();
 
-router.post( '/newOutfit',   Outfit.insert)
-router.get('/outfitsAll',  Outfit.retrieveALL)
-router.get('/proposal',  Outfit.retrieveOne)
+router.post('/newOutfit',   Outfit.insert)
+router.get('/outfits',  Outfit.retrieveAll)
+router.get('/outfit',  Outfit.retrieveOne)
 
 module.exports = router;

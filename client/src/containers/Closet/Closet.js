@@ -124,10 +124,11 @@ class Closet extends Component {
             }else {  
                 console.log(result);
                 console.log( 'Outfit saved!' );
+                this.modalToggle();
+
                 // this.showAlert("Outfit uploaded", 'yellow' );
             }
         }
-
     }
     render() {
         return (

@@ -5,7 +5,7 @@ import { Route, Switch,withRouter , Redirect} from 'react-router-dom';
 import Home from './containers/Home/Home';
 import Closet from './containers/Closet/Closet';
 import Start from './containers/Start/Start'
-import Outfits from './containers/Outfits/Outfits'
+import ShowOutfits from './containers/ShowOutfits/ShowOutfits'
 import AddItem from './containers/AddItem/AddItem';
 import DeleteItem from './containers/DeleteItem/DeleteItem';
 import Auth from './containers/Auth/Auth';
@@ -39,7 +39,7 @@ class App extends Component {
              {/* <Route path='/auth' exact component={Auth} /> */}
             <Route path='/start'  exact component={Start} />
             <Route path='/closet' exact component={Closet} />
-            <Route path='/outfits' exact component={Outfits} />
+            <Route path='/outfits' exact component={ShowOutfits} />
             <Route path='/addItem' exact component={AddItem} />
             <Route path='/deleteItem' exact component={DeleteItem} />
             <Route path='/signOut' exact component={SignOut} /> 
