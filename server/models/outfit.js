@@ -34,14 +34,51 @@ class Outfit {
         }
     }
 
-    static retrieveOne (req, res, next) {
-        const userId = req.query.userId;
-        db.any(`SELECT cities.city_name 
-                FROM user_cities
-                JOIN cities ON user_cities.city_id = cities.id
-                WHERE user_cities.user_id = $1 `, [userId])
-        .then( data =>  res.json(data))
-        .catch( error =>  res.json(error)  )
+    static async retrieveOne (req, res, next) {
+        // const highTemp = req.query.highTemp;
+        // const userId = req.query.userId;
+
+        const { userId, highTemp} = req.query;
+        console.log("highTemp :",highTemp, "userId:", userId ); 
+
+        try{
+            const outfit = await db.any(`
+                    SELECT *
+                    FROM outfits
+                    WHERE ((outfits.user_id = $1) AND ($2 >= outfits.high_temp ) AND($3  <= outfits.high_temp))
+                    ORDER BY id DESC
+                    LIMIT 1` , [userId, parseInt(highTemp)+3,  parseInt(highTemp)-3])
+
+            // const outfit = res[0]; 
+            console.log(" in retrieveOne, outfit[0]:",outfit[0]);
+
+            let outfitId = outfit[0].id;
+
+            try{
+                const itemsOfOutfit = await db.any(`
+                        SELECT items.image_location
+                        FROM items
+                        JOIN outfit_items ON outfit_items.item_id = items.id
+                        WHERE outfit_items.outfit_id = $1` , [outfitId])
+
+                console.log("itemsOfOutfit:",itemsOfOutfit);
+                outfit[0].items =[...itemsOfOutfit]
+
+                console.log("outfit[0]:",outfit[0]);
+                console.log("outfit[0].items:",outfit[0].items);
+            }
+            catch(error){
+                res.json(); 
+            }
+            // res.json(outfit[0]) not working
+            res.json(outfit);
+            
+           
+        }
+        catch(error) {
+            console.log("Error in retrieveOne:", error)
+            res.json(error);
+        }
     } 
 
     static async insert (req, res, next) {

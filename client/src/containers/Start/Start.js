@@ -11,6 +11,7 @@ import './Start.css';
 class Start extends Component {
     state = {
         weather: null,
+        proposal: null,
         cityList: [],
         newCityName: "",
         dropdownOpen: false,
@@ -33,6 +34,7 @@ class Start extends Component {
         const response = await axios('/api/cities', {params: {userId: localStorage.userId  }})
         console.log("response of get all city : ", response);
         let cityList = response.data.map(r => r.city_name);
+
         this.setState({ cityList});
         };
    
@@ -42,19 +44,17 @@ class Start extends Component {
         const response= await axios.post('/api/cities', { city: this.state.newCityName, userId: localStorage.userId })
         console.log("response : ", response);
         this.getCityList();
+
         this.setState({ newCityName: "" });
       };
       
       handleInputChange = (e) => {
         this.setState({newCityName: e.target.value});
       }
-    
+      
       getWeather = async (city) => {
-        console.log(city);
         const response = await axios(`/api/weather/${city}`)
-        console.log("In getWeather, response.data: ", response.data);
-        console.log("In getWeather, response.data.weather[0]: ", response.data.weather[0]);
-
+       
         // to store weatherInfo with redux 
         const weatherInfo ={
           weatherName: response.data.weather[0].main,
@@ -62,17 +62,57 @@ class Start extends Component {
           highTemp: response.data.main.temp_max,
           lowTemp: response.data.main.temp_min
         }
-        console.log("weatherInfo:",weatherInfo);
+
         const dispatchResult = this.props.onWeatherStore(weatherInfo);
-        console.log("dispatchResult:",dispatchResult);
-
-
-        this.setState({ weather: response.data});
+        // console.log("dispatchResult:",dispatchResult);
+        
+        const weather = response.data
+        console.log("In getWeather weather:", weather);
+        return weather;
       }
-    
-      handleChangeCity = (e) => {
-          console.log("e.target.value: ",e.target.value);
-        this.getWeather(e.target.value);
+      
+      getProposal = async (weather) => {
+          console.log("weather in getProposal:", weather);
+       
+          let itemList =[];
+
+          if (!weather)
+              return  itemList;
+
+          try {
+              const data = await axios.get(
+                  '/api/outfit/outfit',
+                  {params: {highTemp: weather.main.temp_max, userId: localStorage.userId}})
+              
+              if(data) {
+                console.log("data.data[0]: ", data.data[0]);
+                console.log("data: ", data);
+                
+                // itemList.push = data.data.items;
+
+              }
+
+              return data
+              }
+          catch (error){ 
+              console.log(" getProposal error", error);
+              return itemList;
+          }
+      }
+  
+      handleChangeCity = async (e) => {
+        
+        const weather = await this.getWeather(e.target.value);
+        console.log("weather in handleCgangeCity: ",weather);
+        
+        const proposal = await this.getProposal(weather);
+        console.log("proposal in handleCgangeCity: ",proposal);
+
+        this.setState({
+           weather: weather,
+           proposal: proposal
+        });
+
       }
     
       componentDidMount () {
@@ -108,7 +148,8 @@ class Start extends Component {
                   </Col>
                   <Col>
                       <h1 className="title" > Proposal </h1>
-                      <Proposal weather={this.state.weather}/>
+                      <Proposal 
+                        proposal={this.state.proposal} weather={ this.state.weather}/>
                   </Col>
               </Row>
             </Container>
