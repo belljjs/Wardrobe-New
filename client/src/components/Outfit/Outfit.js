@@ -31,9 +31,8 @@ const outfit = (props) => {
             {items}
             
             <button onClick={props.clicked} className="Trash">
-                 <FontAwesomeIcon icon={faTrashAlt} size="md" color="darkGreen" marginTop="8vw" />
+                 <FontAwesomeIcon icon={faTrashAlt} size="1x" color="darkGreen"  />
             </button>   
-            {/* <button onClick={props.clicked} className="Trash">delete</button> */}
         </div>
     )
     

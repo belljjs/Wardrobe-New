@@ -10,8 +10,24 @@ class ShowOutfits extends Component {
         outfitsAll: []
     }
 
-    outfitDeletHandler = () =>  {
+    outfitDeletHandler = async (outfitListIndex) =>  {
+        const outfitId = this.state.outfitsAll[outfitListIndex].id
+        console.log("outfitListIndex:",outfitListIndex);
+        console.log("outfitId:",outfitId);
+        
+        const outfitList = [...this.state.outfitsAll];
 
+        const response = await axios({
+            method: 'DELETE',
+            url: '/api/outfit/delete',
+            data: {outfitId: outfitId }
+          })
+        console.log(" In outfitDeletHandlers, response.data:", response.data);
+        
+        outfitList.splice(outfitListIndex,1);
+        console.log(" after splice, outfitList:", outfitList);
+        
+        this.setState({ outfitsAll: outfitList  })
     }
     
     getOutfits = async () => {

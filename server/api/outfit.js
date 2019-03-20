@@ -9,5 +9,6 @@ const router = express.Router();
 router.post('/newOutfit',   Outfit.insert)
 router.get('/outfits',  Outfit.retrieveAll)
 router.get('/outfit',  Outfit.retrieveOne)
+router.delete('/delete',  Outfit.delete)
 
 module.exports = router;

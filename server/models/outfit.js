@@ -98,6 +98,34 @@ class Outfit {
             res.json(error) 
         }
     };
+
+    static async delete (req, res, next) {
+        const outfitId = req.body.outfitId;
+
+        console.log("In delete, outfitId:",outfitId);
+
+        try{
+             const response = await db.any(`
+                DELETE FROM  outfits
+                WHERE id = $1 
+                RETURNING *`, [outfitId])
+            console.log( "response of delete outfit:", response)
+            try{
+                const res = await db.any(`
+                   DELETE FROM  outfit_items
+                   WHERE outfit_id = $1 
+                   RETURNING *`, [outfitId]);
+                console.log( "res of delete outfit_items:", res);
+            }catch(error){
+                console.log("Error in delete outfit_items errer : ", error);
+                res.json(error) 
+            } 
+            res.json(response)
+        }catch(error){
+            console.log("Error in delete outfit error: ", error);
+            res.json(error) 
+        } 
+    } 
 }
 
 module.exports = Outfit
@@ -105,3 +133,4 @@ module.exports = Outfit
 // router.post( '/newOutfit',   Outfit.insert)
 // router.get('/outfitsAll',  Outfit.retrieveALL)
 // router.get('/proposal',  Outfit.retrieveOne)
+// router.delete('/delete',  Outfit.delete)
