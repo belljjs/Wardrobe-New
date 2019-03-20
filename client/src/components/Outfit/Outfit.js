@@ -10,6 +10,7 @@ const outfit = (props) => {
     const items = props.items.map(item=> {
         return (
             <img 
+                key={item.image_location}
                 className="ItemInOutfit" 
                 src={item.image_location}
                 alt="items"/>
@@ -17,8 +18,6 @@ const outfit = (props) => {
     })
     return (
         <div className="OutfitLine" >
-            {/* onClick={props.clicked}> */}
-           
             <div className="WeatherInfo">
                 <img 
                     className="WeatherImage" 
@@ -26,10 +25,8 @@ const outfit = (props) => {
                     alt="Weather Icon"/>
                 {props.weather_name}
                 <div>{props.high_temp}℉ / {props.low_temp}℉</div>
-
             </div>
             {items}
-            
             <button onClick={props.clicked} className="Trash">
                  <FontAwesomeIcon icon={faTrashAlt} size="1x" color="darkGreen"  />
             </button>   

@@ -1,0 +1,26 @@
+.Start {
+    display : flex;
+    flex-flow: wrap;
+}
+
+
+.ItemInProposal {
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    padding: 8px, 16px;
+    margin: 10px 5px;
+    width: 20vw;
+    height: 20vw;
+}
+@media (max-width: 500px) {
+    .ItemInProposal {
+        width: 50px;
+        height: 50px;
+    }
+}
+.OutfitInProposal {
+    display : flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+}

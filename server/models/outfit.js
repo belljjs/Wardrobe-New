@@ -113,16 +113,12 @@ class Outfit {
             try{
                 const res = await db.any(`
                    DELETE FROM  outfit_items
-                   WHERE outfit_id = $1 
-                   RETURNING *`, [outfitId]);
-                console.log( "res of delete outfit_items:", res);
+                   WHERE outfit_id = $1 `, [outfitId]);
             }catch(error){
-                console.log("Error in delete outfit_items errer : ", error);
                 res.json(error) 
             } 
             res.json(response)
         }catch(error){
-            console.log("Error in delete outfit error: ", error);
             res.json(error) 
         } 
     } 

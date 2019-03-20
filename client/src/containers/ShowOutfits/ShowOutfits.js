@@ -12,21 +12,13 @@ class ShowOutfits extends Component {
 
     outfitDeletHandler = async (outfitListIndex) =>  {
         const outfitId = this.state.outfitsAll[outfitListIndex].id
-        console.log("outfitListIndex:",outfitListIndex);
-        console.log("outfitId:",outfitId);
-        
         const outfitList = [...this.state.outfitsAll];
-
         const response = await axios({
             method: 'DELETE',
             url: '/api/outfit/delete',
             data: {outfitId: outfitId }
           })
-        console.log(" In outfitDeletHandlers, response.data:", response.data);
-        
         outfitList.splice(outfitListIndex,1);
-        console.log(" after splice, outfitList:", outfitList);
-        
         this.setState({ outfitsAll: outfitList  })
     }
     
@@ -36,17 +28,13 @@ class ShowOutfits extends Component {
             {params: {userId: localStorage.userId  }}
         )
         console.log(" In getOutfits, response.data:", response.data);
-
         let outfitsAll = response.data
-
-        console.log(" outfitsAll:", outfitsAll);
         this.setState({ outfitsAll: outfitsAll  })
     };
 
     componentDidMount () {
         console.log("In componentDidMount...");
         this.getOutfits();   // get all outfits of currnet_user in the begining
-
       }
 
     render() {

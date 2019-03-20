@@ -4,6 +4,8 @@ import Weather  from './Weather';
 import axios from 'axios';
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import Proposal from './Proposal';
+import './Start.css';
 
 
 class Start extends Component {
@@ -79,35 +81,38 @@ class Start extends Component {
       }
       render() {
         return (
-          <Container>
-            <Row>
-                <Col>
-                    <h1 className="title">Current Weather</h1>
-                    <FormGroup>
-                        <Input type="select" onChange={this.handleChangeCity}>
-                        { this.state.cityList.length === 0 && <option>No city added yet.</option>}
-                        { this.state.cityList.length > 0 && <option>Select a city.</option> }
-                        { this.state.cityList.map((city, i) => <option key={i}>{city}</option>) }
-                        </Input>
-                    </FormGroup>
+        
+            <Container>
+              <Row>
+                  <Col>
+                      <h1 className="title">Current Weather</h1>
+                      <FormGroup>
+                          <Input type="select" onChange={this.handleChangeCity}>
+                          { this.state.cityList.length === 0 && <option>No city added yet.</option>}
+                          { this.state.cityList.length > 0 && <option>Select a city.</option> }
+                          { this.state.cityList.map((city, i) => <option key={i}>{city}</option>) }
+                          </Input>
+                      </FormGroup>
 
-                    <InputGroup style={{width: '275px'}}>
-                        <Input 
-                            placeholder="New city name..."
-                            value={this.state.newCityName}
-                            onChange={this.handleInputChange}
-                        />
-                        <InputGroupAddon addonType="append">
-                              <Button color="primary" onClick={this.handleAddCity}>Add City</Button>
-                        </InputGroupAddon>
-                    </InputGroup>
-                    <Weather data={this.state.weather}/>   
-                </Col>
-                <Col>
-                     <h1 className="title" > Proposal </h1>
-                </Col>
-            </Row>
-          </Container>
+                      <InputGroup style={{width: '275px'}}>
+                          <Input 
+                              placeholder="New city name..."
+                              value={this.state.newCityName}
+                              onChange={this.handleInputChange}
+                          />
+                          <InputGroupAddon addonType="append">
+                                <Button color="primary" onClick={this.handleAddCity}>Add City</Button>
+                          </InputGroupAddon>
+                      </InputGroup>
+                      <Weather data={this.state.weather}/>   
+                  </Col>
+                  <Col>
+                      <h1 className="title" > Proposal </h1>
+                      <Proposal weather={this.state.weather}/>
+                  </Col>
+              </Row>
+            </Container>
+          
         );
       }
     }
