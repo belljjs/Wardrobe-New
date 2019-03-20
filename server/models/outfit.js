@@ -50,27 +50,35 @@ class Outfit {
                     LIMIT 1` , [userId, parseInt(highTemp)+3,  parseInt(highTemp)-3])
 
             // const outfit = res[0]; 
-            console.log(" in retrieveOne, outfit[0]:",outfit[0]);
-
-            let outfitId = outfit[0].id;
-
-            try{
-                const itemsOfOutfit = await db.any(`
-                        SELECT items.image_location
-                        FROM items
-                        JOIN outfit_items ON outfit_items.item_id = items.id
-                        WHERE outfit_items.outfit_id = $1` , [outfitId])
-
-                console.log("itemsOfOutfit:",itemsOfOutfit);
-                outfit[0].items =[...itemsOfOutfit]
-
-                console.log("outfit[0]:",outfit[0]);
-                console.log("outfit[0].items:",outfit[0].items);
+            
+            console.log(" in retrieveOne, outfit:",outfit);
+            // find outfit for porposal
+            if (outfit[0]){
+                console.log(" in retrieveOne, outfit[0]:",outfit[0]);
+                let outfitId = outfit[0].id;
+                try{
+                    const itemsOfOutfit = await db.any(`
+                            SELECT items.image_location
+                            FROM items
+                            JOIN outfit_items ON outfit_items.item_id = items.id
+                            WHERE outfit_items.outfit_id = $1` , [outfitId])
+    
+                    console.log("itemsOfOutfit:",itemsOfOutfit);
+                    outfit[0].items =[...itemsOfOutfit]
+    
+                    console.log("outfit[0]:",outfit[0]);
+                    console.log("outfit[0].items:",outfit[0].items);
+                }   
+                catch(error){
+                    res.json(error); 
+                }
+            // no proper outfit for proposal : outfit = []
+            } else {
+                console.log(" in retrieveOne, no outfit matched.");
+                
             }
-            catch(error){
-                res.json(); 
-            }
-            // res.json(outfit[0]) not working
+           
+            // res.json(outfit[0]) is not working
             res.json(outfit);
             
            

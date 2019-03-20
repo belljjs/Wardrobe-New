@@ -7,28 +7,13 @@ const  proposal = (props) => {
     if (!weather) {
             return null
     } 
-    console.log("proposal:", proposal);
+    console.log("In proposal, proposal:", proposal);
+
     // proposal is object
-    if (!proposal){
+    
+    if (!proposal.data){
             return  <div> No previous outfit for this Weather</div>;
     }
-
-
-    // const images =[];
-    // for(let item of props.proposal){
-    //     images.push(item.image_location)
-    // }
-    // console.log("images:",images);;
-
-    // const outfit = images.map(image => {
-    //     return<img 
-    //         key={image}
-    //         className="ItemInProposal" 
-    //         src={image}
-    //         alt="items"/>
-    // })
-
- 
 
     const outfit = proposal.data[0].items.map(item => {
         return<img 
@@ -38,7 +23,7 @@ const  proposal = (props) => {
             alt="items"/>
     })
 
-    console.log("outfit:",outfit);;
+    console.log("outfit proposal :",outfit);;
 
     return (
         <div className="OutfitInProposal">

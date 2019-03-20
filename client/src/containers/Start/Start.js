@@ -73,30 +73,26 @@ class Start extends Component {
       
       getProposal = async (weather) => {
           console.log("weather in getProposal:", weather);
-       
-          let itemList =[];
 
           if (!weather)
-              return  itemList;
+              return {};
 
           try {
               const data = await axios.get(
                   '/api/outfit/outfit',
                   {params: {highTemp: weather.main.temp_max, userId: localStorage.userId}})
               
-              if(data) {
+              if(data.data[0]) {
                 console.log("data.data[0]: ", data.data[0]);
                 console.log("data: ", data);
-                
-                // itemList.push = data.data.items;
-
+                return data
+              } else {
+                return {}
               }
-
-              return data
-              }
+          }
           catch (error){ 
               console.log(" getProposal error", error);
-              return itemList;
+              return {};
           }
       }
   
