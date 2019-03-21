@@ -29,28 +29,31 @@ class DeleteItem extends Component {
         }) 
     }
 
-    handleDeleteItem = async (itemsShownIndex) =>{
-        let itemsShown = [...this.state.itemsShown];
-        const itemId = itemsShown[itemsShownIndex].id;
+    handleDeleteItem = async () =>{
+        console.log("this.state.itemsShown:",this.state.itemsShown);
+        console.log("this.state.itemSelected:",this.state.itemSelected);
+
+        const itemId = this.state.itemSelected[0].id;
         console.log("itemId:",itemId)
 
-        //Delete request 
-        // try{
-        //     const response = await axios({
-        //         method: 'DELETE',
-        //         url: '/api/item/delete',
-        //         data: {itemId: itemId },
-        //         headers: {autorization: localStorage.token}}
-        //       );
-        //     console.log("response:",response);
-        // }
-        // catch(error){
-        //     console.log("Error:",error)
-        // }
+        try{
+            const response = await axios({
+                method: 'DELETE',
+                url: '/api/item/delete',
+                data: {itemId: itemId },
+                headers: {autorization: localStorage.token}}
+              );
+            console.log("response:",response);
+        }
+        catch(error){
+            console.log("Error:",error)
+        }
 
-        itemsShown.splice(itemsShownIndex,1)
-        this.setState({
-            itemsShown: itemsShown}) 
+        this.modalToggle();
+        this.getItems();
+        // itemsShown.splice(itemsShownIndex,1)
+        // this.setState({
+        //     itemsShown: itemsShown}) 
     }
 
     handleItemClicked = (itemsShownIndex) => {

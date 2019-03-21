@@ -26,13 +26,6 @@ class DeleteModal extends React.Component {
             {/* returnFocusAfterClose={false}> */}
             <ModalHeader toggle={this.props.modalToggle} close={closeBtn}> Delete Item </ModalHeader>
             <ModalBody>
-                {/* <Item 
-                    isModal = {this.props.modal}
-                    id={itemId}
-                    image_location={itemImage}
-                    clicked={this.clicked}>
-                </Item>
-                 */}
                   <img 
                     className="DeleteItem" 
                     src={itemImage}
