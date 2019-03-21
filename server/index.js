@@ -40,10 +40,11 @@ app.use(cors());
 
 // app.get('/', (req,res) => res.redirect('/api/start'));
 
+app.use('/api/authentication', require('./api/authentication'));
 app.use('/api/cities',         require('./api/cities'));
 app.use('/api/weather',        require('./api/weather'));
 app.use('/api/item',           require('./api/item'));
-app.use('/api/authentication', require('./api/authentication'));
+app.use('/api/outfit',         require('./api/outfit'));
 
 // app.use(function(req, res, next) {
 //   next(createError(404));

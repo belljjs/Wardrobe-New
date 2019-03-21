@@ -1,35 +1,35 @@
 const db = require('../database');
 
 class Cities {
-    // if need some filtering, use parameter and use it in query
-    // static retrieveALL (callback) {
-    //     db.query('SELECT city_name FROM cities', (err, res) => {
-    //         if (err.error) 
-    //             return callback(err);
-    //         callback(res);
-    //     } )
-        
-    // }
 
     static retrieveALL (req, res, next) {
-        db.any('SELECT city_name FROM cities')
+        const userId = req.query.userId;
+        db.any(`SELECT cities.city_name 
+                FROM user_cities
+                JOIN cities ON user_cities.city_id = cities.id
+                WHERE user_cities.user_id = 16 `, [userId])
         .then( data =>  res.json(data))
         .catch( error =>  res.json(error)  )
     }   
 
-    // static insert (city, callback) {              
-    //     db.query('INSERT INTO cities (city_name) VALUES ($1)', [city], (err, res) => {
-    //         if (err.error)
-    //           return callback(err);
-    //         callback(res);
-    //       });
-    // }
+    static async insert (req, res, next) {
+        const city = req.body.city;    
+        console.log("****** req.body:",req.body);
+        let city_id = null;
+        try{
+            let res = await db.one('INSERT INTO cities (city_name) VALUES ($1) RETURNING id', [city]) 
+            city_id = res.id;
+            // res.json(res)
 
-    static insert (req, res, next) {
-        const city = req.body.city;            
-        db.one('INSERT INTO cities (city_name) VALUES ($1)', [city]) 
-         .then( data =>  res.json(data))
-         .catch(error =>  res.json(error)  )
+            try{
+                res = await db.one('INSERT INTO user_cities (user_id, city_id) VALUES ($1, $2) RETURNING *', [req.body.userId, city_id]) 
+                res.json(res)
+            }catch(error){
+                res.json(error) 
+            }
+        }catch(error){
+            res.json(error) 
+        }
     };
 }
 

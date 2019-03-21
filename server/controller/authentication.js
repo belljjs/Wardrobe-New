@@ -40,11 +40,9 @@ const signup = async(req,res,next) => {
 
         const newUser = await createUser(firstName, lastName, email, hash)
         console.log("newUser:",newUser);
-
         console.log("Successfully user created")
 
         const token = tokenForUser(newUser)
-
         res.send({
             token: token, 
             userId: newUser.id,

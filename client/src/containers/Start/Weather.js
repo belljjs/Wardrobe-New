@@ -1,8 +1,10 @@
 import React from 'react';
 import { Row, Col, Table} from 'reactstrap';
 
+
 const Weather = (props) => {
     const { data } = props;
+
     if (!data)
         return  <div></div>;
     return (
@@ -38,5 +40,13 @@ const Weather = (props) => {
         </Row>
      );
 };
-
+// const mapStateToProps = state => {
+//     return {weatherInfo: state.weatherInfo }
+// }
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onWeatherStore: (weatherInfo) => dispatch(actions.weatherStore(weatherInfo))
+//     }
+// }
+// export default connect(null,mapDispatchToProps)(Weather);
 export default Weather;

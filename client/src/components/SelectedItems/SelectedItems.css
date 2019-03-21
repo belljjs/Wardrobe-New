@@ -1,5 +1,11 @@
 .SelectedItems{
     display: flex;
+    flex-flow: wrap;
     justify-content: center;
   
+}
+.inline{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }

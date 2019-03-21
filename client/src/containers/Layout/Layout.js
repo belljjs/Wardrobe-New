@@ -3,21 +3,27 @@ import { connect } from 'react-redux';
 import './Layout.css'
 import axios from 'axios';
 import Toolbar from '../../components/Toolbar/Toolbar';
+import DropMenu from '../../components/Nav/DropMenu';
 
 class Layout extends Component {
   state = {
-    showSideDraw: false,
+    showDropMenu: false,
     items : [],
     current_user_id: undefined
   }
 
-  // current_user ? setState(user_id) : 
+    dropMenuCloseHandler = () => {
+        this.setState( { showDropMenu: false } );
+    }
 
+    dropMenuOpenHandler = () => {
+        this.setState( ( prevState ) => {
+            return { showDropMenu: !prevState.showDropMenu };
+        } );
+    }
+      
   createItems = async () => {
-     const items = await axios(('/api/items'));
-    
-
-
+    const items = await axios(('/api/items'));
     this.setState({items: items})
   }
   render() {
@@ -25,7 +31,13 @@ class Layout extends Component {
     }
     return (  
       <div className="Layout">
-        <Toolbar isAuth={this.props.isAuthenticated}/>
+        <Toolbar
+          isAuth={this.props.isAuthenticated}
+          dropMenuClicked={this.dropMenuOpenHandler} />
+        <DropMenu
+          isAuth={this.props.isAuthenticated}
+          open={this.state.showDropMenu}
+          closed={this.dropMenuCloseHandler} />
         <main className="Content" items={this.state.items}>
               {this.props.children}
         </main>
@@ -35,7 +47,7 @@ class Layout extends Component {
 }
 const mapStateToProps = state =>{
   return{
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.auth.token !== null
   }
 }
 export default connect(mapStateToProps)(Layout);

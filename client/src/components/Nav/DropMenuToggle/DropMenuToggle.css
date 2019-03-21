@@ -1,0 +1,24 @@
+.DropMenuToggle {
+    width: 40px;
+    height: 70%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    cursor: pointer;
+
+}
+
+.DropMenuToggle div {
+    width: 80%;
+    height: 3px;
+    background-color: grey;
+}
+
+@media (min-width: 500px) {
+    .DropMenuToggle {
+        display: none;
+    }
+}

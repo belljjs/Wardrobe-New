@@ -38,6 +38,29 @@ class Item {
         .then( data =>  res.json(data))
         .catch( error =>  res.json(error)  )
     }
+    static async delete (req, res, next) {
+        const itemId = req.body.itemId;
+
+        console.log("In delete, itemId:",itemId);
+
+        try{
+             const response = await db.any(`
+                DELETE FROM  items
+                WHERE id = $1 
+                RETURNING *`, [itemId])
+            console.log( "response of delete item:", response)
+            try{
+                const res = await db.any(`
+                   DELETE FROM  outfit_items
+                   WHERE item_id = $1 `, [itemId]);
+            }catch(error){
+                res.json(error) 
+            } 
+            res.json(response)
+        }catch(error){
+            res.json(error) 
+        } 
+    } 
 }
 
 module.exports = Item

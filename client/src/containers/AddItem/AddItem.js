@@ -85,7 +85,9 @@ class AddItem extends Component {
             }
             const res= await axios.post(
                 'api/item/newItem/', 
+                // req.body
                 {item : newItem, userId: localStorage.userId },
+                // for authorization
                 {headers: {autorization: localStorage.token}}
             )
             if(res) {
@@ -93,12 +95,12 @@ class AddItem extends Component {
                     console.log("res.data.error:",res.data.error);
                 }else {  
                     console.log( 'Success!' );
-                    this.showAlert("Item Uploaded", 'yellow' );
+                    this.showAlert("Item Uploaded!", 'white' );
                     this.setState({ submitted: true }) 
                 }
             }
         } else {
-            this.showAlert( "Please check input ", 'violet' );
+            this.showAlert( "Please check input! ", 'white' );
             console.log("Input validation error! ");
         } 
     }
@@ -128,7 +130,7 @@ class AddItem extends Component {
 		setTimeout( function () {
 			$( alertEl ).fadeOut( 'slow' );
 			$( alertEl ).remove();
-		}, 6000 );
+		}, 5000 );
 	};
 
     render() {

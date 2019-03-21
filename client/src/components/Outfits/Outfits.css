@@ -1,0 +1,9 @@
+.Outfits{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    padding: 0px 0px;
+    margin : 0px 0px;
+   
+
+}

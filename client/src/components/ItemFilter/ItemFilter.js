@@ -9,7 +9,8 @@ const itemFilter = (props) => {
     const filters = filterArray.map( (filter,index) => 
         <Button 
             key={index} 
-            clicked={props.filterClicked.bind(this, filter)}>   {filter}
+            clicked={props.filterClicked.bind(this, filter)}>  
+            {filter}
         </Button>
     )
     return(
