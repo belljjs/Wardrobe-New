@@ -3,16 +3,13 @@ import './Start.css';
 
 const  proposal = (props) => {
     const { proposal, weather } = props;
-    
+
     if (!weather) {
             return null
     } 
-    console.log("In proposal, proposal:", proposal);
-
     // proposal is object
-    
     if (!proposal.data){
-            return  <div> No previous outfit for this Weather</div>;
+            return  <div className="emptyProposal"> No previous outfit for this weather</div>;
     }
 
     const outfit = proposal.data[0].items.map(item => {
@@ -23,15 +20,11 @@ const  proposal = (props) => {
             alt="items"/>
     })
 
-    console.log("outfit proposal :",outfit);;
-
     return (
         <div className="OutfitInProposal">
             {outfit}
         </div>
-        
     )
-   
 }
 
 export default proposal;

@@ -13,23 +13,9 @@ class Start extends Component {
         weather: null,
         proposal: null,
         cityList: [],
-        newCityName: "",
-        dropdownOpen: false,
-        splitButtonOpen: false
-        
+        newCityName: ""
       }
-      toggleDropDown = () => {
-        this.setState({
-          dropdownOpen: !this.state.dropdownOpen
-        });
-      }
-    
-      toggleSplit = () =>  {
-        this.setState({
-          splitButtonOpen: !this.state.splitButtonOpen
-        });
-      }
-    
+
       getCityList = async () => {
         const response = await axios('/api/cities', {params: {userId: localStorage.userId  }})
         console.log("response of get all city : ", response);
@@ -38,7 +24,6 @@ class Start extends Component {
         this.setState({ cityList});
         };
    
-    
       handleAddCity = async () => {
         console.log("localStorage.userId:",localStorage.userId)
         const response= await axios.post('/api/cities', { city: this.state.newCityName, userId: localStorage.userId })
@@ -62,29 +47,20 @@ class Start extends Component {
           highTemp: response.data.main.temp_max,
           lowTemp: response.data.main.temp_min
         }
-
-        const dispatchResult = this.props.onWeatherStore(weatherInfo);
-        // console.log("dispatchResult:",dispatchResult);
-        
+        // const dispatchResult = this.props.onWeatherStore(weatherInfo);
         const weather = response.data
         console.log("In getWeather weather:", weather);
         return weather;
       }
       
       getProposal = async (weather) => {
-          console.log("weather in getProposal:", weather);
-
           if (!weather)
               return {};
-
           try {
               const data = await axios.get(
                   '/api/outfit/outfit',
-                  {params: {highTemp: weather.main.temp_max, userId: localStorage.userId}})
-              
+                  {params: {highTemp: weather.main.temp_max, userId: localStorage.userId}});
               if(data.data[0]) {
-                console.log("data.data[0]: ", data.data[0]);
-                console.log("data: ", data);
                 return data
               } else {
                 return {}
@@ -97,24 +73,18 @@ class Start extends Component {
       }
   
       handleChangeCity = async (e) => {
-        
         const weather = await this.getWeather(e.target.value);
-        console.log("weather in handleCgangeCity: ",weather);
-        
         const proposal = await this.getProposal(weather);
-        console.log("proposal in handleCgangeCity: ",proposal);
-
         this.setState({
            weather: weather,
            proposal: proposal
         });
-
       }
     
       componentDidMount () {
         this.getCityList();   // get the cities in the begining
-
       }
+
       render() {
         return (
         
@@ -137,15 +107,19 @@ class Start extends Component {
                               onChange={this.handleInputChange}
                           />
                           <InputGroupAddon addonType="append">
-                                <Button color="primary" onClick={this.handleAddCity}>Add City</Button>
+                                <Button color="info" onClick={this.handleAddCity}>Add City</Button>
                           </InputGroupAddon>
                       </InputGroup>
                       <Weather data={this.state.weather}/>   
                   </Col>
                   <Col>
-                      <h1 className="title" > Proposal </h1>
+                    <div>
+                      <h1 className="title" > Proposal for this weather </h1>
                       <Proposal 
-                        proposal={this.state.proposal} weather={ this.state.weather}/>
+                        proposal={this.state.proposal} 
+                        weather={ this.state.weather}/>
+                    </div>
+
                   </Col>
               </Row>
             </Container>

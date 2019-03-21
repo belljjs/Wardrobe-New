@@ -71,17 +71,6 @@ router.post( '/imageUpload', ( req, res ) => {
 router.post( '/newItem',   Item.insert)
 router.get('/itemsAll',  Item.retrieveALL)
 
-// router.post( 
-// 	'/newItem',  
-// 	passport.authenticate('jwt', {session:false}),  
-// 	Item.insert)
-
-// router.get(
-// 	'/itemsAll',  
-// 	passport.authenticate('jwt', {session:false}),   
-// 	Item.retrieveALL)
-    
-
 module.exports = router;
 
 

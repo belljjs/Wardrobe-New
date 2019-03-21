@@ -6,17 +6,17 @@ const item = (props) => {
     if(props.isModal === "true") {
         width = "17vw"
     } 
-    console.log("props.isModal, width :", props.isModal, width);
+    console.log("props:",props);
+    console.log("props.image_location:",props.image_location);
 
     return (
         <div 
             onClick={props.clicked}>
-            {/* {props.children} */}
             <img 
                 className="Item" 
                 src={props.image_location} 
                 alt={props.id} 
-                style={width={width}} />
+                style={width={width}} height={width} />
         </div>
     )
     
