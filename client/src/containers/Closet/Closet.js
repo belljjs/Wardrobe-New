@@ -136,7 +136,8 @@ class Closet extends Component {
 
         if (this.props.weather.weatherName) {
             weatherInfo = 
-                <div>
+                <div  className="ClosetWeatherInfo">
+                    <div className="city">{this.props.weather.cityName}</div>
                     <img 
                         className="WeatherImage" 
                         src={`http://openweathermap.org/img/w/${this.props.weather.weatherIcon}.png`} 
@@ -153,7 +154,7 @@ class Closet extends Component {
         return (
             <div>
                 <div>
-                    <div className="ClosetWeatherInfo">{weatherInfo}</div>
+                    <div>{weatherInfo}</div>
                     <h3 className="ClosetTitle">Closet</h3>
 
                 </div>

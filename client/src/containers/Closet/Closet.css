@@ -18,6 +18,14 @@
     display: flex;
     font-size: 1rem
 }
+.city{
+    margin-top: 1.5vw;
+    color: rgb(76, 88, 102);
+    /* font-weight: bold; */
+    display: flex;
+    font-size: 1rem;
+    margin-right: 5px;
+}
 .ClosetTitle{
     color: rgb(4, 76, 85);
     font-size: 2rem  ;
