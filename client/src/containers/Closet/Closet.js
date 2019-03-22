@@ -7,6 +7,7 @@ import SelectedItems from '../../components/SelectedItems/SelectedItems';
 import ClosetModal from "../../UI/ClosetModal/ClosetModal";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import './Closet.css';
 
 class Closet extends Component {
     state = {
@@ -106,6 +107,7 @@ class Closet extends Component {
             itemIds.push(item.id)
         })
         console.log("itemIds:",itemIds);
+        console.log("this.props.weather:",this.props.weather);
 
         const result= await axios.post(
             'api/outfit/newOutfit/', 
@@ -122,16 +124,39 @@ class Closet extends Component {
             if (result.data.error ) {
                 console.log("outfit insert error:",result.data.error);
             }else {  
-                console.log(result);
+                console.log("result of post new outfit:",result);
                 console.log( 'Outfit saved!' );
                 this.modalToggle();
             }
         }
     }
     render() {
+        let weatherInfo = `Please start with weather to save outfit`;
+        
+
+        if (this.props.weather.weatherName) {
+            weatherInfo = 
+                <div>
+                    <img 
+                        className="WeatherImage" 
+                        src={`http://openweathermap.org/img/w/${this.props.weather.weatherIcon}.png`} 
+                        alt="Weather Icon"/>
+                    <div className="temp"> 
+                        <div style={{marginRight:"10px"}}>{this.props.weather.weatherName}</div>
+                        <div>{this.props.weather.highTemp}℉ / {this.props.weather.lowTemp}℉</div>
+                    </div>
+                </div>
+            
+        }
+        
+            
         return (
             <div>
-                <h3 className="title">Closet</h3>
+                <div>
+                    <div className="ClosetWeatherInfo">{weatherInfo}</div>
+                    <h3 className="ClosetTitle">Closet</h3>
+
+                </div>
                 <ItemFilter 
                     filterClicked={this.handleItemsFilterClicked}/>
                 <Items 

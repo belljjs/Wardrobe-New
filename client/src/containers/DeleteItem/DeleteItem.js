@@ -30,11 +30,7 @@ class DeleteItem extends Component {
     }
 
     handleDeleteItem = async () =>{
-        console.log("this.state.itemsShown:",this.state.itemsShown);
-        console.log("this.state.itemSelected:",this.state.itemSelected);
-
         const itemId = this.state.itemSelected[0].id;
-        console.log("itemId:",itemId)
 
         try{
             const response = await axios({
@@ -48,24 +44,15 @@ class DeleteItem extends Component {
         catch(error){
             console.log("Error:",error)
         }
-
         this.modalToggle();
-        this.getItems();
-        // itemsShown.splice(itemsShownIndex,1)
-        // this.setState({
-        //     itemsShown: itemsShown}) 
+        this.getItems(); 
     }
 
     handleItemClicked = (itemsShownIndex) => {
         
         let itemsShown = [...this.state.itemsShown];
         let itemSelected = []
-       
         itemSelected.push(itemsShown[itemsShownIndex])
-
-        console.log("itemsSelected;",itemSelected);
-        console.log("itemsShown;",itemsShown);
-
         this.setState({ itemSelected: itemSelected, itemsShown: itemsShown}); 
         this.modalToggle();
 
@@ -87,8 +74,8 @@ class DeleteItem extends Component {
     componentDidMount () {
         this.getItems();   // get all items of currnet_user in the begining
       }
-    render() {
 
+    render() {
         return (
             <div>
                 <h3 className="title">Delete Item</h3>

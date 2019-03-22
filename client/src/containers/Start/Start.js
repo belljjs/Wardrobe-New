@@ -47,7 +47,7 @@ class Start extends Component {
           highTemp: response.data.main.temp_max,
           lowTemp: response.data.main.temp_min
         }
-        // const dispatchResult = this.props.onWeatherStore(weatherInfo);
+        const dispatchResult = this.props.onWeatherStore(weatherInfo);
         const weather = response.data
         console.log("In getWeather weather:", weather);
         return weather;
@@ -114,7 +114,7 @@ class Start extends Component {
                   </Col>
                   <Col>
                     <div>
-                      <h1 className="title" > Proposal for this weather </h1>
+                      <h1 className="title" > Proposal for thes weather </h1>
                       <Proposal 
                         proposal={this.state.proposal} 
                         weather={ this.state.weather}/>

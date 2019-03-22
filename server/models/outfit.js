@@ -91,15 +91,18 @@ class Outfit {
 
     static async insert (req, res, next) {
         console.log("*In outfit insert, req.body:",req.body);
+        console.log("*In outfit insert, req.body.weather:",req.body.weather);
         const weather = req.body.weather;    
         const userId = req.body.userId;    
         const outfitDate = new Date();  
         const itemIds = req.body.itemIds;  
 
         let outfitId = null;
+
         try{
-            console.log("*In outer Try");
-            let res = await db.one(`INSERT INTO outfits 
+            console.log("**** In outer Try");
+
+            let response = await db.one(`INSERT INTO outfits 
                     (
                     user_id,
                     weather_name,
@@ -118,14 +121,16 @@ class Outfit {
                     weather.lowTemp,
                     outfitDate
                     ]
-            ) 
+            );
 
-            console.log("=== res:",res);
-            outfitId = res.id;
+            console.log("=== response:",response);
+
+            outfitId = response.id;
 
             console.log("=== outfitId:",outfitId)
             
             for(let itemId of itemIds){
+
                 console.log("===item id:",itemId)
                 
                 try{
@@ -137,10 +142,11 @@ class Outfit {
                     // res.json(error) 
                 }
             }
-            res.json(res)
+            
+            res.json(response)
             
         }catch(error){
-            res.json(error) 
+            res.send(error) 
         }
     };
 
