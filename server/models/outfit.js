@@ -102,7 +102,7 @@ class Outfit {
         try{
             console.log("**** In outer Try");
 
-            let response = await db.one(`INSERT INTO outfits 
+            let outfit = await db.one(`INSERT INTO outfits 
                     (
                     user_id,
                     weather_name,
@@ -123,30 +123,27 @@ class Outfit {
                     ]
             );
 
-            console.log("=== response:",response);
+            console.log("outfitId of insert outfit",outfit);
+            outfitId = outfit.id;
 
-            outfitId = response.id;
-
-            console.log("=== outfitId:",outfitId)
-            
             for(let itemId of itemIds){
 
-                console.log("===item id:",itemId)
+                console.log("===item id of insert outfit_item:",itemId)
                 
                 try{
-                    res = await db.one('INSERT INTO outfit_items (outfit_id, item_id) VALUES ($1, $2) RETURNING *', [outfitId, itemId]) 
-                    console.log("Each row of outfit_items:", res);
+                    let data = await db.one('INSERT INTO outfit_items (outfit_id, item_id) VALUES ($1, $2) RETURNING *', [outfitId, itemId]) 
+                    console.log("data of insert outfit_items:", data);
                     // res.json(res)
                 }catch(error){
-                    console.log("Error for item ", itemId," : ", error);
-                    // res.json(error) 
+                    console.log("Error for insert outfit_items ", itemId," : ", error);
+                    res.json(error) 
                 }
             }
             
-            res.json(response)
+            res.json(outfit)
             
         }catch(error){
-            res.send(error) 
+            res.json(error) 
         }
     };
 

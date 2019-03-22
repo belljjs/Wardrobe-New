@@ -92,22 +92,18 @@ class Closet extends Component {
         this.getItems();   // get all items of currnet_user in the begining
       }
     modalToggle=()=> {
+        console.log("Modal  Toggled!")
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
     }
     outfitSaveHandler = async () => {
-        // const {weatherName, weatherIcon, highTemp, lowTemp } = this.props.weather;
-        // const weather = this.props.weather;
-        // console.log("@@@@@@ Form store... weather:",weather);
-        // console.log("@@@@@@ Form store... weather.weatherName:",weatherName);
-        // console.log("@@@@@@ Form store... weather.weatherIcon:",weatherIcon);
         const itemIds=[];
         this.state.itemsSelected.map(item => {
             itemIds.push(item.id)
         })
-        console.log("itemIds:",itemIds);
-        console.log("this.props.weather:",this.props.weather);
+
+        console.log("In outfitSaveHandler, itemIds:",itemIds);
 
         const result= await axios.post(
             'api/outfit/newOutfit/', 
@@ -120,6 +116,9 @@ class Closet extends Component {
             // for authorization
             {headers: {autorization: localStorage.token}}
         )
+        
+        console.log( 'in outfitSaveHandler, Result:', result);
+
         if(result){
             if (result.data.error ) {
                 console.log("outfit insert error:",result.data.error);
