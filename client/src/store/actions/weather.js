@@ -7,6 +7,7 @@ export const weatherStore= (weatherInfo ) => {
         weatherName: weatherInfo.weatherName,
         weatherIcon: weatherInfo.weatherIcon,
         highTemp: weatherInfo.highTemp,
-        lowTemp: weatherInfo.lowTemp
+        lowTemp: weatherInfo.lowTemp,
+        cityName: weatherInfo.cityName,
      };
 }

@@ -6,6 +6,7 @@ const initialState = {
     weatherIcon: null ,
     highTemp: null ,
     lowTemp: null ,
+    cityName: null,
     error: null
 
 };
@@ -18,7 +19,9 @@ const weatherStore = (state, action) => {
         weatherName: action.weatherName ,
         weatherIcon: action.weatherIcon ,
         highTemp: action.highTemp ,
-        lowTemp: action.lowTemp 
+        lowTemp: action.lowTemp,
+        cityName: action.cityName,
+
      } );
 };
 

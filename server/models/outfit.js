@@ -91,15 +91,18 @@ class Outfit {
 
     static async insert (req, res, next) {
         console.log("*In outfit insert, req.body:",req.body);
+        console.log("*In outfit insert, req.body.weather:",req.body.weather);
         const weather = req.body.weather;    
         const userId = req.body.userId;    
         const outfitDate = new Date();  
         const itemIds = req.body.itemIds;  
 
         let outfitId = null;
+
         try{
-            console.log("*In outer Try");
-            let res = await db.one(`INSERT INTO outfits 
+            console.log("**** In outer Try");
+
+            let outfit = await db.one(`INSERT INTO outfits 
                     (
                     user_id,
                     weather_name,
@@ -118,26 +121,26 @@ class Outfit {
                     weather.lowTemp,
                     outfitDate
                     ]
-            ) 
+            );
 
-            console.log("=== res:",res);
-            outfitId = res.id;
+            console.log("outfitId of insert outfit",outfit);
+            outfitId = outfit.id;
 
-            console.log("=== outfitId:",outfitId)
-            
             for(let itemId of itemIds){
-                console.log("===item id:",itemId)
+
+                console.log("===item id of insert outfit_item:",itemId)
                 
                 try{
-                    res = await db.one('INSERT INTO outfit_items (outfit_id, item_id) VALUES ($1, $2) RETURNING *', [outfitId, itemId]) 
-                    console.log("Each row of outfit_items:", res);
+                    let data = await db.one('INSERT INTO outfit_items (outfit_id, item_id) VALUES ($1, $2) RETURNING *', [outfitId, itemId]) 
+                    console.log("data of insert outfit_items:", data);
                     // res.json(res)
                 }catch(error){
-                    console.log("Error for item ", itemId," : ", error);
-                    // res.json(error) 
+                    console.log("Error for insert outfit_items ", itemId," : ", error);
+                    res.json(error) 
                 }
             }
-            res.json(res)
+            
+            res.json(outfit)
             
         }catch(error){
             res.json(error) 

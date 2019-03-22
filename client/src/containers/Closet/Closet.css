@@ -1,0 +1,33 @@
+.AddWeatherIcon {
+    display: flex;
+    flex-direction: row;
+}
+.ClosetWeatherInfo{
+    display: flex;
+    justify-content: left;
+    margin-left: 5vw;
+    color: rgb(250, 163, 76);
+    font-weight: bold;
+    font-size: 1.5rem
+
+}
+.temp {
+    margin-top: 1.5vw;
+    color: rgb(134, 132, 132);
+    /* font-weight: bold; */
+    display: flex;
+    font-size: 1rem
+}
+.city{
+    margin-top: 1.5vw;
+    color: rgb(76, 88, 102);
+    /* font-weight: bold; */
+    display: flex;
+    font-size: 1rem;
+    margin-right: 5px;
+}
+.ClosetTitle{
+    color: rgb(4, 76, 85);
+    font-size: 2rem  ;
+
+}

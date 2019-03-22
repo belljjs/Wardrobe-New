@@ -13,7 +13,10 @@ const toolbar=(props) => (
             <p className='MainTitle'>My Wardrobe</p>
         </div>
         <div className="DesktopOnly">
-           <Nav isAuthenticated={props.isAuth}/>
+           <Nav 
+                isAuthenticated={props.isAuth}
+                weatherFound={props.isWeather}
+                />
         </div>
         <DropMenuToggle clicked={props.dropMenuClicked} />    
     </header>

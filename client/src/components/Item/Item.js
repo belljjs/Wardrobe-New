@@ -6,8 +6,8 @@ const item = (props) => {
     if(props.isModal === "true") {
         width = "17vw"
     } 
-    console.log("props:",props);
-    console.log("props.image_location:",props.image_location);
+    // console.log("props:",props);
+    // console.log("props.image_location:",props.image_location);
 
     return (
         <div 
