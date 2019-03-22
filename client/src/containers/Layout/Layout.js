@@ -33,6 +33,7 @@ class Layout extends Component {
       <div className="Layout">
         <Toolbar
           isAuth={this.props.isAuthenticated}
+          isWeather={this.props.weatherFound}
           dropMenuClicked={this.dropMenuOpenHandler} />
         <DropMenu
           isAuth={this.props.isAuthenticated}
@@ -47,7 +48,8 @@ class Layout extends Component {
 }
 const mapStateToProps = state =>{
   return{
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    weatherFound: state.weather.weatherName !== null
   }
 }
 export default connect(mapStateToProps)(Layout);

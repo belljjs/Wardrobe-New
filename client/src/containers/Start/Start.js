@@ -37,15 +37,16 @@ class Start extends Component {
         this.setState({newCityName: e.target.value});
       }
       
-      getWeather = async (city) => {
-        const response = await axios(`/api/weather/${city}`)
+      getWeather = async (cityName) => {
+        const response = await axios(`/api/weather/${cityName}`)
        
         // to store weatherInfo with redux 
         const weatherInfo ={
           weatherName: response.data.weather[0].main,
           weatherIcon: response.data.weather[0].icon,
           highTemp: response.data.main.temp_max,
-          lowTemp: response.data.main.temp_min
+          lowTemp: response.data.main.temp_min,
+          cityName: cityName
         }
         const dispatchResult = this.props.onWeatherStore(weatherInfo);
         const weather = response.data
