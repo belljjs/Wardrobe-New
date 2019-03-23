@@ -88,9 +88,10 @@ class Closet extends Component {
         this.setState({ itemsAll: itemsAll, itemsShown:itemsAll })
     };
 
-    componentDidMount () {
+    componentWillMount () {
         this.getItems();   // get all items of currnet_user in the begining
       }
+
     modalToggle=()=> {
         console.log("Modal  Toggled!")
         this.setState(prevState => ({
