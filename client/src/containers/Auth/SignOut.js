@@ -9,6 +9,7 @@ class SignOut extends Component {
     componentDidMount () {
         console.log("sign out at SignOut component");
         this.props.onSignOut();
+
     }
 
     render () {
@@ -18,7 +19,11 @@ class SignOut extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSignOut: () => dispatch(actions.signOut())  
+        onSignOut: () => { 
+            dispatch(actions.signOut())
+            dispatch(actions.weatherDelete())
+
+        }
     };
 };
 
