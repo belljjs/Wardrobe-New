@@ -18,7 +18,7 @@ class ClosetModal extends React.Component {
           isOpen={this.props.modal} 
           toggle={this.props.modalToggle} >
           {/* returnFocusAfterClose={false}> */}
-          <ModalHeader toggle={this.props.modalToggle} close={closeBtn}> New Outfit </ModalHeader>
+          <ModalHeader> New Outfit </ModalHeader>
           <ModalBody>
                 <SelectedItems     
                   isModal= "true"
