@@ -1,32 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Item from '../Item/Item';
 import Magnify from '../../UI/Magnify/Magnify';
 import './SelectedItems.css';
 
-const selectedItems = (props) => {
-    let title = 
-         <div className="inline">
-             <p className="subTitle"> SELECTED ITEMS </p> 
-             <Magnify clicked={props.magnifierClicked}/>
-        </div>
-    let clicked = (index)=>props.itemsSelectedClicked(index);
-   
-    if(props.isModal === "true") {
-        title = "";
-        clicked = null
-    } 
-    console.log("props.isModal,title :", props.isModal, title);
+class SelectedItems extends Component {
+    render() {
 
-    const itemsSelected = props.itemsSelected.map(({id, category, color, season, image_location}, index) =>
+   
+    let title = null;
+    if(this.props.isModal === "false") {
+       title = 
+            <div className="inline">
+                <p className="subTitle"> SELECTED ITEMS </p> 
+                <Magnify clicked={this.props.magnifierClicked}/>
+            </div>
+    }
+    // let clicked = (index)=>this.props.itemsSelectedClicked(index);
+ 
+    console.log("In selectedItems....")
+    console.log("this.props.isModal:", this.props.isModal,"title:", title);
+    console.log("this in Selecteditems:", this);
+
+    const itemsSelected = this.props.itemsSelected.map(({id, category, color, season, image_location}, index) =>
         <Item 
-            isModal = {props.isModal}
+            isModal = {this.props.isModal}
             key={id}
             id={id}
             category={category}
             color={color}
             season={season}
             image_location={image_location}
-            clicked={clicked}>
+            clicked={this.props.itemsSelectedClicked.bind(this,index)}>
         </Item>
     )
     return (
@@ -39,5 +43,6 @@ const selectedItems = (props) => {
          </div>
     )
 }
+}
 
-export default selectedItems;
+export default SelectedItems;

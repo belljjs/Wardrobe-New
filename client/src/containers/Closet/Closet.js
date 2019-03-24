@@ -53,7 +53,10 @@ class Closet extends Component {
 
     handleItemsSelectedClicked = (itemsSelectedIndex) =>{
         // remove the item from itemsSelected
+        console.log("itemsSelectedIndex:",itemsSelectedIndex);
+
         let itemsSelected = [...this.state.itemsSelected];  
+
         itemsSelected.splice(itemsSelectedIndex,1)
         const itemsShown = this.adjustItemsShown(
                 this.freshItemsShown(this.state.itemsFilter),itemsSelected )
@@ -64,6 +67,9 @@ class Closet extends Component {
     }
 
     handleItemsShownClicked = (itemsShownIndex) =>{
+
+        console.log("itemsShownIndex:",itemsShownIndex);
+
         let itemsShown = [...this.state.itemsShown];
         let itemsSelected = [...this.state.itemsSelected];
         itemsSelected.push(itemsShown[itemsShownIndex])
@@ -172,6 +178,7 @@ class Closet extends Component {
                     modal={this.state.modal} 
                     modalToggle={this.modalToggle} 
                     itemsSelected={this.state.itemsSelected}
+                    // itemsSelectedClicked= {null}
                     itemsSelectedClicked={this.handleItemsSelectedClicked}
                     outfitSaveClicked={this.outfitSaveHandler}>
                 </ClosetModal>
