@@ -115,7 +115,7 @@ class Start extends Component {
                   </Col>
                   <Col>
                     <div>
-                      <h1 className="title" > Proposal for thes weather </h1>
+                      <h1 className="title" > Proposal for this weather </h1>
                       <Proposal 
                         proposal={this.state.proposal} 
                         weather={ this.state.weather}/>

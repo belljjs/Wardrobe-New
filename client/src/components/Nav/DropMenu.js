@@ -19,10 +19,11 @@ const dropMenu = ( props ) => {
                 <div className="DropLogo">
                     <Logo />
                 </div>
-                <nav>
-                <Nav 
-                    isAuthenticated={props.isAuth} 
-                    weatherFound={props.isWeather} />
+                <nav >
+                    <Nav 
+                        clicked={props.closed} 
+                        isAuthenticated={props.isAuth} 
+                        weatherFound={props.isWeather} />
                 </nav>
             </div>
         </div>
