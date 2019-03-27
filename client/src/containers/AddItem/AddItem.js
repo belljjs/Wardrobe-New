@@ -142,7 +142,7 @@ class AddItem extends Component {
     render() {
         const formLabel = {width: "120px", textAlign: "left", fontWeight: "bold"};
         const imageLabel = {textAlign: "left", width: "100%", marginBottom: "20px", fontWeight: "bold"};
-        const chooseFile = { backgroundColor: "rgb(141, 216, 226)",  fontWeight: "bold"};
+        const chooseFile = { color: "rgb(141, 216, 226)"};
         console.log("this.state in render", this.state);
         return (
             <div>
