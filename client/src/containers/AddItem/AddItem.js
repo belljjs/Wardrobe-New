@@ -21,12 +21,18 @@ class AddItem extends Component {
     }
 
     handleFileSelected = event => {
-        this.setState({ 
-            selectedFile: event.target.files[0] ,
-            imageKey: URL.createObjectURL(event.target.files[0]) 
-        })
+        console.log("Change happen on input - Choose File");
+        console.log("selectedFile(event.target.files[0]) - Choose File:",event.target.files[0]);
+        if (event.target.files[0]){
+            this.setState({ 
+                selectedFile: event.target.files[0] ,
+                imageKey: URL.createObjectURL(event.target.files[0]) 
+            }) 
+        }
+        
     };
 
+    // Upload to S3
     imageUpload = async () => {
         const imageData = new FormData();
             // This is setting 'this.state.selectedFile' to 'this.state.selectedFile.name'.
@@ -134,10 +140,9 @@ class AddItem extends Component {
 	};
 
     render() {
-        // let redirect = null;
-        // if (this.state.submitted){
-        //     redirect = <Redirect to='/closet'/>
-        // }
+        const formLabel = {width: "120px", textAlign: "left", fontWeight: "bold"};
+        const imageLabel = {textAlign: "left", width: "100%", marginBottom: "20px", fontWeight: "bold"};
+        const chooseFile = { backgroundColor: "rgb(141, 216, 226)",  fontWeight: "bold"};
         console.log("this.state in render", this.state);
         return (
             <div>
@@ -149,18 +154,20 @@ class AddItem extends Component {
                             <Col>
                                 <FormGroup style={{marginBottom: "30px"}}>
                                     <div>
-                                        <Label for="imgInput" style={{textAlign: "left", width: "100%", marginBottom: "20px"}} >Item Image</Label>
-                                        <Input type="file" name="file" id="imgInput" onChange={this.handleFileSelected} />
+                                        <Label for="imgInput" style={imageLabel} >Item Image</Label>
+                                        <Input type="file" style={chooseFile} name="file" id="imgInput" onChange={this.handleFileSelected} />
                                     </div>
                                     <FormText color="muted">
                                         <p>Choose image file for the item to be added.</p>
                                     </FormText>
+
+                                    {/* Image preview */}
                                     <img style={{marginTop: '2vh'}} className="fileImage" src={this.state.imageKey} alt=""/>
                                 </FormGroup>
                             </Col>
                             <Col style={{marginTop: '3vh'}}>
                                 <FormGroup style={{display: "flex"}}>
-                                    <Label for="category"style={{width: "110px",textAlign: "left"}} >Category</Label>
+                                    <Label for="category" style={formLabel} >Category</Label>
                                     <Input type="select" name="select" id="category" onChange={this.handleCatagoryChange} value={this.state.category} >
                                         <option></option>
                                         <option>top</option>
@@ -171,7 +178,7 @@ class AddItem extends Component {
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: "flex"}}>
-                                    <Label for="color" style={{width: "110px", textAlign: "left"}}>Color</Label>
+                                    <Label for="color" style={formLabel}>Color</Label>
                                     <Input type="select" name="select" id="color" onChange={this.handleColorChange} value={this.state.color}>
                                         <option></option>
                                         <option>white</option>
@@ -184,7 +191,7 @@ class AddItem extends Component {
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: "flex"}}>
-                                    <Label for="season"style={{width: "110px",textAlign: "left"}} >Season</Label>
+                                    <Label for="season" style={formLabel}>Season</Label>
                                     <Input type="select" name="select" id="season" onChange={this.handleSeasonChange} value={this.state.season}>
                                         <option></option>
                                         <option>summer</option>
@@ -194,7 +201,7 @@ class AddItem extends Component {
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: "flex"}}>
-                                    <Label for="occasion" style={{width: "110px", textAlign: "left"}}>Occasion</Label>
+                                    <Label for="occasion"style={formLabel}>Occasion</Label>
                                     <Input type="select" name="select" id="occasion" onChange={this.handleOccasionChange} value={this.state.occasion}>
                                         <option></option> 
                                         <option>formal</option>

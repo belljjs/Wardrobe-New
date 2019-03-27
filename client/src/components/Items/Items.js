@@ -9,13 +9,13 @@ class  Items extends Component {
       // console.log(this.props);
     // console.log("**** In Items, this.props.itemsShown:",this.props.itemsShown)
 
-    componentWillMount() {
-        this.setState({
-          children: this.props.itemsShown,
-          activeItemIndex: 0,
-        });  
-    }
-    changeActiveItem = (activeItemIndex) => this.setState({ activeItemIndex });
+    // componentWillMount() {
+    //     this.setState({
+    //       children: this.props.itemsShown,
+    //       activeItemIndex: 0,
+    //     });  
+    // }
+    // changeActiveItem = (activeItemIndex) => this.setState({ activeItemIndex });
  
     
     render() {

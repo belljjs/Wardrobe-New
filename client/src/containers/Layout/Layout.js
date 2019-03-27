@@ -37,6 +37,7 @@ class Layout extends Component {
           dropMenuClicked={this.dropMenuOpenHandler} />
         <DropMenu
           isAuth={this.props.isAuthenticated}
+          isWeather={this.props.weatherFound}
           open={this.state.showDropMenu}
           closed={this.dropMenuCloseHandler} />
         <main className="Content" items={this.state.items}>

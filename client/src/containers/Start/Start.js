@@ -132,7 +132,7 @@ class Start extends Component {
 
 // const mapStateToProps = state => {
 //     console.log("state(store):", state);
-//     return {weatherInfoFromStore: state.weatherInfo }
+//     return {weatherStore: state.weatherInfo }
 // }
 const mapDispatchToProps = dispatch => {
   return {
