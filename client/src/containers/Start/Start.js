@@ -37,7 +37,7 @@ class Start extends Component {
         this.setState({newCityName: e.target.value});
       }
       toCelcius = (farenheit) =>{
-        return (farenheit-32) *5/9;
+        return Math.floor((farenheit-32) *5/9);
       }
       getWeather = async (cityName) => {
         const response = await axios(`/api/weather/${cityName}`)
