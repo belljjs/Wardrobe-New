@@ -1,4 +1,4 @@
-const db = require('../../database/index');
+const db = require('../../../database');
 
 const createUser = (first_name, last_name, email, password) => {
     console.log(" In createUser, email, password:", email, password);

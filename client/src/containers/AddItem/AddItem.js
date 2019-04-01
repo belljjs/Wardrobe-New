@@ -143,7 +143,13 @@ class AddItem extends Component {
         const formLabel = {width: "120px", textAlign: "left", fontWeight: "bold"};
         const imageLabel = {textAlign: "left", width: "100%", marginBottom: "20px", fontWeight: "bold"};
         const chooseFile = { color: "rgb(141, 216, 226)"};
-        console.log("this.state in render", this.state);
+
+        const colors = ["white", "grey", "black", "beige","red","blue","green","yellow"];
+        const colorOptions = colors.map(c => <option>{c}</option>)
+        const season = ["summer","winter","spring/fall","all"];
+        const seasonOptions = season.map(s => <option>{s}</option>)
+        const occasion = ["formal","casual","exercise"];
+        const occasionOptions = occasion.map(s => <option>{s}</option>)        
         return (
             <div>
                 {/* {redirect} */}
@@ -181,33 +187,21 @@ class AddItem extends Component {
                                     <Label for="color" style={formLabel}>Color</Label>
                                     <Input type="select" name="select" id="color" onChange={this.handleColorChange} value={this.state.color}>
                                         <option></option>
-                                        <option>white</option>
-                                        <option>grey</option>
-                                        <option>black</option>
-                                        <option>beige</option>
-                                        <option>blue</option>
-                                        <option>red</option>
-                                        <option>green</option>
+                                        {colorOptions}
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: "flex"}}>
                                     <Label for="season" style={formLabel}>Season</Label>
                                     <Input type="select" name="select" id="season" onChange={this.handleSeasonChange} value={this.state.season}>
                                         <option></option>
-                                        <option>summer</option>
-                                        <option>winters</option>
-                                        <option>spring/fall</option>
-                                        <option>all</option>
+                                        {seasonOptions}
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: "flex"}}>
                                     <Label for="occasion"style={formLabel}>Occasion</Label>
                                     <Input type="select" name="select" id="occasion" onChange={this.handleOccasionChange} value={this.state.occasion}>
                                         <option></option> 
-                                        <option>formal</option>
-                                        <option>casual</option>
-                                        <option>exercise</option>
-                                        <option>all</option>
+                                        {occasionOptions}
                                     </Input>
                                 </FormGroup>
                                 <Button clicked={this.handleItemAdd}> SUBMIT </Button>

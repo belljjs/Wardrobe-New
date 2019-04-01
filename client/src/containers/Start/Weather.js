@@ -12,17 +12,17 @@ const Weather = (props) => {
              <Col sm="12" md={{ size: 8, offset: 2 }}>
                 <h4 className="city-name">{data.name}</h4>
                 <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather Icon"/>
-                <span>{data.weather[0].main} - {data.weather[0].description}</span>&nbsp;
-                <span>{Math.floor(data.main.temp)}&deg;F</span>
+                {data.weather[0].main} - {data.weather[0].description} &nbsp;
+                {Math.floor(data.main.temp)}&deg;C
                 <Table>
                     <tbody>
                         <tr>
                             <td>Min Temp</td>
-                            <td>{Math.floor(data.main.temp_min)}&deg;F</td>
+                            <td>{Math.floor(data.main.temp_min)}&deg;C</td>
                         </tr>
                         <tr>
                             <td>Max Temp</td>
-                            <td>{Math.floor(data.main.temp_max)}&deg;F</td>
+                            <td>{Math.floor(data.main.temp_max)}&deg;C</td>
                         </tr>
                         <tr>
                             <td>Wind</td>

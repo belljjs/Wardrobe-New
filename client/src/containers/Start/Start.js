@@ -36,21 +36,26 @@ class Start extends Component {
       handleInputChange = (e) => {
         this.setState({newCityName: e.target.value});
       }
-      
+      toCelcius = (farenheit) =>{
+        return (farenheit-32) *5/9;
+      }
       getWeather = async (cityName) => {
         const response = await axios(`/api/weather/${cityName}`)
-       
+        const weather = response.data
+        console.log("WEATHER:",weather);
+        weather.main.temp = this.toCelcius(weather.main.temp );
+        weather.main.temp_max = this.toCelcius(weather.main.temp_max );
+        weather.main.temp_min = this.toCelcius(weather.main.temp_min );
+
         // to store weatherInfo with redux 
         const weatherInfo ={
-          weatherName: response.data.weather[0].main,
-          weatherIcon: response.data.weather[0].icon,
-          highTemp: response.data.main.temp_max,
-          lowTemp: response.data.main.temp_min,
+          weatherName: weather.weather[0].main,
+          weatherIcon: weather.weather[0].icon,
+          highTemp: weather.main.temp_max,
+          lowTemp: weather.main.temp_min,
           cityName: cityName
         }
         const dispatchResult = this.props.onWeatherStore(weatherInfo);
-        const weather = response.data
-        console.log("In getWeather weather:", weather);
         return weather;
       }
       

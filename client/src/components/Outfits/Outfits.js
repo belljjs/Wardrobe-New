@@ -7,7 +7,7 @@ const outfits = (props) =>  {
 
     const outfitsAll = [...props.outfitsAll]
     const outfits = outfitsAll.map( (outfit, index) => {
-            const {id, user_id, weather_name, weather_icon, high_temp, low_temp, outfit_date, items} = outfit; 
+            const {id, user_id, weather_name, weather_icon, high_temp, low_temp, created_at, items} = outfit; 
             return(
                 <Outfit 
                     key={id}
@@ -17,7 +17,7 @@ const outfits = (props) =>  {
                     weather_icon={weather_icon}
                     high_temp={high_temp}
                     low_temp={low_temp}
-                    outfit_date={outfit_date}
+                    created_at={created_at}
                     items={items}
                     clicked={props.outfitDeleteClicked.bind(this, index)}>
                 </Outfit>

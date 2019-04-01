@@ -1,4 +1,4 @@
-const db = require('../database/index');
+const db = require('../../database');
 
 class Outfit {
 
@@ -103,27 +103,25 @@ class Outfit {
             console.log("**** In outer Try");
 
             let outfit = await db.one(`INSERT INTO outfits 
-                    (
-                    user_id,
-                    weather_name,
-                    weather_icon,
-                    high_temp,
-                    low_temp,
-                    outfit_date 
+                    (   
+                        user_id,
+                        weather_name,
+                        weather_icon,
+                        high_temp,
+                        low_temp
                     )
-                    VALUES ($1, $2, $3, $4, $5, $6)
+                    VALUES ($1, $2, $3, $4, $5)
                     RETURNING id`,
                     [
-                    userId,
-                    weather.weatherName,
-                    weather.weatherIcon,
-                    weather.highTemp,
-                    weather.lowTemp,
-                    outfitDate
+                        userId,
+                        weather.weatherName,
+                        weather.weatherIcon,
+                        weather.highTemp,
+                        weather.lowTemp
                     ]
             );
 
-            console.log("outfitId of insert outfit",outfit);
+            console.log("outfit.id of the new outfit:", outfit.id);
             outfitId = outfit.id;
 
             for(let itemId of itemIds){
@@ -143,6 +141,7 @@ class Outfit {
             res.json(outfit)
             
         }catch(error){
+            console.log( "outfit insert error:",error);
             res.json(error) 
         }
     };
