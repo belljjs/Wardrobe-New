@@ -19,7 +19,7 @@ class DeleteModal extends React.Component {
         const closeBtn = <button className="close" onClick={this.modalToggle}>&times;</button>;
         return (
             <Modal 
-            size="1x" 
+            size="md" 
             centered
             isOpen={this.props.modal} 
             toggle={this.props.modalToggle} >

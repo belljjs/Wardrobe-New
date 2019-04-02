@@ -1,4 +1,4 @@
-.weatherShot {
+.screenShot {
     width: 50vw;
     height: auto;
     margin-left: 10vw;
@@ -16,3 +16,8 @@
     text-align: left;
     margin-left: 20vw;
 }
+hr{
+   width: 70vw;
+   /* height: 5px; */
+    background-color: darkgrey;
+ }

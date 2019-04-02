@@ -1,4 +1,6 @@
 import React from 'react'
+import { Container, Row, Col, Form, FormGroup, FormText, Label, Input  } from 'reactstrap';
+
 import weatherShot from '../../asset/image/weatherShot.png';
 import closetSelectedShot from '../../asset/image/closetSelectedShot.png';
 import closetShot from '../../asset/image/closetShot.png';
@@ -22,49 +24,61 @@ const home =() => {
             <div>
                 <h3 className="titleHome"> Plan Your Outfit</h3>
                 <div className="titlePage">
-                        First, make an account with <FontAwesomeIcon icon={faSignInAlt}/> {" "} icon in the menu bar.
+                        First, make an account with &nbsp;  <FontAwesomeIcon icon={faSignInAlt}/> &nbsp; icon in the menu bar.
                 </div>
-
+                <hr></hr>
                 <div>
                     <div className="titlePage">
                         <p>Start with finding weather of the city and get the proposal for the weather. </p>
                     </div>
-                    <img className="weatherShot"
+                    <img className="screenShot"
                         src={weatherShot} 
                         alt=""  />
                     <div className="titlePage">
                         <p>Then, the menu bar shows available links.</p>
                     </div>
                 </div>
+                <hr></hr>
                 <div>
                     <div className="titlePage">
-                        If there is no items and no outfits saved, then add items with image files for the items stored in your computer. 
+                        <p>If there is no items and no outfits saved, </p>
+                        <p>then click the <strong>+</strong> link to add items with image files for the items stored in your computer. </p>
                     </div>
-                    <img className="weatherShot"
+                    <img className="screenShot"
                         src={addItemShot} 
                         alt=""  />
                     <div className="titlePage">
-                        Click <strong>choose file </strong> button to find file for an item.
+                        Click the &nbsp; <strong style={{border: "solid grey 1px"}}>choose file </strong> &nbsp; button to find a file for an item.
                     </div>                   
-                    <img className="weatherShot"
+                    <img className="screenShot"
                         src={itemFileShot} 
                         alt=""  />
                 </div>
+                <hr></hr>
                 <div>
                     <div className="titlePage">
-                        After open a file for an item, then add infomation for the item and click submit button.
+                        <p>If an item is no longer available, then click <strong>-</strong> link to delete the item.   </p>
                     </div>
-                    <img className="weatherShot"
-                        src={itemInfoShot} 
+                    <img className="screenShot"
+                        src={deleteShot} 
+                        alt=""  />
+                    <div className="titlePage">
+                        <p>Click the item then you can see a big image of the item.</p>
+                        <p>Confirm the item to be deleted.</p>
+                    </div>                   
+                    <img className="screenShot"
+                        src={deleteModalShot} 
                         alt=""  />
                 </div>
+                <br></br><br></br>
+                <hr></hr>
                 <div>
                     <div className="titlePage">
-                        <p>To open your closet, click <strong>closet</strong> link in the menu bar.</p>
+                        <p>To open your closet, clickthe <strong>closet</strong> link in the menu bar.</p>
                         <p>Click items to select for an outfit. </p>
                         <p>If you want to put items back to the closet, click again each item of selected items.</p>
                     </div>
-                    <img className="weatherShot"
+                    <img className="screenShot"
                         src={closetSelectedShot} 
                         alt=""  />
                 </div>
@@ -72,16 +86,18 @@ const home =() => {
                     <div className="titlePage">
                         <p> After selecting items for an outfit, click magnifier to see items bigger. If it's ok, then save it.</p>
                     </div>
-                    <img className="weatherShot"
+                    <img className="screenShot"
                         src={closetModalShot} 
                         alt=""  />
                 </div>
+                <br></br><br></br>
+                <hr></hr>
                 <div>
                     <div className="titlePage">
-                        <p> To check all the outfits saved, click outfit in the menu bar.</p>
-                        <p> If you want to delete some outfits, click <FontAwesomeIcon icon={faTrashAlt} size="1x" color="darkGreen"  /> icon for each outfit. </p>
+                        <p> To check all the outfits saved, click <strong>outfit </strong> link in the menu bar.</p>
+                        <p> If you want to delete some outfits, click &nbsp; <FontAwesomeIcon icon={faTrashAlt} size="1x" color="darkGreen"  /> &nbsp; icon for each outfit. </p>
                     </div>
-                    <img className="weatherShot"
+                    <img className="screenShot"
                         src={outfitShot} 
                         alt=""  />
                 </div>
