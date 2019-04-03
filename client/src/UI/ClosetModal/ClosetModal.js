@@ -10,7 +10,6 @@ class ClosetModal extends React.Component {
 
   render() {
       console.log("In ClosetModal.... isOpen:", this.props.modal)
-      const closeBtn = <button className="close" onClick={this.modalToggle}>&times;</button>;
       return (
         <Modal 
           size="lg" 

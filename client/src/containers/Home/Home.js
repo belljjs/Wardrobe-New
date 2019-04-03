@@ -41,7 +41,7 @@ const home =() => {
                     <div className= "titlePage"> Add Item </div>
                     <div className="pageFeature">
                         <p>If there is no items and no outfits saved, </p>
-                        <p>then click the <strong>+</strong> link to add items with image files for the items stored in your computer. </p>
+                        <p>then click the &nbsp;  <FontAwesomeIcon icon={faPlus}/> &nbsp;  link to add items with image files for the items stored in your computer. </p>
                     </div>
                     <img className="screenShot"
                         src={addItemShot} 
@@ -63,7 +63,7 @@ const home =() => {
                 <div>
                     <div className= "titlePage"> Delete Item </div>
                     <div className="pageFeature">
-                        <p>If an item is no longer available, then click <strong>-</strong> link to delete the item.   </p>
+                        <p>If an item is no longer available, then click &nbsp;  <FontAwesomeIcon icon={faMinus}/> &nbsp; link to delete the item.   </p>
                     </div>
                     <img className="screenShot"
                         src={deleteShot} 
