@@ -22,8 +22,12 @@ const signin = (req,res,next) => {
     console.log( " varified user : ", req.user );
    
     const {email, password} = req.body;
+    console.log( " Before res.json..." );
+    const token = tokenForUser(req.user);
+    console.log( " tokenForUser(req.user):",tokenForUser(req.user) );
+
     res.send({
-        token: tokenForUser(req.user), 
+        token: token,
         userId: req.user.id, 
         message: "Successfully signed in",
         exp: 3600
