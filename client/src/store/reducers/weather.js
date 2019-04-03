@@ -25,11 +25,20 @@ const weatherStore = (state, action) => {
      } );
 };
 
+const weatherDelete = (state, action) => {
+    return updateObject(state, { weatherName: null, weatherIcon: null, highTemp: null,lowTemp: null, cityName: null, error: null });
+};
+
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.WEATHER_STORE: {
             const result = weatherStore(state, action);
-            console.log("**** result:",result)
+            console.log("**** result of weatherStore:",result)
+            return result;
+        }
+        case actionTypes.WEATHER_DELETE: {
+            const result = weatherDelete(state, action);
+            console.log("**** result of weatherDelete:",result)
             return result;
         }
         default:

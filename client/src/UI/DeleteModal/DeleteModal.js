@@ -19,12 +19,12 @@ class DeleteModal extends React.Component {
         const closeBtn = <button className="close" onClick={this.modalToggle}>&times;</button>;
         return (
             <Modal 
-            size="lg" 
+            size="md" 
             centered
             isOpen={this.props.modal} 
             toggle={this.props.modalToggle} >
             {/* returnFocusAfterClose={false}> */}
-            <ModalHeader toggle={this.props.modalToggle} close={closeBtn}> Delete Item </ModalHeader>
+            <ModalHeader > Delete Item </ModalHeader>
             <ModalBody>
                   <img 
                     className="DeleteItem" 

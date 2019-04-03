@@ -1,4 +1,4 @@
-const db = require('../../database/index');
+const db = require('../../../database');
 
 // used in localLogin
 const verifyUser = ( email) => {

@@ -1,0 +1,30 @@
+.screenShot {
+    width: 50vw;
+    height: auto;
+    /* margin-left: 10vw; */
+}
+.titleHome{
+    color: rgb(101, 13, 128);
+    font-size: 3rem  ;
+    padding-top: 8vh;
+    padding-bottom: 4vh;
+}
+.pageFeature{
+    font-size: 1.5rem  ;
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+    /* text-align: left; */
+    /* margin-left: 20vw; */
+}
+.titlePage{
+    font-size: 2rem  ;
+    font-weight: bold;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    color: rgb(7, 92, 145);
+}
+hr{
+    width: 60vw;
+    height: 5px;
+    background-color: darkgrey;
+ }

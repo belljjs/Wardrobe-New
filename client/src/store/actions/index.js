@@ -6,5 +6,6 @@ export {
 } from './auth';
 
 export {
-    weatherStore
+    weatherStore,
+    weatherDelete
 } from './weather';

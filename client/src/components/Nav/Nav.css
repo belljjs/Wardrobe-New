@@ -26,10 +26,12 @@
     display: block;
 }
 .Nav a:hover{
-    color: rgb(27, 27, 27);
+    text-decoration: none;
+    color: rgb(15, 14, 14);
 }
 .Nav a:active,
 .Nav a.active {
+    text-decoration: none;
     color: rgb(2, 139, 163);
 }
 
@@ -54,7 +56,7 @@
         color: rgb(82, 80, 80);
     }
     .Nav a:hover{
-        color: rgb(27, 27, 27);
+        color: rgb(15, 14, 14);
     }
     .Nav a:active,
     .Nav a.active {

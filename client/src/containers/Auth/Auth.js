@@ -49,7 +49,7 @@ class Auth extends Component {
             },
         },
         isSignup: false,
-        submitResult: ""
+        signUpInputValidation: ""
     }
 
     checkValidity ( value, rules ) {
@@ -95,17 +95,17 @@ class Auth extends Component {
         event.preventDefault();
         if (this.validAllControls()){
             console.log("Allcontrols are valid:", this.state.controls);
-            console.log("controls before onAuth:", this.state.controls);
+            console.log("controls before onAuth:", this.state.controls,"IsSignup:", this.state.isSignup );
             this.props.onAuth( 
                 this.state.controls.firstName.value, 
                 this.state.controls.lastName.value, 
                 this.state.controls.email.value, 
                 this.state.controls.password.value,
                 this.state.isSignup );
-            this.setState({submitResult: ""})
+            this.setState({signUpInputValidation: ""})
             
         } else {
-            this.setState({submitResult: "Invalid Input. Please try again."})
+            this.setState({signUpInputValidation: "Invalid Input. Please try again."})
         }
     }
 
@@ -149,8 +149,11 @@ class Auth extends Component {
         } 
        
         
-        let notice = this.props.error || this.props.message || null;
-        notice = <p> {notice}</p>
+        let notice = this.props.error || this.props.message|| null;
+
+        console.log("this.props.error:",this.props.error);
+        console.log("this.props.message:",this.props.message);
+        console.log("notice:",notice);
 
         // let authRedirect = null
         // if (this.props.isAuthenticated) {
@@ -161,8 +164,8 @@ class Auth extends Component {
             <div className="Auth">
                 {/* {authRedirect} */}
                 <h3 className="title">{title}</h3>
-                <h5>{this.state.submitResult}</h5>
-                {notice}
+                <h5>{this.state.signUpInputValidation}</h5>
+                <p> {notice}</p>
                 <Form>
                     {nameControl}
                     <div className="Control">
@@ -188,10 +191,13 @@ class Auth extends Component {
     }
 }
 const mapStateToProps = state => {
+    console.log("state:",state)
+    console.log("state.auth.error:",state.auth.error)
+    console.log("state.auth.message:",state.auth.message)
     return {
-        error: state.error,
-        message: state.message,
-        isAuthenticated: state.token !== null,
+        error: state.auth.error,
+        message: state.auth.message,
+        isAuthenticated: state.auth.token !== null,
 
     };
 };

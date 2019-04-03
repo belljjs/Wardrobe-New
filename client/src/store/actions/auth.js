@@ -101,6 +101,7 @@ export const authCheckState = () => {
             if (expirationDate <= new Date()) { 
                 console.log("signout2   at authCheckState expired");
                 dispatch(signOut());
+                
             // then need authSuccess 
             } else { 
                 const userId = localStorage.getItem('userId');

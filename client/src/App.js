@@ -12,12 +12,6 @@ import Auth from './containers/Auth/Auth';
 import SignOut from './containers/Auth/SignOut';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faIgloo} from '@fortawesome/free-solid-svg-icons'
-
-// library.add(faIgloo)
-
 
 class App extends Component {
 
@@ -26,11 +20,11 @@ class App extends Component {
     }
 
     render() {
-      // default routes - unauthenticated 
       let routes = (
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/auth' exact component={Auth} />
+          
           {/* for any path unknown */}
           <Redirect to='/' />
         </Switch>
@@ -40,13 +34,13 @@ class App extends Component {
         console.log("isAuthenticated is true...")
         routes = (
           <Switch>
-             {/* <Route path='/auth' exact component={Auth} /> */}
             <Route path='/start'  exact component={Start} />
             <Route path='/closet' exact component={Closet} />
             <Route path='/outfits' exact component={ShowOutfits} />
             <Route path='/addItem' exact component={AddItem} />
             <Route path='/deleteItem' exact component={DeleteItem} />
             <Route path='/signOut' exact component={SignOut} /> 
+
             {/* for any path unknown */}
             <Redirect to='/start' />
           </Switch>

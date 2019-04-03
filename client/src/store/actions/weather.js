@@ -11,3 +11,9 @@ export const weatherStore= (weatherInfo ) => {
         cityName: weatherInfo.cityName,
      };
 }
+export const weatherDelete = () => {
+
+    return {
+        type: actionTypes.WEATHER_DELETE
+    };
+};

@@ -9,6 +9,7 @@ import SelectedItems from '../../components/SelectedItems/SelectedItems';
 class ClosetModal extends React.Component {
 
   render() {
+      console.log("In ClosetModal.... isOpen:", this.props.modal)
       const closeBtn = <button className="close" onClick={this.modalToggle}>&times;</button>;
       return (
         <Modal 
@@ -17,13 +18,13 @@ class ClosetModal extends React.Component {
           isOpen={this.props.modal} 
           toggle={this.props.modalToggle} >
           {/* returnFocusAfterClose={false}> */}
-          <ModalHeader toggle={this.props.modalToggle} close={closeBtn}> New Outfit </ModalHeader>
+          <ModalHeader> New Outfit </ModalHeader>
           <ModalBody>
-              <SelectedItems     
+                <SelectedItems     
                   isModal= "true"
                   itemsSelected={this.props.itemsSelected}
-                  itemsSelectedClicked={this.props.handleItemsSelectedClicked}
-              />
+                  itemsSelectedClicked={this.props.itemsSelectedClicked}
+                />
           </ModalBody>
           <ModalFooter>
               <Button color="primary" onClick={this.props.outfitSaveClicked}>Save Outfit</Button>{' '}

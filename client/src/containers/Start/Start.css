@@ -22,8 +22,7 @@
     flex-flow: wrap;
     justify-content: center;
     align-items: center;
-    padding-top: 10vw;
-    padding-bottom: 10vw;
+    padding: 5vw;
     border: 3px beige solid;
     border-radius: 20px;
 }

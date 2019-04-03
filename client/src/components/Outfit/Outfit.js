@@ -23,7 +23,7 @@ const outfit = (props) => {
                     className="WeatherImage" 
                     src={`http://openweathermap.org/img/w/${props.weather_icon}.png`} 
                     alt="Weather Icon"/>
-                {props.weather_name}
+                <div>{props.weather_name}</div>
                 <div>{props.high_temp}℉ / {props.low_temp}℉</div>
             </div>
             {items}
