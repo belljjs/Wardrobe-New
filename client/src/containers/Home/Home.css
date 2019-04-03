@@ -9,15 +9,22 @@
     padding-top: 4vh;
     padding-bottom: 4vh;
 }
-.titlePage{
+.pageFeature{
     font-size: 1.5rem  ;
     padding-top: 6vh;
     padding-bottom: 6vh;
     /* text-align: left; */
     /* margin-left: 20vw; */
 }
+.titlePage{
+    font-size: 2rem  ;
+    font-weight: bold;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    color: rgb(85, 26, 163);
+}
 hr{
-    width: 70vw;
+    width: 60vw;
     height: 5px;
     background-color: darkgrey;
  }

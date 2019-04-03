@@ -23,46 +23,46 @@ const home =() => {
     return (
             <div>
                 <h3 className="titleHome"> Plan Your Outfit</h3>
-                <div className="titlePage">
+                <div className="pageFeature">
                         First, make an account with &nbsp;  <FontAwesomeIcon icon={faSignInAlt}/> &nbsp; icon in the menu bar.
                 </div>
-                <hr></hr>
                 <div>
-                    <div className="titlePage">
+                    <div className= "titlePage"> Weather </div>
+                    <div className= "pageFeature">
                         <p>Start with finding weather of the city and get the proposal for the weather. </p>
                     </div>
                     <img className="screenShot"
                         src={weatherShot} 
                         alt=""  />
-                    <div className="titlePage">
+                    <div className="pageFeature">
                         <p>Then, the menu bar shows available links.</p>
                     </div>
                 </div>
-                <hr></hr>
                 <div>
-                    <div className="titlePage">
+                    <div className= "titlePage"> Add Item </div>
+                    <div className="pageFeature">
                         <p>If there is no items and no outfits saved, </p>
                         <p>then click the <strong>+</strong> link to add items with image files for the items stored in your computer. </p>
                     </div>
                     <img className="screenShot"
                         src={addItemShot} 
                         alt=""  />
-                    <div className="titlePage">
+                    <div className="pageFeature">
                         Click the &nbsp; <strong style={{border: "solid grey 1px"}}>choose file </strong> &nbsp; button to find a file for an item.
                     </div>                   
                     <img className="screenShot"
                         src={itemFileShot} 
                         alt=""  />
                 </div>
-                <hr></hr>
                 <div>
-                    <div className="titlePage">
+                    <div className= "titlePage"> Delete Item </div>
+                    <div className="pageFeature">
                         <p>If an item is no longer available, then click <strong>-</strong> link to delete the item.   </p>
                     </div>
                     <img className="screenShot"
                         src={deleteShot} 
                         alt=""  />
-                    <div className="titlePage">
+                    <div className="pageFeature">
                         <p>Click the item then you can see a big image of the item.</p>
                         <p>Confirm the item to be deleted.</p>
                     </div>                   
@@ -71,9 +71,10 @@ const home =() => {
                         alt=""  />
                 </div>
                 <br></br><br></br>
-                <hr></hr>
+
                 <div>
-                    <div className="titlePage">
+                    <div className= "titlePage"> Open Closet </div>
+                    <div className="pageFeature">
                         <p>To open your closet, clickthe <strong>closet</strong> link in the menu bar.</p>
                         <p>Click items to select for an outfit. </p>
                         <p>If you want to put items back to the closet, click again each item of selected items.</p>
@@ -83,7 +84,7 @@ const home =() => {
                         alt=""  />
                 </div>
                 <div>
-                    <div className="titlePage">
+                    <div className="pageFeature">
                         <p> After selecting items for an outfit, click magnifier to see items bigger. If it's ok, then save it.</p>
                     </div>
                     <img className="screenShot"
@@ -91,9 +92,10 @@ const home =() => {
                         alt=""  />
                 </div>
                 <br></br><br></br>
-                <hr></hr>
                 <div>
-                    <div className="titlePage">
+                     <div className= "titlePage"> Outfits </div>                     
+
+                    <div className="pageFeature">
                         <p> To check all the outfits saved, click <strong>outfit </strong> link in the menu bar.</p>
                         <p> If you want to delete some outfits, click &nbsp; <FontAwesomeIcon icon={faTrashAlt} size="1x" color="darkGreen"  /> &nbsp; icon for each outfit. </p>
                     </div>
