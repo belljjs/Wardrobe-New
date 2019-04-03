@@ -27,7 +27,7 @@ const home =() => {
                         First, make an account with &nbsp;  <FontAwesomeIcon icon={faSignInAlt}/> &nbsp; icon in the menu bar.
                 </div>
                 <div>
-                    <div className= "titlePage"> Weather </div>
+                    <div className= "titlePage"> Check Weather </div>
                     <div className= "pageFeature">
                         <p>Start with finding weather of the city and get the proposal for the weather. </p>
                     </div>
@@ -53,7 +53,7 @@ const home =() => {
                     <img className="screenShot"
                         src={itemFileShot} 
                         alt=""  />
-                </div>
+                </div><br></br>
                 <div>
                     <div className= "titlePage"> Delete Item </div>
                     <div className="pageFeature">
@@ -70,7 +70,7 @@ const home =() => {
                         src={deleteModalShot} 
                         alt=""  />
                 </div>
-                <br></br><br></br>
+                <br></br><br></br><br></br>
 
                 <div>
                     <div className= "titlePage"> Open Closet </div>
@@ -91,9 +91,9 @@ const home =() => {
                         src={closetModalShot} 
                         alt=""  />
                 </div>
-                <br></br><br></br>
+                <br></br><br></br><br></br>
                 <div>
-                     <div className= "titlePage"> Outfits </div>                     
+                     <div className= "titlePage"> Show Outfits </div>                     
 
                     <div className="pageFeature">
                         <p> To check all the outfits saved, click <strong>outfit </strong> link in the menu bar.</p>

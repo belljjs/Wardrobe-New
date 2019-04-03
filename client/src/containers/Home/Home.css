@@ -6,7 +6,7 @@
 .titleHome{
     color: rgb(101, 13, 128);
     font-size: 3rem  ;
-    padding-top: 4vh;
+    padding-top: 8vh;
     padding-bottom: 4vh;
 }
 .pageFeature{
@@ -21,7 +21,7 @@
     font-weight: bold;
     padding-top: 3vh;
     padding-bottom: 3vh;
-    color: rgb(85, 26, 163);
+    color: rgb(7, 92, 145);
 }
 hr{
     width: 60vw;
