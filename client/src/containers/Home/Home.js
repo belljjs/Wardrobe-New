@@ -1,9 +1,7 @@
 import React from 'react'
-import { Container, Row, Col, Form, FormGroup, FormText, Label, Input  } from 'reactstrap';
 
 import weatherShot from '../../asset/image/weatherShot.png';
 import closetSelectedShot from '../../asset/image/closetSelectedShot.png';
-import closetShot from '../../asset/image/closetShot.png';
 import closetModalShot from '../../asset/image/closetModalShot.png';
 import deleteModalShot from '../../asset/image/deleteModalShot.png';
 import deleteShot from '../../asset/image/deleteShot.png';
@@ -24,12 +22,13 @@ const home =() => {
             <div>
                 <h3 className="titleHome"> Plan Your Outfit</h3>
                 <div className="pageFeature">
-                        First, make an account with &nbsp;  <FontAwesomeIcon icon={faSignInAlt}/> &nbsp; icon in the menu bar.
+                        <p>To sign in or sign up, use &nbsp;  <FontAwesomeIcon icon={faSignInAlt}/> &nbsp; icon in the menu bar.</p>
+                        <p>To sign out, use &nbsp;  <FontAwesomeIcon icon={faSignOutAlt}/> &nbsp; icon which will be shown after sign in.</p>
                 </div>
                 <div>
                     <div className= "titlePage"> Check Weather </div>
                     <div className= "pageFeature">
-                        <p>Start with finding weather of the city and get the proposal for the weather. </p>
+                        <p> Once signed in, start with finding weather of the city and get the proposal for the weather. </p>
                     </div>
                     <img className="screenShot"
                         src={weatherShot} 
@@ -53,7 +52,14 @@ const home =() => {
                     <img className="screenShot"
                         src={itemFileShot} 
                         alt=""  />
-                </div><br></br>
+                    <div className="pageFeature">
+                        Set the properties of the item and click submit button.
+                    </div>                   
+                    <img className="screenShot"
+                        src={itemInfoShot} 
+                        alt=""  />   
+                </div>
+                <br></br>
                 <div>
                     <div className= "titlePage"> Delete Item </div>
                     <div className="pageFeature">

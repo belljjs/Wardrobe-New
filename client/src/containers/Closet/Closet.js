@@ -106,9 +106,9 @@ class Closet extends Component {
     }
     outfitSaveHandler = async () => {
         const itemIds=[];
-        this.state.itemsSelected.map(item => {
+        this.state.itemsSelected.map(item => 
             itemIds.push(item.id)
-        })
+        )
 
         console.log("In outfitSaveHandler, itemIds:",itemIds);
 
