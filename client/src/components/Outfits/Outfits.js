@@ -34,8 +34,4 @@ const outfits = (props) =>  {
     )
 }
 
-
- 
-
-
 export default outfits;

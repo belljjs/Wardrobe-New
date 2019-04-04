@@ -7,9 +7,7 @@ import * as actions from '../../store/actions/index';
 class SignOut extends Component {
     // dispatch logout at starting
     componentDidMount () {
-        console.log("sign out at SignOut component");
         this.props.onSignOut();
-
     }
 
     render () {
@@ -22,7 +20,6 @@ const mapDispatchToProps = dispatch => {
         onSignOut: () => { 
             dispatch(actions.signOut())
             dispatch(actions.weatherDelete())
-
         }
     };
 };

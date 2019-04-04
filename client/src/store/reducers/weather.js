@@ -8,20 +8,16 @@ const initialState = {
     lowTemp: null ,
     cityName: null,
     error: null
-
 };
-
 
 const weatherStore = (state, action) => {
     console.log("**** In weather reducer, before state:",state);
-
     return updateObject( state, { 
         weatherName: action.weatherName ,
         weatherIcon: action.weatherIcon ,
         highTemp: action.highTemp ,
         lowTemp: action.lowTemp,
         cityName: action.cityName,
-
      } );
 };
 

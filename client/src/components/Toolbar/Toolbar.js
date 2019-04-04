@@ -4,8 +4,6 @@ import './Toolbar.css'
 import Nav from '../Nav/Nav';
 import DropMenuToggle from '../Nav/DropMenuToggle/DropMenuToggle';
 
-
-
 const toolbar=(props) => (
     <header className="Toolbar">
         <div className="LogoTitle">
@@ -21,7 +19,5 @@ const toolbar=(props) => (
         <DropMenuToggle clicked={props.dropMenuClicked} />    
     </header>
 );
-
-
 
 export default toolbar;

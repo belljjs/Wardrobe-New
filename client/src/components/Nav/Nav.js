@@ -26,7 +26,6 @@ const nav = (props) => (
                         <li style={{"marginRight":"50px"}}><NavLink to='/start'>Start with finding weather... </NavLink></li>
                         <li> <NavLink to='/signOut'><FontAwesomeIcon icon={faSignOutAlt}/></NavLink> </li>
                     </div>
-                
             : 
                 <div  className="Nav">
                     <li><NavLink to='/home'>Home</NavLink></li>

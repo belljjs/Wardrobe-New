@@ -102,7 +102,6 @@ class Auth extends Component {
                 this.state.controls.password.value,
                 this.state.isSignup );
             this.setState({signUpInputValidation: ""})
-            
         } else {
             this.setState({signUpInputValidation: "Invalid Input. Please try again."})
         }
@@ -110,7 +109,6 @@ class Auth extends Component {
 
     inputChangeHandler= (event, controlName)=>{
         const validCheck = this.checkValidity( event.target.value, this.state.controls[controlName].validation )
-
         const updatedControls = {
             ...this.state.controls,
             [controlName]: {
@@ -122,6 +120,7 @@ class Auth extends Component {
         };
         this.setState({ controls: updatedControls});
     }
+
     switchAuthModeHandler = () => {
         this.setState(prevState => {
             return {isSignup: !prevState.isSignup};
@@ -147,17 +146,7 @@ class Auth extends Component {
             )     
         } 
        
-        
         let notice = this.props.error || this.props.message|| null;
-
-        console.log("this.props.error:",this.props.error);
-        console.log("this.props.message:",this.props.message);
-        console.log("notice:",notice);
-
-        // let authRedirect = null
-        // if (this.props.isAuthenticated) {
-        //     authRedirect = <Redirect to='/start' />
-        // }
 
         return (
             <div className="Auth">
@@ -175,7 +164,6 @@ class Auth extends Component {
                         <Label>Password</Label> <span className="info">{this.state.controls.password.info} </span>
                         <Input type="password" name="password" value={this.state.controls.password.value} onChange={(e) => this.inputChangeHandler(e,'password')}></Input>
                     </div>
-                    
                     <Button  clicked={this.submitHandler}> Submit </Button>
                 </Form>
                 <div className="Mode">
@@ -183,23 +171,19 @@ class Auth extends Component {
                     <Button clicked={this.switchAuthModeHandler}
                         >{this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button>
                 </div>
-               
-
             </div>
         );
     }
 }
+
 const mapStateToProps = state => {
-    console.log("state:",state)
-    console.log("state.auth.error:",state.auth.error)
-    console.log("state.auth.message:",state.auth.message)
     return {
         error: state.auth.error,
         message: state.auth.message,
         isAuthenticated: state.auth.token !== null,
-
     };
 };
+
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (firstName,lastName, email, password, isSignup ) => dispatch( actions.auth(firstName,lastName, email, password, isSignup) ),

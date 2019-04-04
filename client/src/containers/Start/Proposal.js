@@ -3,7 +3,6 @@ import './Start.css';
 
 const  proposal = (props) => {
     const { proposal, weather } = props;
-
     if (!weather) {
             return null
     } 
@@ -11,7 +10,6 @@ const  proposal = (props) => {
     if (!proposal.data){
             return  <div className="emptyProposal"> No previous outfit for this weather</div>;
     }
-
     const outfit = proposal.data[0].items.map(item => {
         return<img 
             key={item.image_location}

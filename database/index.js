@@ -23,17 +23,17 @@
 //     query (query, ...args) {
 //         this._pool.connect((err, client, done) => {
 //             if (err) throw err;
+
 //             // param exist only for the case of 2 args
 //             const params = args.length === 2 ? args[0] : [];
+
 //             // callback always exist, so arg.length >= 1 
 //             // for the case 3,4,...  callback is second arg
 //             const callback = args.length === 1 ? args[0] : args[1];
+
 //             client.query(query, params, (err, res) => {
 //                 done();
-//                 console.log("*** Inside database, query, params:",query, params);
-//                 console.log("*** Inside database err:",err);
 //                 if (err) {
-//                     console.log(err.stack);
 //                     return callback({ error: 'Database error.' }, null);
 //                 }
 //                 callback({}, res.rows);

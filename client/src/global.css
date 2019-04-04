@@ -4,19 +4,18 @@
     padding-top: 8vh;
     padding-bottom: 4vh;
   }
-  
-  .city-name {
-    color: rgb(114, 12, 106);
-    font-size: 1.5rem  ;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-  }
-  .subTitle {
-    color: rgb(58, 57, 57);
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-top: 20px 20px 5px 20px;
-  }
-  .Content {
-    margin-top: 12vh;
-  }
+.city-name {
+  color: rgb(114, 12, 106);
+  font-size: 1.5rem  ;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+.subTitle {
+  color: rgb(58, 57, 57);
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px 20px 5px 20px;
+}
+.Content {
+  margin-top: 12vh;
+}

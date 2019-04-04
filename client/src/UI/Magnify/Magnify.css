@@ -2,9 +2,8 @@
     border: none;
     width: 1px;
     height: 1px;
-  margin-top: 20px;
-  margin-left: 20px;
-    
+    margin-top: 20px;
+    margin-left: 20px;
 }
 .Magnifier:focus{
     outline: none;
@@ -12,5 +11,4 @@
 .Magnifier img{
     width: 50px;
     height: auto;
-
 }

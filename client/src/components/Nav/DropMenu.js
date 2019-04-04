@@ -4,7 +4,6 @@ import Logo from '../Logo/Logo';
 import Nav from './Nav';
 import './DropMenu.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
-// import Aux from '../../../hoc/Aux/Aux';
 
 const dropMenu = ( props ) => {
     let dropMenuCss = "DropMenu Close"; //  when 'showDropMenu: false' in Layout

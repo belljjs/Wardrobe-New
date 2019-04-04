@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import axios from 'axios';
-// import { Redirect } from 'react-router-dom'
 import Button from '../../UI/Button/Button';
 import $ from 'jquery';
 import './AddItem.css';
@@ -32,7 +31,7 @@ class AddItem extends Component {
         
     };
 
-    // Upload to S3
+    // Upload to  AWS S3
     imageUpload = async () => {
         const imageData = new FormData();
             // This is setting 'this.state.selectedFile' to 'this.state.selectedFile.name'.
@@ -143,20 +142,18 @@ class AddItem extends Component {
         const formLabel = {width: "120px", textAlign: "left", fontWeight: "bold"};
         const imageLabel = {textAlign: "left", width: "100%", marginBottom: "20px", fontWeight: "bold"};
         const chooseFile = { color: "rgb(141, 216, 226)"};
-
         const colors = ["white", "grey", "black", "beige","red","blue","green","yellow"];
         const colorOptions = colors.map(c => <option>{c}</option>)
         const season = ["summer","winter","spring/fall","all"];
         const seasonOptions = season.map(s => <option>{s}</option>)
         const occasion = ["formal","casual","exercise"];
-        const occasionOptions = occasion.map(s => <option>{s}</option>)        
+        const occasionOptions = occasion.map(s => <option>{s}</option>)  
+              
         return (
-            <div>
-                {/* {redirect} */}
-                <Container>
-                    <h3 className="title">Add Item</h3>
-                        <Form>
-                            <Row>
+            <Container>
+                <h3 className="title">Add Item</h3>
+                    <Form>
+                        <Row>
                             <Col>
                                 <FormGroup style={{marginBottom: "30px"}}>
                                     <div>
@@ -206,13 +203,10 @@ class AddItem extends Component {
                                 </FormGroup>
                                 <Button clicked={this.handleItemAdd}> SUBMIT </Button>
                                 <div id="oc-alert-container"></div>
-                                {/* <div>Image Location: {this.state.imageLocation}</div> */}
                             </Col>
-                            </Row>
-                        </Form>
-                </Container>
-               
-            </div>
+                        </Row>
+                    </Form>
+            </Container>
         );
     }
 }

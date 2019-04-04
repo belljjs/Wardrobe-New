@@ -2,7 +2,6 @@
     display : flex;
     flex-flow: wrap;
 }
-
 .ItemInProposal {
     border: 1px solid lightgrey;
     border-radius: 10px;

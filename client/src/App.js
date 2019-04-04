@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './containers/Layout/Layout';
 import { Route, Switch,withRouter , Redirect} from 'react-router-dom';
-
 import Home from './containers/Home/Home';
 import Closet from './containers/Closet/Closet';
 import Start from './containers/Start/Start'
@@ -24,12 +23,10 @@ class App extends Component {
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/auth' exact component={Auth} />
-          
           {/* for any path unknown */}
           <Redirect to='/' />
         </Switch>
       )
-
       if (this.props.isAuthenticated) {
         console.log("isAuthenticated is true...")
         routes = (
@@ -40,7 +37,6 @@ class App extends Component {
             <Route path='/addItem' exact component={AddItem} />
             <Route path='/deleteItem' exact component={DeleteItem} />
             <Route path='/signOut' exact component={SignOut} /> 
-
             {/* for any path unknown */}
             <Redirect to='/start' />
           </Switch>
@@ -56,13 +52,13 @@ class App extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   console.log(" In App mapStateToProps.. stat:",state)
   return {
     isAuthenticated: state.auth.token !== null
   }
 }
-
 const mapDispatchToProps = dispatch => {
   return {
     onCheckAutoSignIn: () => dispatch( actions.authCheckState() )
