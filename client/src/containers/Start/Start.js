@@ -55,7 +55,7 @@ class Start extends Component {
           lowTemp: weather.main.temp_min,
           cityName: cityName
         }
-        const dispatchResult = this.props.onWeatherStore(weatherInfo);
+        this.props.onWeatherStore(weatherInfo);
         return weather;
       }
       

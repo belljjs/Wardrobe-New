@@ -4,7 +4,6 @@ import { Form, Label, Input } from 'reactstrap';
 import './Auth.css';
 import '../../global.css' ;
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import * as actions from "../../store/actions/index";
 
 class Auth extends Component {

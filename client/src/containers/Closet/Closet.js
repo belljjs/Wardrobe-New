@@ -6,7 +6,6 @@ import ItemFilter from '../../components/ItemFilter/ItemFilter';
 import SelectedItems from '../../components/SelectedItems/SelectedItems';
 import ClosetModal from "../../UI/ClosetModal/ClosetModal";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
 import './Closet.css';
 
 class Closet extends Component {
@@ -190,9 +189,5 @@ const mapStateToProps = state => {
     console.log("state(store):", state);
     return {weather: state.weather }
 }
-// const mapDispatchToProps = dispatch => {
-//   return {
-//       onWeatherStore: (weatherInfo) => dispatch(actions.weatherStore(weatherInfo))
-//   }
-// }
+
 export default connect(mapStateToProps)(Closet);

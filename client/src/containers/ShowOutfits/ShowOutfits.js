@@ -13,11 +13,12 @@ class ShowOutfits extends Component {
     outfitDeletHandler = async (outfitListIndex) =>  {
         const outfitId = this.state.outfitsAll[outfitListIndex].id
         const outfitList = [...this.state.outfitsAll];
-        const response = await axios({
+        await axios({
             method: 'DELETE',
             url: '/api/outfit/delete',
             data: {outfitId: outfitId }
           })
+        
         outfitList.splice(outfitListIndex,1);
         this.setState({ outfitsAll: outfitList  })
     }

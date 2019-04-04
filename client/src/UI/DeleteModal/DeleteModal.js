@@ -16,7 +16,6 @@ class DeleteModal extends React.Component {
         }
         // // const itemId = this.props.itemSelected[0].id 
 
-        const closeBtn = <button className="close" onClick={this.modalToggle}>&times;</button>;
         return (
             <Modal 
             size="md" 
