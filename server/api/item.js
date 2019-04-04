@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require( 'express' );
 const aws = require( 'aws-sdk' );
 const multerS3 = require( 'multer-s3' );
@@ -11,9 +12,10 @@ const requireAuth = passport.authenticate('jwt', {session:false});
 
 const router = express.Router();
 
+
 const s3 = new aws.S3({
-	accessKeyId: 'AKIAJUVT3E7RB656TCKQ',
-	secretAccessKey: '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',
+	accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+	secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
 	Bucket: 'wardrobe-belljjs'
 });
 
@@ -47,6 +49,7 @@ checkFileType = (file, cb) => {
 }
 
 router.post( '/imageUpload', ( req, res ) => {
+
 	imageUpload( req, res, ( error ) => {
 		console.log( 'req.file', req.file );
 		if( error ){

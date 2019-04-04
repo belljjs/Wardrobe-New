@@ -1,11 +1,12 @@
 // const jwt = require('jwt-simple');
 const jwt = require('jsonwebtoken');
-const config = require('../../config');
+// const config = require('../../config');
 const { createUser } = require('../models/auth/signUp');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
+
 
 const tokenForUser = (user) => {
-    // const timestamp = new Date().getTime();
     
     const payload = {
         sub: user.id, 
@@ -13,8 +14,8 @@ const tokenForUser = (user) => {
         exp: 3600 
     }
 
-    // need to hide password later !!   --- config ???
-    return jwt.sign(payload, "supersecret");
+    // need to hide password later --- config ???
+    return jwt.sign(payload, process.env.REACT_APP_SECRET_KEY);
 }
 
 const signin = (req,res,next) => {

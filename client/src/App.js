@@ -28,7 +28,6 @@ class App extends Component {
         </Switch>
       )
       if (this.props.isAuthenticated) {
-        console.log("isAuthenticated is true...")
         routes = (
           <Switch>
             <Route path='/start'  exact component={Start} />
@@ -37,7 +36,7 @@ class App extends Component {
             <Route path='/addItem' exact component={AddItem} />
             <Route path='/deleteItem' exact component={DeleteItem} />
             <Route path='/signOut' exact component={SignOut} /> 
-            {/* for any path unknown */}
+            {/* for any path unknown, or after authentification which is still in /auth */}
             <Redirect to='/start' />
           </Switch>
         )
