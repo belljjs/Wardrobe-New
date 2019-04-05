@@ -2,34 +2,36 @@ import React from 'react';
 import { Row, Col, Table} from 'reactstrap';
 
 const Weather = (props) => {
-    const { data } = props;
-    if (!data)
+    const { weather } = props;
+    console.log("<<<<<< weather.cityName:", weather.cityName);
+    console.log("<<<<<<  weather.name:", weather.name);
+    if (! weather.cityName)
         return  <div></div>;
     return (
         <Row className="weather">
              <Col sm="12" md={{ size: 8, offset: 2 }}>
-                <h4 className="city-name">{data.name}</h4>
-                <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather Icon"/>
-                {data.weather[0].main} - {data.weather[0].description} &nbsp;
-                {Math.floor(data.main.temp)}&deg;C
+                <h4 className="city-name">{ weather.cityName}</h4>
+                <img src={`http://openweathermap.org/img/w/${ weather.icon}.png`} alt="Weather Icon"/>
+                { weather.name} - { weather.description} &nbsp;
+                {Math.floor( weather.temp)}&deg;C
                 <Table>
                     <tbody>
                         <tr>
                             <td>Min Temp</td>
-                            <td>{Math.floor(data.main.temp_min)}&deg;C</td>
+                            <td>{Math.floor( weather.lowTemp)}&deg;C</td>
                         </tr>
                         <tr>
                             <td>Max Temp</td>
-                            <td>{Math.floor(data.main.temp_max)}&deg;C</td>
+                            <td>{Math.floor( weather.highTemp)}&deg;C</td>
                         </tr>
                         <tr>
                             <td>Wind</td>
-                            <td>{Math.floor(data.wind.speed)} km/h</td>
+                            <td>{Math.floor( weather.wind)} km/h</td>
                         </tr>
 
                         <tr>
                             <td>Humidity</td>
-                            <td>{Math.floor(data.main.humidity)}%</td>
+                            <td>{Math.floor( weather.humidity)}%</td>
                         </tr>
 
                     </tbody>

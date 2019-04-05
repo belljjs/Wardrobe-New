@@ -9,10 +9,12 @@ import './Start.css';
 
 class Start extends Component {
   state = {
-      weather: null,
+      // weather: null,
       proposal: null,
       cityList: [],
-      newCityName: ""
+      newCityName: "",
+      error: null,
+      
   }
 
   getCityList = async () => {
@@ -32,7 +34,7 @@ class Start extends Component {
     this.setState({ newCityName: "" });
   };
       
-  handleInputChange = (e) => {
+  handleNewCityInputChange = (e) => {
     this.setState({newCityName: e.target.value});
   }
 
@@ -41,36 +43,54 @@ class Start extends Component {
   }
   
   getWeather = async (cityName) => {
-    const response = await axios(`/api/weather/${cityName}`)
-    const weather = response.data
-    console.log("WEATHER:",weather);
-    weather.main.temp = this.toCelcius(weather.main.temp );
-    weather.main.temp_max = this.toCelcius(weather.main.temp_max );
-    weather.main.temp_min = this.toCelcius(weather.main.temp_min );
-
-    // to store weatherInfo with redux 
-    const weatherInfo ={
-      weatherName: weather.weather[0].main,
-      weatherIcon: weather.weather[0].icon,
-      highTemp: weather.main.temp_max,
-      lowTemp: weather.main.temp_min,
-      cityName: cityName
+    try {
+      const response = await axios(`/api/weather/${cityName}`)
+      const weather = response.data
+      console.log("WEATHER from accuweather:",weather);
+  
+      weather.main.temp = this.toCelcius(weather.main.temp );
+      weather.main.temp_max = this.toCelcius(weather.main.temp_max );
+      weather.main.temp_min = this.toCelcius(weather.main.temp_min );
+  
+      // to store weatherInfo with redux 
+      const weatherInfo ={
+        cityName: cityName,
+        name: weather.weather[0].main,
+        description: weather.weather[0].description ,
+        icon: weather.weather[0].icon,
+        temp: weather.main.temp,
+        highTemp: weather.main.temp_max,
+        lowTemp: weather.main.temp_min,
+        humidity: weather.main.humidity,
+        wind: weather.wind.speed
+      }
+      this.props.onWeatherStore(weatherInfo);
+      this.setState({error :null})
+      return weatherInfo;
     }
-    this.props.onWeatherStore(weatherInfo);
-    return weather;
+    catch(error) {
+      console.log(" getWeather error", error);
+      this.setState({error : "City name is not found"})
+      return {};
+    }
   }
       
-  getProposal = async (weather) => {
-      if (!weather)
+  getProposal = async (weatherInfo) => {
+      if (!weatherInfo)
           return {};
       try {
-          const data = await axios.get(
+          const proposal = await axios.get(
               '/api/outfit/outfit',
-              {params: {highTemp: weather.main.temp_max, userId: localStorage.userId}});
-          if(data.data[0]) {
-            return data
-          } else {
-            return {}
+              {params: {highTemp: weatherInfo.highTemp, userId: localStorage.userId}});
+          if(proposal.data[0]) {
+              const proposalInfo ={
+                proposal: proposal.data[0].items
+              }
+              console.log("****  proposalInfo:",proposalInfo)
+              this.props.onProposalStore(proposalInfo);
+              return proposalInfo;
+          }else{
+              return {}
           }
       }
       catch (error){ 
@@ -80,49 +100,82 @@ class Start extends Component {
   }
   
   handleChangeCity = async (e) => {
-    const weather = await this.getWeather(e.target.value);
-    const proposal = await this.getProposal(weather);
-    this.setState({
-        weather: weather,
-        proposal: proposal
-    });
+    const weatherInfo = await this.getWeather(e.target.value);
+    if(weatherInfo.name) {
+        console.log(" weather is true");
+        const proposalInfo = await this.getProposal(weatherInfo);
+        if (!proposalInfo) {
+          this.setState({error : "proposal error"})
+        }else {
+          console.log("Proposal is :",proposalInfo);
+        }
+     }
   }
+
     
   componentDidMount () {
     this.getCityList();   // get the cities in the begining
   }
 
   render() {
+    let formOfCity = 
+      <FormGroup>
+          <Input type="select"  onChange={this.handleChangeCity}>
+          { this.state.cityList.length === 0 && <option>No city added yet.</option>}
+          { this.state.cityList.length > 0 && <option>Select a city.</option> }
+          { this.state.cityList.map((city, i) => <option key={i}>{city}</option>) }
+          </Input>
+      </FormGroup>
+   
+    if (this.props.weather.cityName){
+      formOfCity = 
+            <FormGroup>
+              <Input type="select" onChange={this.handleChangeCity}>
+                <option>{this.props.weather.cityName}</option> 
+                { this.state.cityList.map((city, i) => <option key={i}>{city}</option>) }
+              </Input>
+          </FormGroup>
+
+       // to get the current temperature of the city
+      //  let weatherInfo = this.getWeather(this.props.weather.cityName);
+      //  console.log("Get the new current temp!!!  :",weatherInfo); 
+    }
+
+    let weather = null;
+
+    if (this.state.error){
+      weather =  <div className="cityError">{this.state.error}</div>
+    } else if(this.props.weather.name){
+      weather = <Weather weather={this.props.weather}/>
+    } 
+
+    // console.log("this.props.proposal:",this.props.proposal );
+
+
     return (
         <Container>
           <Row>
             <Col>
               <h1 className="title">Current Weather</h1>
-              <FormGroup>
-                  <Input type="select" onChange={this.handleChangeCity}>
-                  { this.state.cityList.length === 0 && <option>No city added yet.</option>}
-                  { this.state.cityList.length > 0 && <option>Select a city.</option> }
-                  { this.state.cityList.map((city, i) => <option key={i}>{city}</option>) }
-                  </Input>
-              </FormGroup>
+              {formOfCity}
               <InputGroup style={{width: '275px'}}>
                   <Input 
                       placeholder="New city name..."
                       value={this.state.newCityName}
-                      onChange={this.handleInputChange}
+                      onChange={this.handleNewCityInputChange}
                   />
                   <InputGroupAddon addonType="append">
                         <Button color="info" onClick={this.handleAddCity}>Add City</Button>
                   </InputGroupAddon>
               </InputGroup>
-              <Weather data={this.state.weather}/>   
+              {weather} 
             </Col>
             <Col>
               <div>
                 <h1 className="title" > Proposal for this weather </h1>
                 <Proposal 
-                  proposal={this.state.proposal} 
-                  weather={ this.state.weather}/>
+                  proposal={ this.props.proposal.proposal } 
+                  weather={ this.props.weather }/>
               </div>
 
             </Col>
@@ -131,12 +184,19 @@ class Start extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onWeatherStore: (weatherInfo) => dispatch(actions.weatherStore(weatherInfo))
+const mapStateToProps = state => {
+  return { 
+    weather: state.weather ,
+    proposal: state.proposal
   }
 }
 
-export default connect(null,mapDispatchToProps)(Start);
+const mapDispatchToProps = dispatch => {
+  return {
+    onWeatherStore: (weatherInfo) => dispatch(actions.weatherStore(weatherInfo)),
+    onProposalStore: (proposalInfo) => dispatch(actions.proposalStore(proposalInfo))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Start);
     

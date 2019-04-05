@@ -38,3 +38,8 @@
     font-size: 1rem;
     font-weight: bold;
 }
+.cityError {
+    color: rgb(255, 196, 0);
+    font-weight: bold;
+    margin-top: 5vh;
+}

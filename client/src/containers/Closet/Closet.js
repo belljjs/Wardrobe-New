@@ -119,16 +119,16 @@ class Closet extends Component {
 
     render() {
         let weatherInfo = `Please start with weather to save outfit`;
-        if (this.props.weather.weatherName) {
+        if (this.props.weather.name) {
             weatherInfo = 
                 <div  className="ClosetWeatherInfo">
                     <div className="city">{this.props.weather.cityName}</div>
                     <img 
                         className="WeatherImage" 
-                        src={`http://openweathermap.org/img/w/${this.props.weather.weatherIcon}.png`} 
+                        src={`http://openweathermap.org/img/w/${this.props.weather.icon}.png`} 
                         alt="Weather Icon"/>
                     <div className="temp"> 
-                        <div style={{marginRight:"10px"}}>{this.props.weather.weatherName}</div>
+                        <div style={{marginRight:"10px"}}>{this.props.weather.name}</div>
                         <div>{this.props.weather.highTemp}℉ / {this.props.weather.lowTemp}℉</div>
                     </div>
                 </div>
@@ -163,7 +163,6 @@ class Closet extends Component {
     }
 }
 const mapStateToProps = state => {
-    console.log("state(store):", state);
     return {weather: state.weather }
 }
 

@@ -4,6 +4,8 @@ import axios from 'axios';
 import Button from '../../UI/Button/Button';
 import $ from 'jquery';
 import './AddItem.css';
+import Spinner from '../../UI/Spinner/Spinner';
+
 
 class AddItem extends Component {
 
@@ -16,7 +18,8 @@ class AddItem extends Component {
         submitted: false,
         imageKey: null,    //  for image file url to be used for preview before image uploading
         imageLocation: null,    //  for image file url to be used for preview before image uploading
-        validInput: false
+        validInput: false,
+        loading: false
     }
 
     handleFileSelected = event => {
@@ -105,23 +108,34 @@ class AddItem extends Component {
                 }
             }
         } else {
-            this.showAlert( "Please check input! ", 'white' );
+            this.showAlert( "Invalid input! ", 'white' );
             console.log("Input validation error! ");
         } 
     }
 
     handleItemAdd = (e) => {
+        this.setState({loading: true});
+        console.log("this.state.loading:",this.state.loading)
+
         if(this.state.selectedFile) {
+
             this.imageUpload()
             .then(res => {
-                this.createNewItem()
+                this.setState({loading: false});
+                this.createNewItem();
+               
             })
             .catch( (error) => {
+                this.setState({loading: false});
                 this.showAlert(error, 'red' );
             });
         } else {
-                this.showAlert( "Please choose a file", 'violet' );
+            this.setState({loading: false});
+            this.showAlert( "Please choose a file", 'violet' );
         } 
+
+        this.setState({loading: false});
+        console.log("this.state.loading:",this.state.loading)
     };
 
     showAlert = ( message, background = '#3089cf' ) => {
@@ -147,8 +161,12 @@ class AddItem extends Component {
         const season = ["summer","winter","spring/fall","all"];
         const seasonOptions = season.map(s => <option>{s}</option>)
         const occasion = ["formal","casual","exercise"];
-        const occasionOptions = occasion.map(s => <option>{s}</option>)  
-              
+        const occasionOptions = occasion.map(s => <option>{s}</option>)
+
+        let processing = null
+        if (this.state.loading) {
+            processing = <Spinner />
+        }
         return (
             <Container>
                 <h3 className="title">Add Item</h3>
@@ -203,6 +221,7 @@ class AddItem extends Component {
                                 </FormGroup>
                                 <Button clicked={this.handleItemAdd}> SUBMIT </Button>
                                 <div id="oc-alert-container"></div>
+                                {processing}
                             </Col>
                         </Row>
                     </Form>

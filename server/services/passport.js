@@ -1,11 +1,12 @@
 const passport = require('passport');
-const config = require('../../config');
+// const config = require('../../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const {verifyUser, findUserById} = require('../models/auth/signIn');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const db = require('../../database');
+require('dotenv').config();
 
 const localOptions = {usernameField: 'email'};
 
@@ -49,7 +50,7 @@ const localLogin = new LocalStrategy(
  const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     // hide the password later!!
-    secretOrKey: "supersecret"
+    secretOrKey: process.env.REACT_APP_SECRET_KEY
   };
 
  const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
