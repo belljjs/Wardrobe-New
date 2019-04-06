@@ -9,12 +9,10 @@ import './Start.css';
 
 class Start extends Component {
   state = {
-      // weather: null,
       proposal: null,
       cityList: [],
       newCityName: "",
       error: null,
-      
   }
 
   getCityList = async () => {
@@ -30,7 +28,6 @@ class Start extends Component {
     const response= await axios.post('/api/cities', { city: this.state.newCityName, userId: localStorage.userId })
     console.log("response : ", response);
     this.getCityList();
-
     this.setState({ newCityName: "" });
   };
       
@@ -46,8 +43,6 @@ class Start extends Component {
     try {
       const response = await axios(`/api/weather/${cityName}`)
       const weather = response.data
-      console.log("WEATHER from accuweather:",weather);
-  
       weather.main.temp = this.toCelcius(weather.main.temp );
       weather.main.temp_max = this.toCelcius(weather.main.temp_max );
       weather.main.temp_min = this.toCelcius(weather.main.temp_min );
@@ -86,7 +81,6 @@ class Start extends Component {
               const proposalInfo ={
                 proposal: proposal.data[0].items
               }
-              console.log("****  proposalInfo:",proposalInfo)
               this.props.onProposalStore(proposalInfo);
               return proposalInfo;
           }else{
@@ -94,7 +88,6 @@ class Start extends Component {
           }
       }
       catch (error){ 
-          console.log(" getProposal error", error);
           return {};
       }
   }
@@ -102,12 +95,9 @@ class Start extends Component {
   handleChangeCity = async (e) => {
     const weatherInfo = await this.getWeather(e.target.value);
     if(weatherInfo.name) {
-        console.log(" weather is true");
         const proposalInfo = await this.getProposal(weatherInfo);
         if (!proposalInfo) {
           this.setState({error : "proposal error"})
-        }else {
-          console.log("Proposal is :",proposalInfo);
         }
      }
   }

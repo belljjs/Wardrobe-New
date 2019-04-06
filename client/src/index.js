@@ -12,6 +12,7 @@ import weatherReducer from './store/reducers/weather';
 import proposalReducer from './store/reducers/proposal';
 import 'bootstrap/dist/css/bootstrap.min.css';  // to be weppacked!
 
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
     weather: weatherReducer,

@@ -3,8 +3,6 @@ import { Row, Col, Table} from 'reactstrap';
 
 const Weather = (props) => {
     const { weather } = props;
-    console.log("<<<<<< weather.cityName:", weather.cityName);
-    console.log("<<<<<<  weather.name:", weather.name);
     if (! weather.cityName)
         return  <div></div>;
     return (

@@ -11,6 +11,7 @@ import Auth from './containers/Auth/Auth';
 import SignOut from './containers/Auth/SignOut';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
+require('dotenv').config();
 
 class App extends Component {
 
