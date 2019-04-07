@@ -145,11 +145,11 @@ class AddItem extends Component {
         const chooseFile = { color: "rgb(141, 216, 226)"};
 
         const colors = ["white", "grey", "black", "beige","red","blue","green","yellow"];
-        const colorOptions = colors.map(c => <option>{c}</option>)
+        const colorOptions = colors.map((c,i) => <option key={i} >{c}</option>)
         const season = ["summer","winter","spring/fall","all"];
-        const seasonOptions = season.map(s => <option>{s}</option>)
+        const seasonOptions = season.map((s,i) => <option key={i} >{s}</option>)
         const occasion = ["formal","casual","exercise"];
-        const occasionOptions = occasion.map(s => <option>{s}</option>)        
+        const occasionOptions = occasion.map((s,i) => <option key={i} >{s}</option>)       
         return (
             <div>
                 {/* {redirect} */}
