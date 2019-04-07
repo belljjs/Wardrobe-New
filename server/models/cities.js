@@ -4,10 +4,11 @@ class Cities {
 
     static retrieveALL (req, res, next) {
         const userId = req.query.userId;
+        console.log("userId:", userId)
         db.any(`SELECT cities.city_name 
                 FROM user_cities
                 JOIN cities ON user_cities.city_id = cities.id
-                WHERE user_cities.user_id = 16 `, [userId])
+                WHERE user_cities.user_id = ($1) `, [userId])
         .then( data =>  res.json(data))
         .catch( error =>  res.json(error)  )
     }   

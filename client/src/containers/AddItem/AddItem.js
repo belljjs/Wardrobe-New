@@ -157,16 +157,19 @@ class AddItem extends Component {
         const imageLabel = {textAlign: "left", width: "100%", marginBottom: "20px", fontWeight: "bold"};
         const chooseFile = { color: "rgb(141, 216, 226)"};
         const colors = ["white", "grey", "black", "beige","red","blue","green","yellow"];
-        const colorOptions = colors.map(c => <option>{c}</option>)
+        const colorOptions = colors.map((c,i) => <option key={i} >{c}</option>)
         const season = ["summer","winter","spring/fall","all"];
-        const seasonOptions = season.map(s => <option>{s}</option>)
+        const seasonOptions = season.map((s,i) => <option key={i} >{s}</option>)
         const occasion = ["formal","casual","exercise"];
-        const occasionOptions = occasion.map(s => <option>{s}</option>)
+        const occasionOptions = occasion.map((s,i) => <option key={i} >{s}</option>)       
+
+       
 
         let processing = null
         if (this.state.loading) {
             processing = <Spinner />
         }
+
         return (
             <Container>
                 <h3 className="title">Add Item</h3>
