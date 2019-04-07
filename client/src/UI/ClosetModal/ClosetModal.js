@@ -6,7 +6,6 @@ import SelectedItems from '../../components/SelectedItems/SelectedItems';
 class ClosetModal extends React.Component {
 
   render() {
-      console.log("In ClosetModal.... isOpen:", this.props.modal)
       return (
         <Modal 
           size="lg" 

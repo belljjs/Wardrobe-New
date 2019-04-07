@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
  
 const outfit = (props) => {
-    console.log("Props in Outfit:",props);
     const items = props.items.map(item=> {
         return (
             <img 
@@ -29,10 +28,7 @@ const outfit = (props) => {
                  <FontAwesomeIcon icon={faTrashAlt} size="1x" color="darkGreen"  />
             </button>   
         </div>
-    )
-    
+    ) 
 }
-
-
 
 export default outfit;

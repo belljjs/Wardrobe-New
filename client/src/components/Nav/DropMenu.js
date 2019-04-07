@@ -10,7 +10,6 @@ const dropMenu = ( props ) => {
     if (props.open) {
         dropMenuCss = "DropMenu Open";
     }
-    console.log("dropMenuCss:",dropMenuCss);
     return (
         <div>
             <Backdrop show={props.open} clicked={props.closed}/>

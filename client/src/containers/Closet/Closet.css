@@ -11,6 +11,15 @@
     font-weight: bold;
     font-size: 1.5rem
 }
+.noWeatherInfo{
+
+    margin: auto; 
+    color: rgb(250, 163, 76);
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 5vh 0;
+    
+}
 .temp {
     margin-top: 1.5vw;
     color: rgb(134, 132, 132);

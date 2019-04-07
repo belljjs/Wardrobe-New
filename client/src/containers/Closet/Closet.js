@@ -118,7 +118,7 @@ class Closet extends Component {
     }
 
     render() {
-        let weatherInfo = `Please start with weather to save outfit`;
+        let weatherInfo = <div className="noWeatherInfo">Please start with weather to save outfit</div>;
         if (this.props.weather.name) {
             weatherInfo = 
                 <div  className="ClosetWeatherInfo">

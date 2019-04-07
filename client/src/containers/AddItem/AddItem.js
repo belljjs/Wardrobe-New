@@ -6,9 +6,7 @@ import $ from 'jquery';
 import './AddItem.css';
 import Spinner from '../../UI/Spinner/Spinner';
 
-
 class AddItem extends Component {
-
     state = {
         category: "" ,
         color: "" ,
@@ -23,15 +21,12 @@ class AddItem extends Component {
     }
 
     handleFileSelected = event => {
-        console.log("Change happen on input - Choose File");
-        console.log("selectedFile(event.target.files[0]) - Choose File:",event.target.files[0]);
         if (event.target.files[0]){
             this.setState({ 
                 selectedFile: event.target.files[0] ,
                 imageKey: URL.createObjectURL(event.target.files[0]) 
             }) 
         }
-        
     };
 
     // Upload to  AWS S3
@@ -54,12 +49,10 @@ class AddItem extends Component {
                     this.showAlert("File type error", 'violet' );
                 }
             }else {  
-                console.log( 'Success!- image Uploaded' );
                 this.setState({
                     imageKey: res.data.image,
                     imageLocation: res.data.location
                 }) 
-                console.log("States after image upload:", this.state);
             }
         }
     }
@@ -100,30 +93,26 @@ class AddItem extends Component {
             )
             if(res) {
                 if (res.data.error ) {
-                    console.log("res.data.error:",res.data.error);
+                    // console.log("res.data.error:",res.data.error);
                 }else {  
-                    console.log( 'Success!' );
+                    // console.log( 'Success!' );
                     this.showAlert("Item Uploaded!", 'white' );
                     this.setState({ submitted: true }) 
                 }
             }
         } else {
             this.showAlert( "Invalid input! ", 'white' );
-            console.log("Input validation error! ");
+            // console.log("Input validation error! ");
         } 
     }
 
     handleItemAdd = (e) => {
         this.setState({loading: true});
-        console.log("this.state.loading:",this.state.loading)
-
         if(this.state.selectedFile) {
-
             this.imageUpload()
             .then(res => {
                 this.setState({loading: false});
                 this.createNewItem();
-               
             })
             .catch( (error) => {
                 this.setState({loading: false});
@@ -133,9 +122,7 @@ class AddItem extends Component {
             this.setState({loading: false});
             this.showAlert( "Please choose a file", 'violet' );
         } 
-
         this.setState({loading: false});
-        console.log("this.state.loading:",this.state.loading)
     };
 
     showAlert = ( message, background = '#3089cf' ) => {
@@ -162,8 +149,6 @@ class AddItem extends Component {
         const seasonOptions = season.map((s,i) => <option key={i} >{s}</option>)
         const occasion = ["formal","casual","exercise"];
         const occasionOptions = occasion.map((s,i) => <option key={i} >{s}</option>)       
-
-       
 
         let processing = null
         if (this.state.loading) {

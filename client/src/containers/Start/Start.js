@@ -17,16 +17,12 @@ class Start extends Component {
 
   getCityList = async () => {
     const response = await axios('/api/cities', {params: {userId: localStorage.userId  }})
-    console.log("response of get all city : ", response);
     let cityList = response.data.map(r => r.city_name);
-
     this.setState({ cityList});
   };
   
   handleAddCity = async () => {
-    console.log("localStorage.userId:",localStorage.userId)
-    const response= await axios.post('/api/cities', { city: this.state.newCityName, userId: localStorage.userId })
-    console.log("response : ", response);
+    await axios.post('/api/cities', { city: this.state.newCityName, userId: localStorage.userId })
     this.getCityList();
     this.setState({ newCityName: "" });
   };
@@ -101,7 +97,6 @@ class Start extends Component {
         }
      }
   }
-
     
   componentDidMount () {
     this.getCityList();   // get the cities in the begining
@@ -138,9 +133,6 @@ class Start extends Component {
     } else if(this.props.weather.name){
       weather = <Weather weather={this.props.weather}/>
     } 
-
-    // console.log("this.props.proposal:",this.props.proposal );
-
 
     return (
         <Container>

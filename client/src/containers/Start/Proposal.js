@@ -4,9 +4,6 @@ import './Start.css';
 const  proposal = (props) => {
     const { proposal, weather } = props;
 
-    console.log( "proposal in Proposal : ",proposal);
-    console.log( "weather in Proposal : ",weather);
-
     if (!weather) {
             return null
     } 
