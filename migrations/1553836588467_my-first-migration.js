@@ -20,6 +20,12 @@ exports.up = (pgm) => {
   pgm.createTable("cities", {
     id: "id",
     city_name: { type: "varchar(256)", notNull: true },
+    user_id: {
+      type: "integer",
+      notNull: true,
+      references: "users",
+      onDelete: "cascade"
+    },
     created_at: {
       type: "timestamp",
       notNull: true,
@@ -91,28 +97,28 @@ exports.up = (pgm) => {
       }
   });
 
-  pgm.createTable("user_cities", {
-    // id: "id",
-    user_id: {
-      type: "integer",
-      primaryKey: true,
-      notNull: true,
-      references: "users",
-      onDelete: "cascade"
-    },
-    city_id: {
-      type: "integer",
-      primaryKey: true,
-      notNull: true,
-      references: "cities",
-      onDelete: "cascade"
-    },
-    createdAt: {
-      type: "timestamp",
-      notNull: true,
-      default: pgm.func("current_timestamp")
-    }
-  });
+  // pgm.createTable("user_cities", {
+  //   // id: "id",
+  //   user_id: {
+  //     type: "integer",
+  //     primaryKey: true,
+  //     notNull: true,
+  //     references: "users",
+  //     onDelete: "cascade"
+  //   },
+  //   city_id: {
+  //     type: "integer",
+  //     primaryKey: true,
+  //     notNull: true,
+  //     references: "cities",
+  //     onDelete: "cascade"
+  //   },
+  //   createdAt: {
+  //     type: "timestamp",
+  //     notNull: true,
+  //     default: pgm.func("current_timestamp")
+  //   }
+  // });
 };
 
 

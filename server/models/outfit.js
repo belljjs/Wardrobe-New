@@ -92,16 +92,14 @@ class Outfit {
     static async insert (req, res, next) {
         console.log("*In outfit insert, req.body:",req.body);
         console.log("*In outfit insert, req.body.weather:",req.body.weather);
+        
         const weather = req.body.weather;    
-        const userId = req.body.userId;    
+        const userId = req.body.userId;  
         const outfitDate = new Date();  
         const itemIds = req.body.itemIds;  
 
         let outfitId = null;
-
         try{
-            console.log("**** In outer Try");
-
             let outfit = await db.one(`INSERT INTO outfits 
                     (   
                         user_id,
@@ -114,8 +112,8 @@ class Outfit {
                     RETURNING id`,
                     [
                         userId,
-                        weather.weatherName,
-                        weather.weatherIcon,
+                        weather.name,
+                        weather.icon,
                         weather.highTemp,
                         weather.lowTemp
                     ]
@@ -125,9 +123,7 @@ class Outfit {
             outfitId = outfit.id;
 
             for(let itemId of itemIds){
-
                 console.log("===item id of insert outfit_item:",itemId)
-                
                 try{
                     let data = await db.one('INSERT INTO outfit_items (outfit_id, item_id) VALUES ($1, $2) RETURNING *', [outfitId, itemId]) 
                     console.log("data of insert outfit_items:", data);
