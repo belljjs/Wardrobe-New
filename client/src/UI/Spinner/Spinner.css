@@ -1,10 +1,10 @@
-.Loader,
+.Loader, 
 .Loader:before,
 .Loader:after {
   border-radius: 50%;
 }
 .Loader {
-  color: #2149ae;
+  color: #4e79e6;
   font-size: 11px;
   text-indent: -99999em;
   margin: 55px auto;
@@ -64,4 +64,4 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-}
+} 

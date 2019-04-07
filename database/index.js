@@ -23,17 +23,17 @@
 //     query (query, ...args) {
 //         this._pool.connect((err, client, done) => {
 //             if (err) throw err;
+
 //             // param exist only for the case of 2 args
 //             const params = args.length === 2 ? args[0] : [];
+
 //             // callback always exist, so arg.length >= 1 
 //             // for the case 3,4,...  callback is second arg
 //             const callback = args.length === 1 ? args[0] : args[1];
+
 //             client.query(query, params, (err, res) => {
 //                 done();
-//                 console.log("*** Inside database, query, params:",query, params);
-//                 console.log("*** Inside database err:",err);
 //                 if (err) {
-//                     console.log(err.stack);
 //                     return callback({ error: 'Database error.' }, null);
 //                 }
 //                 callback({}, res.rows);
@@ -56,8 +56,9 @@ const pgp = require('pg-promise')({
     // Initialization Options
 });
 
-// Preparing the connection details:
-const cn = 'postgres://postgres:minjin@localhost:5432/wardrobe-db';
+// Preparing the connection details
+// Heroku sets its own process.env.DATABASE_URL to the connection string --> add 'process.env.DATABASE_URL ||'
+const cn = process.env.DATABASE_URL || 'postgres://postgres:minjin@localhost:5432/wardrobe-db';
 
 // Creating a new database instance from the connection details:
 const db = pgp(cn);

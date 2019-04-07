@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "React app on Node.js",
   "main": "index.js",
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.7.0"
+  },
   "scripts": {
     "client": "npm start  --prefix client",
     "server": "nodemon server",

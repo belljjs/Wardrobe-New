@@ -29,18 +29,15 @@ code {
 .left {
   text-align: left;
 }
-
 .weather {
   margin-top: 30px;
 }
-
 .title {
   color: rgb(4, 76, 85);
   font-size: 2rem  ;
   padding-top: 8vh;
   padding-bottom: 4vh;
 }
-
 .city-name {
   color: rgb(114, 12, 106);
   font-size: 1.5rem  ;

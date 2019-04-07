@@ -3,15 +3,12 @@
     width: 80%;
     text-align: center;
     box-sizing: border-box;
-    
 }
-
 @media (min-width: 600px) {
     .Auth {
         width: 500px;
     }
 }
-
 .Control {
     padding-bottom: 2vh;
     text-align: left;
@@ -23,19 +20,16 @@
    padding: 10px 0px 20px 0px;
    font-weight: bold;
 }
-
 .Input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
 }
-
 .Label {
     font-weight: bold;
     display: block;
     margin-bottom: 8px;
 }
-
 .InputElement {
     outline: none;
     border: 1px solid #ccc;
@@ -46,12 +40,10 @@
     width: 100%;
     box-sizing: border-box;
 }
-
 .InputElement:focus {
     outline: none;
     background-color: #ccc;
 }
-
 .Invalid {
     border: 1px solid red;
     background-color: #FDA49A;

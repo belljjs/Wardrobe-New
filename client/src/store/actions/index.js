@@ -9,3 +9,8 @@ export {
     weatherStore,
     weatherDelete
 } from './weather';
+
+export {
+    proposalStore,
+    proposalDelete,
+} from './proposal';

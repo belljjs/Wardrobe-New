@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import axios from 'axios';
-// import { Redirect } from 'react-router-dom'
 import Button from '../../UI/Button/Button';
 import $ from 'jquery';
 import './AddItem.css';
+import Spinner from '../../UI/Spinner/Spinner';
+
 
 class AddItem extends Component {
 
@@ -17,7 +18,8 @@ class AddItem extends Component {
         submitted: false,
         imageKey: null,    //  for image file url to be used for preview before image uploading
         imageLocation: null,    //  for image file url to be used for preview before image uploading
-        validInput: false
+        validInput: false,
+        loading: false
     }
 
     handleFileSelected = event => {
@@ -32,7 +34,7 @@ class AddItem extends Component {
         
     };
 
-    // Upload to S3
+    // Upload to  AWS S3
     imageUpload = async () => {
         const imageData = new FormData();
             // This is setting 'this.state.selectedFile' to 'this.state.selectedFile.name'.
@@ -106,23 +108,34 @@ class AddItem extends Component {
                 }
             }
         } else {
-            this.showAlert( "Please check input! ", 'white' );
+            this.showAlert( "Invalid input! ", 'white' );
             console.log("Input validation error! ");
         } 
     }
 
     handleItemAdd = (e) => {
+        this.setState({loading: true});
+        console.log("this.state.loading:",this.state.loading)
+
         if(this.state.selectedFile) {
+
             this.imageUpload()
             .then(res => {
-                this.createNewItem()
+                this.setState({loading: false});
+                this.createNewItem();
+               
             })
             .catch( (error) => {
+                this.setState({loading: false});
                 this.showAlert(error, 'red' );
             });
         } else {
-                this.showAlert( "Please choose a file", 'violet' );
+            this.setState({loading: false});
+            this.showAlert( "Please choose a file", 'violet' );
         } 
+
+        this.setState({loading: false});
+        console.log("this.state.loading:",this.state.loading)
     };
 
     showAlert = ( message, background = '#3089cf' ) => {
@@ -143,20 +156,25 @@ class AddItem extends Component {
         const formLabel = {width: "120px", textAlign: "left", fontWeight: "bold"};
         const imageLabel = {textAlign: "left", width: "100%", marginBottom: "20px", fontWeight: "bold"};
         const chooseFile = { color: "rgb(141, 216, 226)"};
-
         const colors = ["white", "grey", "black", "beige","red","blue","green","yellow"];
         const colorOptions = colors.map((c,i) => <option key={i} >{c}</option>)
         const season = ["summer","winter","spring/fall","all"];
         const seasonOptions = season.map((s,i) => <option key={i} >{s}</option>)
         const occasion = ["formal","casual","exercise"];
         const occasionOptions = occasion.map((s,i) => <option key={i} >{s}</option>)       
+
+       
+
+        let processing = null
+        if (this.state.loading) {
+            processing = <Spinner />
+        }
+
         return (
-            <div>
-                {/* {redirect} */}
-                <Container>
-                    <h3 className="title">Add Item</h3>
-                        <Form>
-                            <Row>
+            <Container>
+                <h3 className="title">Add Item</h3>
+                    <Form>
+                        <Row>
                             <Col>
                                 <FormGroup style={{marginBottom: "30px"}}>
                                     <div>
@@ -206,13 +224,11 @@ class AddItem extends Component {
                                 </FormGroup>
                                 <Button clicked={this.handleItemAdd}> SUBMIT </Button>
                                 <div id="oc-alert-container"></div>
-                                {/* <div>Image Location: {this.state.imageLocation}</div> */}
+                                {processing}
                             </Col>
-                            </Row>
-                        </Form>
-                </Container>
-               
-            </div>
+                        </Row>
+                    </Form>
+            </Container>
         );
     }
 }

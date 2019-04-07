@@ -1,6 +1,7 @@
 const request = require('request-promise');
 
-const API_KEY = `a84fe32061844e18d5ca1d64c43d5ce6`;
+// const API_KEY = `a84fe32061844e18d5ca1d64c43d5ce6`;
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 class Weather {
     static retrieveByCity (city, callback) {

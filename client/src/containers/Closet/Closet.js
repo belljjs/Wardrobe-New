@@ -6,7 +6,6 @@ import ItemFilter from '../../components/ItemFilter/ItemFilter';
 import SelectedItems from '../../components/SelectedItems/SelectedItems';
 import ClosetModal from "../../UI/ClosetModal/ClosetModal";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
 import './Closet.css';
 
 class Closet extends Component {
@@ -53,10 +52,7 @@ class Closet extends Component {
 
     handleItemsSelectedClicked = (itemsSelectedIndex) =>{
         // remove the item from itemsSelected
-        console.log("itemsSelectedIndex:",itemsSelectedIndex);
-
         let itemsSelected = [...this.state.itemsSelected];  
-
         itemsSelected.splice(itemsSelectedIndex,1)
         const itemsShown = this.adjustItemsShown(
                 this.freshItemsShown(this.state.itemsFilter),itemsSelected )
@@ -68,22 +64,12 @@ class Closet extends Component {
 
     handleItemsShownClicked = (itemsShownIndex) =>{
 
-        console.log("itemsShownIndex:",itemsShownIndex);
-
         let itemsShown = [...this.state.itemsShown];
         let itemsSelected = [...this.state.itemsSelected];
         itemsSelected.push(itemsShown[itemsShownIndex])
         itemsShown.splice(itemsShownIndex,1)
         this.setState({ itemsSelected: itemsSelected, itemsShown: itemsShown}  ) 
     }
-
-    // const res= await axios.post(
-    //     'api/item/newItem/', 
-    //     {item : newItem, userId: localStorage.userId },
-    //     {headers: {autorization: localStorage.token}}
-    // )
-
-
 
     getItems = async () => {
         const response = await axios.get(
@@ -109,9 +95,6 @@ class Closet extends Component {
         this.state.itemsSelected.map(item => 
             itemIds.push(item.id)
         )
-
-        console.log("In outfitSaveHandler, itemIds:",itemIds);
-
         const result= await axios.post(
             'api/outfit/newOutfit/', 
             //req.body
@@ -123,9 +106,6 @@ class Closet extends Component {
             // for authorization
             {headers: {autorization: localStorage.token}}
         )
-        
-        console.log( 'in outfitSaveHandler, Result:', result);
-
         if(result){
             if (result.data.error ) {
                 console.log("outfit insert error:",result.data.error);
@@ -136,33 +116,29 @@ class Closet extends Component {
             }
         }
     }
+
     render() {
         let weatherInfo = `Please start with weather to save outfit`;
-        
-
-        if (this.props.weather.weatherName) {
+        if (this.props.weather.name) {
             weatherInfo = 
                 <div  className="ClosetWeatherInfo">
                     <div className="city">{this.props.weather.cityName}</div>
                     <img 
                         className="WeatherImage" 
-                        src={`http://openweathermap.org/img/w/${this.props.weather.weatherIcon}.png`} 
+                        src={`http://openweathermap.org/img/w/${this.props.weather.icon}.png`} 
                         alt="Weather Icon"/>
                     <div className="temp"> 
-                        <div style={{marginRight:"10px"}}>{this.props.weather.weatherName}</div>
+                        <div style={{marginRight:"10px"}}>{this.props.weather.name}</div>
                         <div>{this.props.weather.highTemp}℉ / {this.props.weather.lowTemp}℉</div>
                     </div>
                 </div>
-            
         }
         
-            
         return (
             <div>
                 <div>
                     <div>{weatherInfo}</div>
                     <h3 className="ClosetTitle">Closet</h3>
-
                 </div>
                 <ItemFilter 
                     filterClicked={this.handleItemsFilterClicked}/>
@@ -187,12 +163,7 @@ class Closet extends Component {
     }
 }
 const mapStateToProps = state => {
-    console.log("state(store):", state);
     return {weather: state.weather }
 }
-// const mapDispatchToProps = dispatch => {
-//   return {
-//       onWeatherStore: (weatherInfo) => dispatch(actions.weatherStore(weatherInfo))
-//   }
-// }
+
 export default connect(mapStateToProps)(Closet);

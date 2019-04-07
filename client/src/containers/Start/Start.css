@@ -2,7 +2,6 @@
     display : flex;
     flex-flow: wrap;
 }
-
 .ItemInProposal {
     border: 1px solid lightgrey;
     border-radius: 10px;
@@ -38,4 +37,9 @@
     color: rgb(255, 196, 0);
     font-size: 1rem;
     font-weight: bold;
+}
+.cityError {
+    color: rgb(255, 196, 0);
+    font-weight: bold;
+    margin-top: 5vh;
 }

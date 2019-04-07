@@ -1,7 +1,5 @@
 import React from 'react';
 import './Outfit.css';
-// import Button from '../../UI/Button/Button'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
  

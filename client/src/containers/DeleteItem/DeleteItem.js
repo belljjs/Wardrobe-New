@@ -5,7 +5,6 @@ import Items from '../../components/Items/Items';
 import ItemFilter from '../../components/ItemFilter/ItemFilter';
 import DeleteModal from "../../UI/DeleteModal/DeleteModal";
 
-
 class DeleteItem extends Component {
     state = {
         itemsAll: [],
@@ -31,15 +30,13 @@ class DeleteItem extends Component {
 
     handleDeleteItem = async () =>{
         const itemId = this.state.itemSelected[0].id;
-
         try{
-            const response = await axios({
+            await axios({
                 method: 'DELETE',
                 url: '/api/item/delete',
                 data: {itemId: itemId },
                 headers: {autorization: localStorage.token}}
               );
-            console.log("response:",response);
         }
         catch(error){
             console.log("Error:",error)
@@ -49,7 +46,6 @@ class DeleteItem extends Component {
     }
 
     handleItemClicked = (itemsShownIndex) => {
-        
         let itemsShown = [...this.state.itemsShown];
         let itemSelected = []
         itemSelected.push(itemsShown[itemsShownIndex])
@@ -57,11 +53,13 @@ class DeleteItem extends Component {
         this.modalToggle();
 
     }
+    
     modalToggle=()=> {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
     }
+
     getItems = async () => {
         const response = await axios.get(
             '/api/item/itemsAll',
@@ -95,6 +93,5 @@ class DeleteItem extends Component {
         );
     }
 }
-
 
 export default DeleteItem;

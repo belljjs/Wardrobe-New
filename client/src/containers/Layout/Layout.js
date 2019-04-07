@@ -12,23 +12,24 @@ class Layout extends Component {
     current_user_id: undefined
   }
 
-    dropMenuCloseHandler = () => {
-        this.setState( { showDropMenu: false } );
-    }
+  dropMenuCloseHandler = () => {
+      this.setState( { showDropMenu: false } );
+  }
 
-    dropMenuOpenHandler = () => {
-        this.setState( ( prevState ) => {
-            return { showDropMenu: !prevState.showDropMenu };
-        } );
-    }
+  dropMenuOpenHandler = () => {
+      this.setState( ( prevState ) => {
+          return { showDropMenu: !prevState.showDropMenu };
+      } );
+  }
       
   createItems = async () => {
     const items = await axios(('/api/items'));
     this.setState({items: items})
   }
+
   render() {
-    if (!this.state.current_user_id) {
-    }
+    // if (!this.state.current_user_id) {
+    // }
     return (  
       <div className="Layout">
         <Toolbar

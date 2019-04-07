@@ -2,7 +2,6 @@ import React from 'react';
 import './ItemFilter.css';
 import Button from '../../UI/Button/Button';
 
-
 const itemFilter = (props) => {
 
     const filterArray = ['top', 'bottom', 'dress', 'shoes', 'bag', 'all'];
@@ -13,13 +12,12 @@ const itemFilter = (props) => {
             {filter}
         </Button>
     )
+    
     return(
         <div className="ItemFilter">    
             {filters}
         </div>
     )
-
 }
-
 
 export default itemFilter;

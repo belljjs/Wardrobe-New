@@ -2,11 +2,12 @@ import React from 'react';
 import './Item.css';
 
 const item = (props) => {
+
     let width = "10vw";
     if(props.isModal === "true") {
         width = "17vw"
     } 
-
+    
     return (
         <div 
             onClick={props.clicked}>
@@ -17,9 +18,6 @@ const item = (props) => {
                 style={width={width}} height={width} />
         </div>
     )
-    
 }
-
-
 
 export default item;

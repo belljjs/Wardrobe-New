@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './containers/Layout/Layout';
 import { Route, Switch,withRouter , Redirect} from 'react-router-dom';
-
 import Home from './containers/Home/Home';
 import Closet from './containers/Closet/Closet';
 import Start from './containers/Start/Start'
@@ -12,6 +11,7 @@ import Auth from './containers/Auth/Auth';
 import SignOut from './containers/Auth/SignOut';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
+require('dotenv').config();
 
 class App extends Component {
 
@@ -24,14 +24,11 @@ class App extends Component {
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/auth' exact component={Auth} />
-          
           {/* for any path unknown */}
           <Redirect to='/' />
         </Switch>
       )
-
       if (this.props.isAuthenticated) {
-        console.log("isAuthenticated is true...")
         routes = (
           <Switch>
             <Route path='/start'  exact component={Start} />
@@ -40,8 +37,7 @@ class App extends Component {
             <Route path='/addItem' exact component={AddItem} />
             <Route path='/deleteItem' exact component={DeleteItem} />
             <Route path='/signOut' exact component={SignOut} /> 
-
-            {/* for any path unknown */}
+            {/* for any path unknown, or after authentification which is still in /auth */}
             <Redirect to='/start' />
           </Switch>
         )
@@ -56,13 +52,13 @@ class App extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   console.log(" In App mapStateToProps.. stat:",state)
   return {
     isAuthenticated: state.auth.token !== null
   }
 }
-
 const mapDispatchToProps = dispatch => {
   return {
     onCheckAutoSignIn: () => dispatch( actions.authCheckState() )

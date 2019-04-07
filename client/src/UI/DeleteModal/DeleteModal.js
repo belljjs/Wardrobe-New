@@ -5,18 +5,13 @@ import  "./DeleteModal.css";
 class DeleteModal extends React.Component {
     clicked = () => {};
     render() {
-        console.log("this.props.itemSelected:",this.props.itemSelected);
         let itemImage = null;
         let itemId = null;
         if(this.props.itemSelected.length > 0){
            itemImage = this.props.itemSelected[0].image_location;
            itemId = this.props.itemSelected[0].id;
-           console.log("itemImage:",itemImage , "itemId:",itemId ) 
-          
         }
-        // // const itemId = this.props.itemSelected[0].id 
 
-        const closeBtn = <button className="close" onClick={this.modalToggle}>&times;</button>;
         return (
             <Modal 
             size="md" 

@@ -24,9 +24,11 @@ const nav = (props) => (
                 : 
                     <div className="Nav">
                         <li style={{"marginRight":"50px"}}><NavLink to='/start'>Start with finding weather... </NavLink></li>
+                        <li><NavLink to='/outfits'>outfits </NavLink></li>
+                        <li><NavLink to='/addItem'><FontAwesomeIcon icon={faPlus}/></NavLink></li>
+                        <li><NavLink to='/deleteItem'><FontAwesomeIcon icon={faMinus}/></NavLink></li>
                         <li> <NavLink to='/signOut'><FontAwesomeIcon icon={faSignOutAlt}/></NavLink> </li>
                     </div>
-                
             : 
                 <div  className="Nav">
                     <li><NavLink to='/home'>Home</NavLink></li>

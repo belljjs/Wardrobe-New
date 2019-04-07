@@ -2,31 +2,49 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-    weatherName: null ,
-    weatherIcon: null ,
+    cityName: null,
+    name: null ,
+    description: null ,
+    icon: null ,
+    temp: null,
     highTemp: null ,
     lowTemp: null ,
-    cityName: null,
+    humidity: null,
+    wind: null,
     error: null
-
 };
 
-
 const weatherStore = (state, action) => {
-    console.log("**** In weather reducer, before state:",state);
+    console.log("**** In weather reducer, state:",state);
+    console.log("**** In weather reducer, action:",action);
 
     return updateObject( state, { 
-        weatherName: action.weatherName ,
-        weatherIcon: action.weatherIcon ,
+        cityName: action.cityName ,
+        name: action.name ,
+        description: action.description ,
+        icon: action.icon ,
+        temp: action.temp,
         highTemp: action.highTemp ,
-        lowTemp: action.lowTemp,
-        cityName: action.cityName,
-
+        lowTemp: action.lowTemp ,
+        humidity: action.humidity,
+        wind: action.wind,
      } );
 };
 
 const weatherDelete = (state, action) => {
-    return updateObject(state, { weatherName: null, weatherIcon: null, highTemp: null,lowTemp: null, cityName: null, error: null });
+    return updateObject(state, 
+        { 
+            cityName: null,
+            name: null ,
+            description: null ,
+            icon: null ,
+            temp: null,
+            highTemp: null ,
+            lowTemp: null ,
+            humidity: null,
+            wind: null,
+            error: null
+        });
 };
 
 const reducer = ( state = initialState, action ) => {
