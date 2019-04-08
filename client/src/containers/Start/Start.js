@@ -133,7 +133,6 @@ class Start extends Component {
     }
 
     let weather = null;
-
     if (this.state.error){
       weather =  <div className="cityError">{this.state.error}</div>
     } else if(this.props.weather.name){

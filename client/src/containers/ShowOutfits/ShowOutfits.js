@@ -37,11 +37,9 @@ class ShowOutfits extends Component {
 
     render() {
         let outfits = <div className="noOutfits"> No outfit has made yet.</div>;
-                 
         if (this.state.outfitsAll.length > 0) {
             outfits =  (
                 <div>
-                  
                     <Outfits 
                         outfitsAll={this.state.outfitsAll}
                         outfitDeleteClicked={this.outfitDeletHandler}    />
