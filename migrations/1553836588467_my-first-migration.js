@@ -1,4 +1,4 @@
-// node-pg-migtate
+
 exports.shorthands = { 
   id:{ type: 'serial', unique: true, notNull: true, primaryKey: true }
 };
@@ -97,28 +97,6 @@ exports.up = (pgm) => {
       }
   });
 
-  // pgm.createTable("user_cities", {
-  //   // id: "id",
-  //   user_id: {
-  //     type: "integer",
-  //     primaryKey: true,
-  //     notNull: true,
-  //     references: "users",
-  //     onDelete: "cascade"
-  //   },
-  //   city_id: {
-  //     type: "integer",
-  //     primaryKey: true,
-  //     notNull: true,
-  //     references: "cities",
-  //     onDelete: "cascade"
-  //   },
-  //   createdAt: {
-  //     type: "timestamp",
-  //     notNull: true,
-  //     default: pgm.func("current_timestamp")
-  //   }
-  // });
 };
 
 
