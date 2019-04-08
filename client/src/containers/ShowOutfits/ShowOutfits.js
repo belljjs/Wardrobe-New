@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../../global.css' ;
+import '../../global.css' ;
+import './ShowOutfits.css'
 import Outfits from '../../components/Outfits/Outfits';
 
 class ShowOutfits extends Component {
@@ -34,12 +36,22 @@ class ShowOutfits extends Component {
       }
 
     render() {
+        let outfits = <div className="noOutfits"> No outfit has made yet.</div>;
+                 
+        if (this.state.outfitsAll.length > 0) {
+            outfits =  (
+                <div>
+                  
+                    <Outfits 
+                        outfitsAll={this.state.outfitsAll}
+                        outfitDeleteClicked={this.outfitDeletHandler}    />
+                </div>
+            )
+        }
         return(
             <div>
                 <h3 className="title">Outfits</h3>
-                <Outfits 
-                    outfitsAll={this.state.outfitsAll}
-                    outfitDeleteClicked={this.outfitDeletHandler}    />
+                {outfits}
             </div>
         )
     }

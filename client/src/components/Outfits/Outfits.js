@@ -6,6 +6,8 @@ import '../../index.css';
 const outfits = (props) =>  {
 
     const outfitsAll = [...props.outfitsAll]
+   
+
     const outfits = outfitsAll.map( (outfit, index) => {
             const {id, user_id, weather_name, weather_icon, high_temp, low_temp, created_at, items} = outfit; 
             return(
