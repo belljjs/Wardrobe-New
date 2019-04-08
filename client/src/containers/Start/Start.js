@@ -24,6 +24,11 @@ class Start extends Component {
   handleAddCity = async () => {
     await axios.post('/api/cities', { city: this.state.newCityName, userId: localStorage.userId })
     this.getCityList();
+    const weatherInfo = await this.getWeather( this.state.newCityName);
+    if(weatherInfo.name) {
+      const proposal = await this.getProposal(weatherInfo);
+      this.setState( {proposal : proposal});
+    } 
     this.setState({ newCityName: "" });
   };
       
@@ -73,12 +78,9 @@ class Start extends Component {
           const proposal = await axios.get(
               '/api/outfit/outfit',
               {params: {highTemp: weatherInfo.highTemp, userId: localStorage.userId}});
-          
-          console.log(" THe response of '/api/outfit/outfit' (proposal) is ", proposal)
-          
+     
           let proposalInfo = { proposal: null }
           // If proposal contains an outfit
-
           if(proposal.data[0]) {
               proposalInfo ={
                 proposal: proposal.data[0].items
@@ -86,34 +88,26 @@ class Start extends Component {
             }
 
           this.props.onProposalStore(proposalInfo);
-
           return proposal.data[0].items;
-          
       }
       catch (error){ 
-          // this.setState({error : "proposal error"})
           return {};
       }
   }
   
   handleChangeCity = async (e) => {
     const weatherInfo = await this.getWeather(e.target.value);
-
     // The city name is valid so that weather can be found.
     if(weatherInfo.name) {
-
         const proposal = await this.getProposal(weatherInfo);
-        console.log(" The result of await this.getProposal  in handleChangeCity is ", proposal)
         this.setState( {proposal : proposal});
       } 
-
   }
     
   componentDidMount = async () => {
     this.getCityList();   // get the cities in the begining
     if(this.props.weather.name) {
       const proposal = await this.getProposal(this.props.weather);
-      console.log(" The result of await this.getProposal  in componentDidMount () is ", proposal)
       this.setState( {proposal : proposal});
     }
   }
@@ -136,10 +130,6 @@ class Start extends Component {
                 { this.state.cityList.map((city, i) => <option key={i}>{city}</option>) }
               </Input>
           </FormGroup>
-
-       // to get the current temperature of the city
-      //  let weatherInfo = this.getWeather(this.props.weather.cityName);
-      //  console.log("Get the new current temp!!!  :",weatherInfo); 
     }
 
     let weather = null;
