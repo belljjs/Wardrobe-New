@@ -79,6 +79,7 @@ class Outfit {
             }
            
             // res.json(outfit[0]) is not working
+            console.log(" The result of outfit.retieveOne is ", outfit);
             res.json(outfit);
             
            

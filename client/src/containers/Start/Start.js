@@ -67,39 +67,55 @@ class Start extends Component {
   }
       
   getProposal = async (weatherInfo) => {
-      if (!weatherInfo)
+      if (!weatherInfo || !weatherInfo.name)
           return {};
       try {
           const proposal = await axios.get(
               '/api/outfit/outfit',
               {params: {highTemp: weatherInfo.highTemp, userId: localStorage.userId}});
+          
+          console.log(" THe response of '/api/outfit/outfit' (proposal) is ", proposal)
+          
+          let proposalInfo = { proposal: null }
+          // If proposal contains an outfit
+
           if(proposal.data[0]) {
-              const proposalInfo ={
+              proposalInfo ={
                 proposal: proposal.data[0].items
               }
-              this.props.onProposalStore(proposalInfo);
-              return proposalInfo;
-          }else{
-              return {}
-          }
+            }
+
+          this.props.onProposalStore(proposalInfo);
+
+          return proposal.data[0].items;
+          
       }
       catch (error){ 
+          // this.setState({error : "proposal error"})
           return {};
       }
   }
   
   handleChangeCity = async (e) => {
     const weatherInfo = await this.getWeather(e.target.value);
+
+    // The city name is valid so that weather can be found.
     if(weatherInfo.name) {
-        const proposalInfo = await this.getProposal(weatherInfo);
-        if (!proposalInfo) {
-          this.setState({error : "proposal error"})
-        }
-     }
+
+        const proposal = await this.getProposal(weatherInfo);
+        console.log(" The result of await this.getProposal  in handleChangeCity is ", proposal)
+        this.setState( {proposal : proposal});
+      } 
+
   }
     
-  componentDidMount () {
+  componentDidMount = async () => {
     this.getCityList();   // get the cities in the begining
+    if(this.props.weather.name) {
+      const proposal = await this.getProposal(this.props.weather);
+      console.log(" The result of await this.getProposal  in componentDidMount () is ", proposal)
+      this.setState( {proposal : proposal});
+    }
   }
 
   render() {
@@ -156,7 +172,7 @@ class Start extends Component {
               <div>
                 <h1 className="title" > Proposal for this weather </h1>
                 <Proposal 
-                  proposal={ this.props.proposal.proposal } 
+                  proposal={ this.props.proposal } 
                   weather={ this.props.weather }/>
               </div>
 
