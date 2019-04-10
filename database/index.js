@@ -63,5 +63,6 @@ const sslmode = true
 // Creating a new database instance from the connection details:
 const db = pgp(cn, sslmode);
 
+
 // Exporting the database object for shared use:
 module.exports = db;

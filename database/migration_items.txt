@@ -1,0 +1,16 @@
+
+  
+
+
+CREATE TABLE items (
+    id serial PRIMARY KEY,
+    user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    image_key VARCHAR (256)  NOT NULL,
+    image_location  VARCHAR (256)  NOT NULL,
+    category VARCHAR (256)  NOT NULL,
+    color  VARCHAR (256)  NOT NULL,
+    season  VARCHAR (256)  NOT NULL,
+    occasion  VARCHAR (256)  NOT NULL,
+    createdAt TIMESTAMP NOT NULL
+ )
+

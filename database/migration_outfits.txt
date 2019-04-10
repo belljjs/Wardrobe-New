@@ -1,0 +1,11 @@
+
+  
+CREATE TABLE outfits (
+    id serial PRIMARY KEY,
+    user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    weather_name VARCHAR (256)  NOT NULL,
+    weather_icon VARCHAR (256)  NOT NULL, 
+    high_temp integer NOT NULL,
+    low_temp integer NOT NULL,
+    createdAt TIMESTAMP NOT NULL
+  )

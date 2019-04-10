@@ -1,0 +1,13 @@
+
+
+CREATE TABLE outfit_items (
+    outfit_id integer NOT NULL,
+    item_id integer NOT NULL,
+    PRIMARY KEY (outfit_id, item_id),
+    CONSTRAINT outfit_items_outfit_id_fkey FOREIGN KEY (outfit_id)
+      REFERENCES outfits (id) 
+      ON DELETE CASCADE,
+    CONSTRAINT outfit_items_item_id_fkey FOREIGN KEY (item_id)
+      REFERENCES items (id) 
+      ON DELETE CASCADE
+)
