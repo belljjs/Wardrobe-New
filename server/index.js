@@ -36,9 +36,15 @@ app.use(passport.session());
 
 app.use(cors());
 
-// only serves static assets in production
+
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  // Express will serve up production assets
+  app.use(express.static("build"));
+
+  // Express will serve up the front-end index.html file if it doesn't recognize the route
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve("build", "index.html"))
+  );
 }
 
 
@@ -51,6 +57,8 @@ app.use('/api/outfit',         require('./api/outfit'));
 
 
 const DOMAIN = 'localhost';
+const PORT = process.env.PORT || 4646;
+
 app.listen(PORT, DOMAIN, () => {
   console.log(`🖥 Server listenning on http://${DOMAIN}:${PORT}`);
 });
