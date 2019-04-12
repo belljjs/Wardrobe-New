@@ -16,7 +16,7 @@ const passportServices = require('./services/passport');
 require('./services/passport');
 
 
-const PORT = process.env.PORT || 4646;
+
 const app = express();
 const cors = require('cors');
 
@@ -37,15 +37,7 @@ app.use(passport.session());
 app.use(cors());
 
 
-if (process.env.NODE_ENV === "production") {
-  // Express will serve up production assets
-  app.use(express.static("build"));
 
-  // Express will serve up the front-end index.html file if it doesn't recognize the route
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve("build", "index.html"))
-  );
-}
 
 
 
@@ -55,7 +47,14 @@ app.use('/api/weather',        require('./api/weather'));
 app.use('/api/item',           require('./api/item'));
 app.use('/api/outfit',         require('./api/outfit'));
 
-
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
 const DOMAIN = 'localhost';
 const PORT = process.env.PORT || 4646;
 

@@ -11,8 +11,9 @@
     "client": "npm start  --prefix client",
     "server": "nodemon server",
     "migrate": "node-pg-migrate",
-    "start": "concurrently \"npm run server\" \"npm run client\" ",
-    "heroku-postbuild": "npm install && cd client && npm install --only-dev && npm install && npm run build"
+    "start": "npm run server",
+    "heroku-postbuild": "npm install && cd client && npm install --only-dev && npm install && npm run build",
+    "dev": "  concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "Jessie Jung",
   "license": "ISC",
