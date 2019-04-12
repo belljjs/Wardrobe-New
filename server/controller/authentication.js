@@ -57,7 +57,7 @@ const signup = async(req,res,next) => {
 
     }
     catch(error) {
-        console.log("Sign up error ", error.detail, " ---------")
+        console.log("Sign up error ", error, " ---------")
         res.status(400).send(error.detail);
     }
 }
