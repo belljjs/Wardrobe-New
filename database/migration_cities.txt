@@ -6,3 +6,5 @@ CREATE TABLE cities (
     created_at TIMESTAMP NOT NULL
 )
   
+
+  

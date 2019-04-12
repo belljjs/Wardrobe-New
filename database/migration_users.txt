@@ -3,15 +3,9 @@ CREATE TABLE users(
  id serial PRIMARY KEY,
  first_name VARCHAR (256)  NOT NULL,
  last_name VARCHAR (256)  NOT NULL,
- pw VARCHAR (50) NOT NULL,
+ pw VARCHAR (256) NOT NULL,
  email VARCHAR (355) UNIQUE NOT NULL,
  signup_odate TIMESTAMP NOT NULL
 )
-  
-CREATE TABLE cities (
-    id serial PRIMARY KEY,
-    city_name: VARCHAR (256)  NOT NULL,
-    user_id: INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    created_at: TIMESTAMP NOT NULL
-)
+
   
