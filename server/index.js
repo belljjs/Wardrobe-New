@@ -55,7 +55,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }
-const DOMAIN = 'localhost';
+const DOMAIN = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
 const PORT = process.env.PORT || 4646;
 
 app.listen(PORT, DOMAIN, () => {
