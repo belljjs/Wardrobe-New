@@ -11,6 +11,6 @@ CREATE TABLE items (
     color  VARCHAR (256)  NOT NULL,
     season  VARCHAR (256)  NOT NULL,
     occasion  VARCHAR (256)  NOT NULL,
-    createdAt TIMESTAMP NOT NULL
+    createdAt TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
  )
 

@@ -3,7 +3,7 @@ CREATE TABLE cities (
     id serial PRIMARY KEY,
     city_name VARCHAR (256)  NOT NULL,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    created_at TIMESTAMP NOT NULL
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 )
   
 

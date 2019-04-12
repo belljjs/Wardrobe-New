@@ -7,5 +7,5 @@ CREATE TABLE outfits (
     weather_icon VARCHAR (256)  NOT NULL, 
     high_temp integer NOT NULL,
     low_temp integer NOT NULL,
-    createdAt TIMESTAMP NOT NULL
+    createdAt TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   )
