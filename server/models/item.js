@@ -2,9 +2,10 @@ const db = require('../../database');
 
 class Item {
     static retrieveALL (req, res, next) {
-        const url = new URL("localhost:4646/api/items/" + req.url);
-        const userId = url.searchParams.get("userId");
-        console.log("userId:",userId);
+        const userId = req.query.userId;
+        // const url = new URL("localhost:4646/api/items/" + req.url);
+        // const userId = url.searchParams.get("userId");
+        console.log(" ** In Item Retrieve ALL userId:",userId);
 
         db.any(`SELECT * FROM items WHERE user_id = ${userId}`)
         .then( data =>  res.json(data))
