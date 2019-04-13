@@ -1,14 +1,5 @@
 const db = require('../../../database');
 
-// used in localLogin
-const verifyUser = ( email) => {
-    console.log("++++ In verifyUser, email:", email);
-
-    const query = `
-        SELECT * FROM users WHERE  email = $1`
-    return db.oneOrNone(query, [email])
-}
-
 
 // used in jwtLogin
 const findUserById = (id) => {
@@ -19,4 +10,4 @@ const findUserById = (id) => {
     return db.one(query, [id])
 }
 
-module.exports = {verifyUser,findUserById };
+module.exports = {findUserById };

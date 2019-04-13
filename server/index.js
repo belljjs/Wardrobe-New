@@ -1,32 +1,24 @@
-//main index.js
-// require('rootpath')();
+
 require('dotenv').config()
 const path = require('path');
 const logger = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('../database');
-//const flash = require('connect-flash');
 const request = require('request');
 const session = require('express-session');
-//const expressSession = require('express-session');
 
 const passport = require('passport');
 const passportServices = require('./services/passport');
 require('./services/passport');
 
-
-
 const app = express();
 const cors = require('cors');
 
 
-
-//app.use(express.json());
-//app.use(express.urlencoded({extended: false}));
 app.use(logger('dev'));
 app.use(require('cookie-parser')());
-//app.use(bodyParser());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -35,11 +27,6 @@ app.use(passport.session());
 // app.use('/public', express.static( __dirname + '/public') );
 
 app.use(cors());
-
-
-
-
-
 
 app.use('/api/authentication', require('./api/authentication'));
 app.use('/api/cities',         require('./api/cities'));
@@ -55,6 +42,8 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }
+//In rarer cases, your app may be using process.env.PORT, but may still be failing to bind. 
+//This can be caused by the app attempting to bind on localhost. Instead, you may need to change this to 0.0.0.0.
 const DOMAIN = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
 const PORT = process.env.PORT || 4646;
 

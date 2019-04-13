@@ -2,7 +2,7 @@ const passport = require('passport');
 // const config = require('../../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const {verifyUser, findUserById} = require('../models/auth/signIn');
+const { findUserById} = require('../models/auth/signIn');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const db = require('../../database');
@@ -10,16 +10,16 @@ require('dotenv').config();
 
 const localOptions = {usernameField: 'email'};
 
-// console.log(" +++++ IN LocalStrategy ")
-// console.log(" +++++ IN LocalStrategy email:", email);
-// console.log(" +++++ IN LocalStrategy password:", password);
-// console.log(" +++++ IN LocalStrategy done:", done);
+
 
 const localLogin = new LocalStrategy(
-        localOptions, 
-        (email,password, done) => {
+    localOptions, 
+    (email,password, done) => {
+        
+        console.log(" +++++ IN LocalStrategy   localOptions: ",localOptions);
+        console.log(" +++++ IN LocalStrategy   email, password: ", email, password);
+
             return  db.oneOrNone(` SELECT * FROM users WHERE  email = $1`, [email])
-            // return verifyUser(email)
                     .then(validUser => {
                         console.log("** ValidUser :",validUser );
                         if(validUser){

@@ -5,7 +5,6 @@ const { createUser } = require('../models/auth/signUp');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-
 const tokenForUser = (user) => {
     
     const payload = {
@@ -13,8 +12,6 @@ const tokenForUser = (user) => {
         iat: new Date().getTime(), 
         exp: 3600 
     }
-
-    // need to hide password later --- config ???
     return jwt.sign(payload, process.env.REACT_APP_SECRET_KEY);
 }
 
@@ -26,6 +23,7 @@ const signin = (req,res,next) => {
     console.log( " Before res.json..." );
     const token = tokenForUser(req.user);
     console.log( " tokenForUser(req.user):",tokenForUser(req.user) );
+    console.log( " &&&&&& res:",res);
 
     res.send({
         token: token,
@@ -37,6 +35,8 @@ const signin = (req,res,next) => {
 }
 
 const signup = async(req,res,next) => {
+    console.log("In controller/auth../signIn:");
+
     const {firstName, lastName, email, password} = req.body;
     saltRounds = 12
     try{
@@ -57,7 +57,7 @@ const signup = async(req,res,next) => {
 
     }
     catch(error) {
-        console.log("Sign up error ", error, " ---------")
+        console.log("Sign up error ", error.detail, " ---------")
         res.status(400).send(error.detail);
     }
 }

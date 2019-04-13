@@ -58,6 +58,7 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
          }
          axios.post(url, authData)
              .then(response => {
+                console.log(" Response of request ", url," : ", response);
                 const expirationDate = new Date(new Date().getTime() + response.data.exp * 1000);
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('expirationDate', expirationDate);
@@ -67,6 +68,8 @@ export const auth = (firstName, lastName, email, password, isSignup) => {
                  // dispatch(checkAuthTimeout(response.data.exp)); 
              })
              .catch(error => {
+                console.log(" Response of request(error) ", url," : ", error.response);
+
                 // Here axios wrap response with error object
                 //error.response.data - text sent from server as 'error.detail'
                 dispatch(authFail(error.response.data));
