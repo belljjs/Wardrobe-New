@@ -15,12 +15,12 @@ code {
 
 .form-group {
   width: 275px;
-  margin: 0px auto;
+  /* margin: auto; */
 }
 
 .input-group {
   width: 275px;
-  margin: 0px auto;
+  /* margin: 0px auto; */
 }
 
 .centered {
