@@ -24,7 +24,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use('/public', express.static( __dirname + '/public') );
+
+app.use('/public', express.static( __dirname + '/public') );
 
 app.use(cors());
 
