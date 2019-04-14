@@ -16,6 +16,7 @@ code {
 .form-group {
   width: 275px;
   margin: auto;
+  margin-bottom: 1rem;
 }
 
 .input-group {
