@@ -209,7 +209,7 @@ class AddItem extends Component {
                                 </FormGroup>
                                 <Button clicked={this.handleItemAdd}> SUBMIT </Button>
                                 <div id="oc-alert-container"></div>
-                                {processing}
+                                <div>{processing}</div>
                             </Col>
                         </Row>
                     </Form>

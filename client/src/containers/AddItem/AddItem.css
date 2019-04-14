@@ -11,3 +11,8 @@
     text-align: "left";
     font-weight: bold;
 } */
+#oc-alert-container{
+    color: rgb(60, 145, 241);
+    font-weight: bold;
+    margin-top: 1rem;
+}
