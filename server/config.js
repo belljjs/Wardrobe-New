@@ -1,4 +1,0 @@
-
-const key = {
-    secret: "supersecret"
-}
