@@ -16,9 +16,9 @@ const dropMenu = ( props ) => {
             <div className={dropMenuCss}>
                 <div className="DropLogo">
                     <Logo />
-                    <p className='DropLogoTitle'>Wardrobe</p>
+                    <div className='DropLogoTitle'>Wardrobe</div>
                 </div>
-                <nav >
+                <nav className="DropNav">
                     <Nav 
                         clicked={props.closed} 
                         isAuthenticated={props.isAuth} 
