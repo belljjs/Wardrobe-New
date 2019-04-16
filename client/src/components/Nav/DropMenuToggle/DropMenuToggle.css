@@ -5,7 +5,7 @@
     flex-flow: column;
     justify-content: space-around;
     align-items: center;
-    padding: 10px 0;
+    padding: 9px 0;
     box-sizing: border-box;
     cursor: pointer;
 }
@@ -16,7 +16,7 @@
     background-color: grey;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
     .DropMenuToggle {
         display: none;
     }

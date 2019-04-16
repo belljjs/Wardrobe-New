@@ -16,7 +16,7 @@ const dropMenu = ( props ) => {
             <div className={dropMenuCss}>
                 <div className="DropLogo">
                     <Logo />
-                    <p className='MainTitle'>Wardrobe</p>
+                    <p className='DropLogoTitle'>Wardrobe</p>
                 </div>
                 <nav >
                     <Nav 

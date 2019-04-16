@@ -6,7 +6,7 @@
     left: 0;
     top: 0;
     z-index: 200;
-    background-color: rgb(238, 235, 195);
+    background-color:white;
     padding: 16px 16px;
     box-sizing: border-box;
     transition: transform 0.3s ease-out;
@@ -28,7 +28,14 @@
 
 .DropLogo {
     display: flex;
+    align-items: baseline;
     height: 11vh;
     width: 11vh;
     margin-bottom: 32px;
+}
+.DropLogoTitle {
+    font-weight: bold;
+    font-size : 1.5rem;
+    color: rgb(78, 68, 129);
+    margin: 0 20px;
 }
