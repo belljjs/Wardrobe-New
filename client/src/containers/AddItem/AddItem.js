@@ -107,22 +107,31 @@ class AddItem extends Component {
     }
 
     handleItemAdd = (e) => {
-        this.setState({loading: true});
+
+
         if(this.state.selectedFile) {
+
+            this.setState({loading: true});
+            console.log("Start loading...");
+
             this.imageUpload()
             .then(res => {
+                console.log("End loading...")
                 this.setState({loading: false});
                 this.createNewItem();
             })
             .catch( (error) => {
+                console.log("End loading...")
                 this.setState({loading: false});
                 this.showAlert(error, 'red' );
             });
+
+           
+
         } else {
-            this.setState({loading: false});
             this.showAlert( "Please choose a file", 'violet' );
         } 
-        this.setState({loading: false});
+
     };
 
     showAlert = ( message, background = '#3089cf' ) => {

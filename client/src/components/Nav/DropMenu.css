@@ -27,6 +27,7 @@
 }
 
 .DropLogo {
+    display: flex;
     height: 11vh;
     width: 11vh;
     margin-bottom: 32px;
