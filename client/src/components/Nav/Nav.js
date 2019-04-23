@@ -8,7 +8,7 @@ import { faPlus} from '@fortawesome/free-solid-svg-icons'
 import { faMinus} from '@fortawesome/free-solid-svg-icons'
 
 const nav = (props) => (
-    <ul className="Nav" onClick={props.clicked}>
+    <ul  onClick={props.clicked}>
         { props.isAuthenticated
             ? 
                 props.weatherFound 

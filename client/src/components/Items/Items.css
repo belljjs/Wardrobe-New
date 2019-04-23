@@ -1,17 +1,15 @@
-.Items{
+/* .Items{
     display: flex;
     flex-flow: wrap;
     justify-content: center;
     padding: 0px 0px;
     margin : 0 20px;
-}
+} */
 .carousel{
-    text-align: center;
-    margin-left: 15vw;
-    border-left : solid 5px lightgrey;
-    border-right : solid 5px lightgrey;
-    /* border-radius: 10px; */
+    margin: auto;
+    border-left : solid 3px lightgrey;
+    border-right : solid 3px lightgrey;
     padding: 0 10px;
-    /* margin-right: 15vw; */
-    width: 70%;
+    width: 80%;
+
 }
