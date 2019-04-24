@@ -1,11 +1,13 @@
 .screenShot {
     width: 50vw;
     height: auto;
-    /* margin-left: 10vw; */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightgrey;
 }
 .titleHome{
     color: rgb(101, 13, 128);
-    font-size: 3rem  ;
+    font-size: 3.5rem  ;
     padding-top: 8vh;
     padding-bottom: 4vh;
 }
