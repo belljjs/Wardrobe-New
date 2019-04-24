@@ -12,7 +12,6 @@ const itemFilter = (props) => {
             {filter}
         </Button>
     )
-    
     return(
         <div className="ItemFilter">    
             {filters}

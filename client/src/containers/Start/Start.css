@@ -21,16 +21,16 @@
     flex-flow: wrap;
     justify-content: center;
     align-items: center;
-    padding: 5vw;
+    padding: 3vw;
     border: 3px lightgrey solid;
     border-radius: 20px;
 }
-@media (max-width: 460px) {
+@media (max-width: 500px) {
     .OutfitInProposal {
         text-align: center;
         width: 60vw;
         height: auto;
-        margin-left: 20vw;
+        margin: 5vh auto;
     }
 }
 .emptyProposal{

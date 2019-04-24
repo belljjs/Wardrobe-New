@@ -3,9 +3,9 @@ import './Item.css';
 
 const item = (props) => {
 
-    let width = "10vw";
+    let width = "12vw";
     if(props.isModal === "true") {
-        width = "17vw"
+        width = "20vw"
     } 
     
     return (
@@ -15,7 +15,8 @@ const item = (props) => {
                 className="Item" 
                 src={props.image_location} 
                 alt={props.id} 
-                style={width={width}} height={width} />
+                style={width={width}} 
+                />
         </div>
     )
 }

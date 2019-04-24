@@ -10,6 +10,12 @@
     border-left : solid 3px lightgrey;
     border-right : solid 3px lightgrey;
     padding: 0 10px;
-    width: 80%;
+    width: 85%;
 
+}
+@media (max-width: 600px) {
+    .carousel{
+        width: 95%;
+        border: none;
+    }
 }

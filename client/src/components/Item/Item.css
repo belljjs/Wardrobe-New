@@ -7,9 +7,9 @@
     height: auto;
     cursor: pointer;
 }
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     .Item{
         width: 70px;
         height: auto;
     }
-}
+} */
