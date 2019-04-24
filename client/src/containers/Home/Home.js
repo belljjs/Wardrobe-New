@@ -58,7 +58,7 @@ const home =() => {
                     src={itemInfoShot} 
                     alt=""  />   
             </div>
-            <br></br>
+            <br></br><br></br><br></br>
             <div>
                 <div className= "titlePage"> Delete Item </div>
                 <div className="pageFeature">
