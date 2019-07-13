@@ -10,6 +10,7 @@ class Item {
     }   
     static insert (req, res, next) {
         console.log("req.body:",req.body);
+        
         const item = req.body.item;  
         const userId = req.body.userId;  
 

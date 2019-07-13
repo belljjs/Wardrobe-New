@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Layout from './containers/Layout/Layout';
 import { Route, Switch,withRouter , Redirect} from 'react-router-dom';
+import Guest from './containers/Guest/Guest';
 import Home from './containers/Home/Home';
 import Closet from './containers/Closet/Closet';
 import Start from './containers/Start/Start'
@@ -22,6 +23,7 @@ class App extends Component {
     render() {
       let routes = (
         <Switch>
+          <Route path='/guest'  exact component={Guest} />
           <Route path='/' exact component={Home} />
           <Route path='/auth' exact component={Auth} />
           {/* for any path unknown */}

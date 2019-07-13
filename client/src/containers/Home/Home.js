@@ -21,6 +21,7 @@ const home =() => {
         <div>
             <h3 className="titleHome"> Plan Your Outfit</h3>
             <div className="pageFeature">
+                    <p>To try here, use &nbsp; <strong>Guest</strong>  &nbsp; icon in the menu bar.</p>
                     <p>To sign in or sign up, use &nbsp;  <FontAwesomeIcon icon={faSignInAlt}/> &nbsp; icon in the menu bar.</p>
                     <p>To sign out, use &nbsp;  <FontAwesomeIcon icon={faSignOutAlt}/> &nbsp; icon which will be shown after sign in.</p>
             </div>
