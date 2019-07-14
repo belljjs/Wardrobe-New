@@ -5,9 +5,9 @@
     border-radius: 5px;
     background-color: lightgrey;
 }
-.titleHome{
+.titleGuest{
     color: rgb(101, 13, 128);
-    font-size: 3.5rem  ;
+    font-size: 3rem  ;
     padding-top: 8vh;
     padding-bottom: 4vh;
 }
