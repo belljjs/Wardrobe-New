@@ -24,6 +24,7 @@ class App extends Component {
       let routes = (
         <Switch>
           <Route path='/guest'  exact component={Guest} />
+          <Route path='/home' exact component={Home} />
           <Route path='/' exact component={Home} />
           <Route path='/auth' exact component={Auth} />
           {/* for any path unknown */}
@@ -33,6 +34,7 @@ class App extends Component {
       if (this.props.isAuthenticated) {
         routes = (
           <Switch>
+            <Route path='/home'  exact component={Home} />
             <Route path='/start'  exact component={Start} />
             <Route path='/closet' exact component={Closet} />
             <Route path='/outfits' exact component={ShowOutfits} />

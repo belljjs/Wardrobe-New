@@ -31,8 +31,8 @@ const nav = (props) => (
                     </div>
             : 
                 <div  className="Nav">
-                    <li><NavLink to='/guest'>Guest</NavLink></li>
-                    <li><NavLink to='/home'>Home</NavLink></li>
+                    <li><NavLink to='/guest' title='Guest'>Guest</NavLink></li>
+                    {/* <li><NavLink to='/home'>Home</NavLink></li> */}
                     <li><NavLink to='/auth' ><FontAwesomeIcon icon={faSignInAlt}/></NavLink></li>
                 </div>
         }
