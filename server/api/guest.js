@@ -15,6 +15,31 @@ const guest = async (req, res) => {
     const itemMapping = {};
     const outfitMapping = {};
 
+     // Copy cities.
+     try{
+        const cities = await db.any(`SELECT * FROM cities WHERE user_id = 2 `)
+        for (let i = 0; i < cities.length; i++){
+            const oldCity= {...cities[i]};  // copy object
+            console.log("oldCity.id: ",oldCity.id,", oldCity.city_name: ",oldCity.city_name);  
+            try{
+                let insertedCity = await db.query(`INSERT INTO cities 
+                    (city_name, user_id)               
+                    VALUES ($1, $2) RETURNING id`,
+                    [
+                        oldCity.city_name,
+                        userId
+                    ])
+                console.log("** inserted city ",insertedCity);
+                // res.json(insertedCity);
+            }
+            catch( error){
+                console.log("** Error on insert cities:",error);
+            }
+        } 
+    }   
+    catch(error){
+        console.log("citiesError :", error)
+    }  
     // Copy items.
     try{
         const items = await db.any(`SELECT * FROM items WHERE user_id = 2 `)
@@ -123,30 +148,7 @@ const guest = async (req, res) => {
         }
     } 
     
-    // Copy cities.
-    try{
-        const cities = await db.any(`SELECT * FROM cities WHERE user_id = 2 `)
-        for (let i = 0; i < cities.length; i++){
-            const oldCity= {...cities[i]};  // copy object
-            console.log("oldCity.id: ",oldCity.id,", oldCity.city_name: ",oldCity.city_name);  
-            try{
-                let insertedCity = await db.query(`INSERT INTO cities 
-                    (city_name, user_id)               
-                    VALUES ($1, $2) RETURNING id`,
-                    [
-                        oldCity.city_name,
-                        userId
-                    ])
-                console.log("** inserted city ",insertedCity);
-            }
-            catch( error){
-                console.log("** Error on insert cities:",error);
-            }
-        } 
-    }   
-    catch(error){
-        console.log("citiesError :", error)
-    }  
+   
 }
 
 module.exports = guest;

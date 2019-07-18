@@ -3,6 +3,7 @@ import "./Nav.css";
 import { NavLink } from 'react-router-dom'; 
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 import { faSignInAlt} from '@fortawesome/free-solid-svg-icons'
@@ -52,6 +53,7 @@ class Nav extends Component {
                         </LightTooltip>
                     </div>
             }
+            
         </ul>
         )
     }

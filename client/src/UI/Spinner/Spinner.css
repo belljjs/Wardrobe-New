@@ -31,7 +31,7 @@
   -webkit-transform-origin: 5.2em 5.1em;
   transform-origin: 5.2em 5.1em;
   -webkit-animation: load2 2s infinite ease 1.5s;
-  animation: load2 2s infinite ease 1.5s;
+  animation: load2 0.5s infinite ease 1.5s;
 }
 .Loader:after {
   width: 5.2em;
@@ -43,7 +43,7 @@
   -webkit-transform-origin: 0px 5.1em;
   transform-origin: 0px 5.1em;
   -webkit-animation: load2 2s infinite ease;
-  animation: load2 2s infinite ease;
+  animation: load2 0.5s infinite ease;
 }
 @-webkit-keyframes load2 {
   0% {

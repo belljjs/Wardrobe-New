@@ -1,44 +1,40 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Spinner from '../../UI/Spinner/Spinner';
 import axios from 'axios';
 import * as actions from '../../store/actions/index';
 
 class GuestRoute extends Component {
+    state= {
+        loading: true
+    }
 
     copyData = async (userId) => {
         console.log("*** userId in copyData : ", userId);
+        try{
+            let response = await axios.get('/api/guest',{params: {userId: userId} } ) 
+            console.log("** response of '/api/guest' *** :",response);   
+        }
+        catch(error){
+            console.log(error);
+        }
         
-        const response = await axios.get('/api/guest',
-            {params: {userId: userId} }
-        ) 
-        console.log("** response.status:",response.status);   
     };
-
-
     componentDidMount = async () => {
-    //     this.getCityList();   // get the cities in the begining
-    //     if(this.props.weather.name) {
-    //       const proposal = await this.getProposal(this.props.weather);
-    //       this.setState( {proposal : proposal});
-    //     }
-    //   }
-
-    // createUser = async()=> {
-
-    
-        // auth start()//
-        const firstName = 'guest' + Math.floor(Date.now());
+        this.props.onAuthStart();
+        const userName = 'guest' + Math.floor(Date.now());
         const authData = {
-            firstName: firstName,
-            lastName: firstName,
-            email: firstName + 'gmail.com',
-            password: firstName
+            firstName: 'guest',
+            lastName: 'guest',
+            email: userName + 'gmail.com',
+            password: userName
         }
         try{
             let response = await axios.post('/api/authentication/sign-up', authData)
 
             console.log(" Response of request sign up : ", response);
+
             const expirationDate = new Date(new Date().getTime() + response.data.exp * 1000);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('expirationDate', expirationDate);
@@ -47,18 +43,28 @@ class GuestRoute extends Component {
             const userId = localStorage.userId;
             console.log("*** userId in componentDidMount : ", userId);
             this.copyData(userId);
-
             this.props.onAuthSuccess(response.data.token, response.data.userId, response.data.message );
+            
         }
         catch(error) {
                console.log(" Response of request(error) sign up : ", error.response);
                this.props.onAuthFail(error.response.data);
         }
     }
+    startHandler =() => {
+        this.setState({ loading: false});
+    }
 
     render () {
-        // this.createUser();
-        return <Redirect to="/start" />;
+        let processing = <Spinner />
+        if (this.state.loading) {
+            processing = <Redirect to="/start" /> ;
+        }
+        return (
+            <div>
+                {processing}
+            </div>
+        );
     }
 }
 
@@ -76,7 +82,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (firstName,lastName, email, password, isSignup ) => dispatch( actions.auth(firstName,lastName, email, password, isSignup) ),
         onAuthSuccess: (token,userId,message ) => dispatch( actions.authSuccess(token,userId,message) ),
-        onAuthFail: (error ) => dispatch( actions.authFail(error) ),
+        onAuthStart: ( ) => dispatch( actions.auth() ),
+        onAuthFail: (error) => dispatch( actions.authFail(error) ),
     };
 };
 
