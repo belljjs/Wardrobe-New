@@ -1,9 +1,13 @@
 export {
     auth,
+    authStart,
+    authSuccess,
+    authFail,
     signOut,
     // setAuthRedirectPath,
     authCheckState
 } from './auth';
+
 
 export {
     weatherStore,

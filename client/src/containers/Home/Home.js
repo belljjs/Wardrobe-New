@@ -20,11 +20,6 @@ const home =() => {
     return (
         <div>
             <h3 className="titleHome"> Plan Your Outfit</h3>
-            {/* <div className="pageFeature"> */}
-                    <p> <strong>Guest</strong>  &nbsp; to start as guest with sample data </p>
-                    <p> <FontAwesomeIcon icon={faSignInAlt}/> &nbsp;to sign in or sign up </p>
-                    {/* <p>To sign out, use &nbsp;  <FontAwesomeIcon icon={faSignOutAlt}/> &nbsp; icon which will be shown after sign in.</p> */}
-            {/* </div> */}
             <div>
                 <div className= "titlePage"> Check Weather </div>
                 <div className= "pageFeature">

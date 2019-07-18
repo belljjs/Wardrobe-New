@@ -3,7 +3,7 @@ const db = require('../../database');
 class Item {
     static retrieveALL (req, res, next) {
         const userId = req.query.userId;
-        // console.log(" ** In Item Retrieve ALL userId:",userId);
+        console.log(" ** In Item Retrieve ALL userId:",userId);
         db.any(`SELECT * FROM items WHERE user_id = ${userId}`)
         .then( data =>  res.json(data))
         .catch( error =>  res.json(error)  )
