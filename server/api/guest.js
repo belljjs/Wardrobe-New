@@ -14,10 +14,10 @@ const guest = async (req, res) => {
     const userId = req.query.userId;
     const itemMapping = {};
     const outfitMapping = {};
-
+    
      // Copy cities.
      try{
-        const cities = await db.any(`SELECT * FROM cities WHERE user_id = 2 `)
+        const cities = await db.any(`SELECT * FROM cities WHERE user_id = 3 `)
         for (let i = 0; i < cities.length; i++){
             const oldCity= {...cities[i]};  // copy object
             console.log("oldCity.id: ",oldCity.id,", oldCity.city_name: ",oldCity.city_name);  
@@ -42,7 +42,7 @@ const guest = async (req, res) => {
     }  
     // Copy items.
     try{
-        const items = await db.any(`SELECT * FROM items WHERE user_id = 2 `)
+        const items = await db.any(`SELECT * FROM items WHERE user_id = 3 `)
 
         for (let i = 0; i < items.length; i++){
             const oldItem = {...items[i]};  // copy object
@@ -79,7 +79,7 @@ const guest = async (req, res) => {
 
     // Copy outfits.
     try{
-        const outfits = await db.any(`SELECT * FROM outfits WHERE user_id = 2 `)
+        const outfits = await db.any(`SELECT * FROM outfits WHERE user_id = 3 `)
         console.log("&&& Outfits: ", outfits);
         for (let i = 0; i < outfits.length; i++){
             console.log("old outfit : ", outfits[i])
