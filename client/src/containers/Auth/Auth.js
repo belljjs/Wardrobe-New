@@ -90,7 +90,6 @@ class Auth extends Component {
     }
 
     submitHandler= (event)=>{
-        console.log("**** In submitHandler")
         event.preventDefault();
         if (this.validAllControls()){
             console.log("Allcontrols are valid:", this.state.controls);

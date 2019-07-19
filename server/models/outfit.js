@@ -169,8 +169,3 @@ class Outfit {
 }
 
 module.exports = Outfit
-
-// router.post( '/newOutfit',   Outfit.insert)
-// router.get('/outfitsAll',  Outfit.retrieveALL)
-// router.get('/proposal',  Outfit.retrieveOne)
-// router.delete('/delete',  Outfit.delete)

@@ -71,9 +71,10 @@ router.post( '/imageUpload', ( req, res ) => {
 	});
 });
 
-router.post( '/newItem',   Item.insert)
-router.get('/itemsAll',  Item.retrieveALL)
-router.delete('/delete',  Item.delete)
+router.post( '/newItem',   Item.insert);
+router.get('/itemsAll',  Item.retrieveALL);
+router.delete('/delete',  Item.delete);
+
 
 module.exports = router;
 

@@ -16,9 +16,25 @@ class Start extends Component {
   }
 
   getCityList = async () => {
-    const response = await axios('/api/cities', {params: {userId: localStorage.userId  }})
-    let cityList = response.data.map(r => r.city_name);
-    this.setState({ cityList});
+
+    console.log(" In getCityList... localStorage.userId:" , localStorage.userId)
+    try{
+      const response = await axios('/api/cities', {params: {userId: localStorage.userId  }})
+    
+      console.log(" response from '/api/cities'... :" , response)
+  
+      let cityList = response.data.map(r => r.city_name);
+  
+      console.log(" In getCityList... cityList:" , cityList)
+  
+      this.setState({ cityList});
+
+    }
+    catch(error) {
+      console.log(error);
+    }
+
+  
   };
   
   handleAddCity = async () => {

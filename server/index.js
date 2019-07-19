@@ -34,6 +34,7 @@ app.use('/api/cities',         require('./api/cities'));
 app.use('/api/weather',        require('./api/weather'));
 app.use('/api/item',           require('./api/item'));
 app.use('/api/outfit',         require('./api/outfit'));
+app.use('/api/guest',          require('./api/guest'));
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
