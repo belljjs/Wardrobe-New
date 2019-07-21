@@ -121,7 +121,7 @@ const home =() => {
 
             <div className={classes.root} >
                 <Paper square elevation={0} className={classes.header}>
-                    <Typography>
+                    <Typography component="div">
                         <Box className='box' textAlign='center' fontWeight="fontWeightBold" fontSize="h6.fontSize">
                         {tutorialSteps[activeStep].label}
                         </Box>
