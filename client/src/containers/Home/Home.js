@@ -76,6 +76,7 @@ const tutorialSteps = [
       maxWidth: 600,
       flexGrow: 1,
       margin: 'auto',
+      backgroundColor: 'whitesmoke'
     },
     header: {
       display: 'flex',
@@ -84,16 +85,23 @@ const tutorialSteps = [
       alignItems: 'center',
       height: 85,
       paddingLeft: theme.spacing(4),
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: 'whitesmoke',
     },
     img: {
       maxHeight: 320,
       display: 'block',
       maxWidth: 600,
       overflow: 'hidden',
-      width: '100%',
-      margin: 'auto',
+      width: '90%',
+      margin: 'auto'
+    },
+    autoplay: {
+        backgroundColor: 'whitesmoke'
+    },
+    stepper: {
+        backgroundColor: 'whitesmoke'
     }
+
   }));
 
 const home =() => {
@@ -132,6 +140,7 @@ const home =() => {
                     </Typography>
                 </Paper>
                 <AutoPlaySwipeableViews
+                    className={classes.autoplay}
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     index={activeStep}
                     onChangeIndex={handleStepChange}
@@ -146,6 +155,7 @@ const home =() => {
                     ))}
                 </AutoPlaySwipeableViews>
                 <MobileStepper
+                    className={classes.stepper}
                     steps={maxSteps}
                     position="static"
                     variant="text"
