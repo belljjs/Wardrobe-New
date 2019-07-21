@@ -88,7 +88,7 @@ const tutorialSteps = [
       backgroundColor: theme.palette.background.default,
     },
     img: {
-      height: 320,
+      maxHeight: 320,
       display: 'block',
       maxWidth: 600,
       overflow: 'hidden',
