@@ -9,21 +9,14 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import weatherShot from '../../asset/image/weatherShot.png';
+import startWeather from '../../asset/image/startWeather.png';
 import closetSelectedShot from '../../asset/image/closetSelectedShot.png';
 import closetModalShot from '../../asset/image/closetModalShot.png';
-import deleteModalShot from '../../asset/image/deleteModalShot.png';
-import deleteShot from '../../asset/image/deleteShot.png';
+import deleteConfirm from '../../asset/image/deleteConfirm.png';
+import deleteItem from '../../asset/image/deleteItem.png';
 import itemInfoShot from '../../asset/image/itemInfoShot.png';
-import itemFileShot from '../../asset/image/itemFileShot.png';
-import outfitShot from '../../asset/image/outfitShot.png';
-// import addItemShot from '../../asset/image/addItemShot.png';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
-// import { faSignInAlt} from '@fortawesome/free-solid-svg-icons'
-// import { faPlus} from '@fortawesome/free-solid-svg-icons'
-// import { faMinus} from '@fortawesome/free-solid-svg-icons'
-// import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import addItemShot from '../../asset/image/addItemShot.png';
+import outfitList from '../../asset/image/outfitList.png';
 import './Home.css';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -32,7 +25,7 @@ const tutorialSteps = [
     {
       label: 'Start with Weather',
       description: 'Find the weather of a city and get the proposal for the weather.',
-      imgPath: weatherShot
+      imgPath: startWeather
     },
     {
       label: 'Open Closet',
@@ -47,7 +40,7 @@ const tutorialSteps = [
     {
       label: 'Create Item',
       description: ' Choose a image of the item from your memory ',
-      imgPath: itemFileShot
+      imgPath: addItemShot
     },
     {
         label: 'Upload Items',
@@ -57,17 +50,17 @@ const tutorialSteps = [
     {
       label: 'Delete Item',
       description: 'Choose an item to delete ',
-      imgPath: deleteShot
+      imgPath: deleteItem
     },
     {
     label: 'Confirm Deleting',
     description: 'Make sure the item for deleting ',
-    imgPath: deleteModalShot
+    imgPath: deleteConfirm
     },
     {
     label: 'Show Outfit List',
     description: 'Display all the outfits you have made',
-    imgPath: outfitShot
+    imgPath: outfitList
     },
   ];
 
