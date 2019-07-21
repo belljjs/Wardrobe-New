@@ -75,7 +75,8 @@ const tutorialSteps = [
     root: {
       maxWidth: 600,
       flexGrow: 1,
-      margin: 'auto'
+      margin: 'auto',
+    //   backgroundColor: 'darkgrey'
     },
     header: {
       display: 'flex',
@@ -92,8 +93,10 @@ const tutorialSteps = [
       maxWidth: 600,
       overflow: 'hidden',
       width: '100%',
-      margin: 'auto'
-    },
+      margin: 'auto',
+    //   marginTop: 20,
+    //   marginBottom: 20,
+    }
   }));
 
 const home =() => {
@@ -138,7 +141,7 @@ const home =() => {
                     enableMouseEvents
                 >
                     {tutorialSteps.map((step, index) => (
-                    <div key={step.label}>
+                    <div key={step.label} >
                         {Math.abs(activeStep - index) <= 2 ? (
                         <img className={classes.img} src={step.imgPath} alt={step.label} />
                         ) : null}
