@@ -50,7 +50,7 @@ const tutorialSteps = [
       imgPath: itemFileShot
     },
     {
-        label: 'Item Upload',
+        label: 'Upload Items',
         description: ' Input info and submit for uploading ',
         imgPath: itemInfoShot
     },
@@ -76,7 +76,6 @@ const tutorialSteps = [
       maxWidth: 600,
       flexGrow: 1,
       margin: 'auto',
-    //   backgroundColor: 'darkgrey'
     },
     header: {
       display: 'flex',
@@ -94,8 +93,6 @@ const tutorialSteps = [
       overflow: 'hidden',
       width: '100%',
       margin: 'auto',
-    //   marginTop: 20,
-    //   marginBottom: 20,
     }
   }));
 
