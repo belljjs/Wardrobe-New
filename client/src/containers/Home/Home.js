@@ -1,4 +1,14 @@
 import React from 'react'
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
 import weatherShot from '../../asset/image/weatherShot.png';
 import closetSelectedShot from '../../asset/image/closetSelectedShot.png';
 import closetModalShot from '../../asset/image/closetModalShot.png';
@@ -16,92 +26,143 @@ import { faMinus} from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import './Home.css';
 
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+
+const tutorialSteps = [
+    {
+      label: 'Start with Weather',
+      description: 'Find the weather of a city and get the proposal for the weather.',
+      imgPath: weatherShot
+    },
+    {
+      label: 'Open Closet',
+      description: ' Click items to select for an outfit. ',
+      imgPath: closetSelectedShot
+    },
+    {
+      label: 'Confirm Outfit',
+      description: 'Looks good? Then save it ',
+      imgPath: closetModalShot
+    },
+    {
+      label: 'Create Item',
+      description: ' Choose a image of the item from your memory ',
+      imgPath: itemFileShot
+    },
+    {
+        label: 'Item Upload',
+        description: ' Input info and submit for uploading ',
+        imgPath: itemInfoShot
+    },
+    {
+      label: 'Delete Item',
+      description: 'Choose an item to delete ',
+      imgPath: deleteShot
+    },
+    {
+    label: 'Delete confirm',
+    description: 'Make sure for the deleting ',
+    imgPath: deleteModalShot
+    },
+    {
+    label: 'Show Outfit List',
+    description: 'Display all the outfits you have made',
+    imgPath: outfitShot
+    },
+  ];
+
+  const useStyles = makeStyles(theme => ({
+    root: {
+      maxWidth: 600,
+      flexGrow: 1,
+      margin: 'auto'
+    },
+    header: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 85,
+      paddingLeft: theme.spacing(4),
+      backgroundColor: theme.palette.background.default,
+    },
+    img: {
+      height: 320,
+      display: 'block',
+      maxWidth: 600,
+      overflow: 'hidden',
+      width: '100%',
+      margin: 'auto'
+    },
+  }));
+
 const home =() => {
+    const classes = useStyles();
+    const theme = useTheme();
+    const [activeStep, setActiveStep] = React.useState(0);
+    const maxSteps = tutorialSteps.length;
+  
+    function handleNext() {
+      setActiveStep(prevActiveStep => prevActiveStep + 1);
+    }
+  
+    function handleBack() {
+      setActiveStep(prevActiveStep => prevActiveStep - 1);
+    }
+  
+    function handleStepChange(step) {
+      setActiveStep(step);
+    }
+  
+
     return (
         <div>
             <h3 className="titleHome"> Plan Your Outfit</h3>
-            <div>
-                <div className= "titlePage"> Check Weather </div>
-                <div className= "pageFeature">
-                    <p> Once signed in, start with finding weather of the city and get the proposal for the weather. </p>
-                </div>
-                <img className="screenShot"
-                    src={weatherShot} 
-                    alt=""  />
-                <div className="pageFeature">
-                    <p>Then, the menu bar shows available links.</p>
-                </div>
-            </div>
-            <div>
-                <div className= "titlePage"> Add Item </div>
-                <div className="pageFeature">
-                    <p>If there is no items and no outfits saved, </p>
-                    <p>then click the &nbsp;  <FontAwesomeIcon icon={faPlus}/> &nbsp;  link to add items with image files for the items stored in your computer. </p>
-                </div>
-                <img className="screenShot"
-                    src={addItemShot} 
-                    alt=""  />
-                <div className="pageFeature">
-                    Click the &nbsp; <strong style={{border: "solid grey 1px"}}> Choose File </strong> &nbsp; button to find a file for an item.
-                </div>                   
-                <img className="screenShot"
-                    src={itemFileShot} 
-                    alt=""  />
-                <div className="pageFeature">
-                    Set the properties of the item and click submit button.
-                </div>                   
-                <img className="screenShot"
-                    src={itemInfoShot} 
-                    alt=""  />   
-            </div>
-            <br></br><br></br><br></br>
-            <div>
-                <div className= "titlePage"> Delete Item </div>
-                <div className="pageFeature">
-                    <p>If an item is no longer available, then click &nbsp;  <FontAwesomeIcon icon={faMinus}/> &nbsp; link to delete the item.   </p>
-                </div>
-                <img className="screenShot"
-                    src={deleteShot} 
-                    alt=""  />
-                <div className="pageFeature">
-                    <p>Click the item then you can see a big image of the item.</p>
-                    <p>Confirm the item to be deleted.</p>
-                </div>                   
-                <img className="screenShot"
-                    src={deleteModalShot} 
-                    alt=""  />
-            </div>
-            <br></br><br></br><br></br>
-            <div>
-                <div className= "titlePage"> Open Closet </div>
-                <div className="pageFeature">
-                    <p>To open your closet, clickthe <strong>closet</strong> link in the menu bar.</p>
-                    <p>Click items to select for an outfit. </p>
-                    <p>If you want to put items back to the closet, click again each item of selected items.</p>
-                </div>
-                <img className="screenShot"
-                    src={closetSelectedShot} 
-                    alt=""  />
-            </div>
-            <div>
-                <div className="pageFeature">
-                    <p> After selecting items for an outfit, click magnifier to see items bigger. If it's ok, then save it.</p>
-                </div>
-                <img className="screenShot"
-                    src={closetModalShot} 
-                    alt=""  />
-            </div>
-            <br></br><br></br><br></br>
-            <div>
-                    <div className= "titlePage"> List Outfits </div>                     
 
-                <div className="pageFeature">
-                    <p> To check all the outfits saved, click <strong>outfit </strong> link in the menu bar.</p>
-                    <p> If you want to delete some outfits, click &nbsp; <FontAwesomeIcon icon={faTrashAlt} size="1x" color="darkGreen"  /> &nbsp; icon for each outfit. </p>
-                </div>
-                <img className="screenShot"
-                    src={outfitShot} 
-                    alt=""  />
+            <div className={classes.root} >
+                <Paper square elevation={0} className={classes.header}>
+                    <Typography>
+                        <Box className='box' textAlign='center' fontWeight="fontWeightBold" fontSize="h6.fontSize">
+                        {tutorialSteps[activeStep].label}
+                        </Box>
+                        <Box textAlign='center' >
+                        {tutorialSteps[activeStep].description}
+                        </Box>
+                        
+                    </Typography>
+                </Paper>
+                <AutoPlaySwipeableViews
+                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                    index={activeStep}
+                    onChangeIndex={handleStepChange}
+                    enableMouseEvents
+                >
+                    {tutorialSteps.map((step, index) => (
+                    <div key={step.label}>
+                        {Math.abs(activeStep - index) <= 2 ? (
+                        <img className={classes.img} src={step.imgPath} alt={step.label} />
+                        ) : null}
+                    </div>
+                    ))}
+                </AutoPlaySwipeableViews>
+                <MobileStepper
+                    steps={maxSteps}
+                    position="static"
+                    variant="text"
+                    activeStep={activeStep}
+                    nextButton={
+                    <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+                        Next
+                        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                    </Button>
+                    }
+                    backButton={
+                    <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                        Back
+                    </Button>
+                    }
+                />
             </div>
         </div>
     );
