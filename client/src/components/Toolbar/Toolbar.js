@@ -12,11 +12,12 @@ const toolbar=(props) => (
         </div>
         <div className="DesktopOnly">
            <Nav 
+               
                 isAuthenticated={props.isAuth}
                 weatherFound={props.isWeather}
                 />
         </div>
-        <DropMenuToggle clicked={props.dropMenuClicked} />    
+        <DropMenuToggle clicked={props.dropMenuToggleClicked} />    
     </header>
 );
 

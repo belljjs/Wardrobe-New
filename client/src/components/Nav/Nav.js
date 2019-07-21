@@ -21,6 +21,7 @@ class Nav extends Component {
               fontSize: 15,
             },
           }))(Tooltip);
+        console.log("this.props.weatherFound:",this.props.weatherFound);
         return ( 
             <ul>
             { this.props.isAuthenticated
@@ -28,28 +29,28 @@ class Nav extends Component {
                     this.props.weatherFound 
                     ?   
                         <div className="Nav">
-                            <li><NavLink to='/start'>weather</NavLink></li>
-                            <li><NavLink to='/closet'>closet</NavLink></li>
-                            <li><NavLink to='/outfits'>outfits </NavLink></li>
-                            <li><NavLink to='/addItem'><FontAwesomeIcon icon={faPlus}/></NavLink></li>
-                            <li><NavLink to='/deleteItem'><FontAwesomeIcon icon={faMinus}/></NavLink></li>
-                            <li> <NavLink to='/signOut'><FontAwesomeIcon icon={faSignOutAlt}/></NavLink></li>
+                            <li><NavLink to='/start' onClick={this.props.clicked}>weather</NavLink></li>
+                            <li><NavLink to='/closet' onClick={this.props.clicked}>closet</NavLink></li>
+                            <li><NavLink to='/outfits' onClick={this.props.clicked}>outfits </NavLink></li>
+                            <li><NavLink to='/addItem' onClick={this.props.clicked}><FontAwesomeIcon icon={faPlus}/></NavLink></li>
+                            <li><NavLink to='/deleteItem' onClick={this.props.clicked}><FontAwesomeIcon icon={faMinus}/></NavLink></li>
+                            <li> <NavLink to='/signOut' onClick={this.props.clicked}><FontAwesomeIcon icon={faSignOutAlt}/></NavLink></li>
                         </div>
                     : 
                         <div className="Nav">
                             <li style={{"marginRight":"50px"}}><NavLink to='/start'>Start with finding weather... </NavLink></li>
-                            <li><NavLink to='/outfits'>outfits </NavLink></li>
-                            <li><NavLink to='/addItem'><FontAwesomeIcon icon={faPlus}/></NavLink></li>
-                            <li><NavLink to='/deleteItem'><FontAwesomeIcon icon={faMinus}/></NavLink></li>
-                            <li> <NavLink to='/signOut'><FontAwesomeIcon icon={faSignOutAlt}/></NavLink> </li>
+                            <li><NavLink to='/outfits' onClick={this.props.clicked}>outfits </NavLink></li>
+                            <li><NavLink to='/addItem' onClick={this.props.clicked}><FontAwesomeIcon icon={faPlus}/></NavLink></li>
+                            <li><NavLink to='/deleteItem' onClick={this.props.clicked}><FontAwesomeIcon icon={faMinus}/></NavLink></li>
+                            <li> <NavLink to='/signOut' onClick={this.props.clicked}><FontAwesomeIcon icon={faSignOutAlt}/></NavLink> </li>
                         </div>
                 : 
                     <div  className="Nav">
                         <LightTooltip  title="Start as guest with sample data">    
-                            <li><NavLink to='/guest'>Guest</NavLink></li>
+                            <li><NavLink to='/guest' onClick={this.props.clicked}>Guest</NavLink></li>
                         </LightTooltip>
                         <LightTooltip  title="Sign in or Sign up ">    
-                             <li><NavLink to='/auth' ><FontAwesomeIcon icon={faSignInAlt}/></NavLink></li>
+                             <li><NavLink to='/auth' onClick={this.props.clicked}><FontAwesomeIcon icon={faSignInAlt}/></NavLink></li>
                         </LightTooltip>
                     </div>
             }

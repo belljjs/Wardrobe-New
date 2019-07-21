@@ -17,13 +17,13 @@ import deleteShot from '../../asset/image/deleteShot.png';
 import itemInfoShot from '../../asset/image/itemInfoShot.png';
 import itemFileShot from '../../asset/image/itemFileShot.png';
 import outfitShot from '../../asset/image/outfitShot.png';
-import addItemShot from '../../asset/image/addItemShot.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
-import { faSignInAlt} from '@fortawesome/free-solid-svg-icons'
-import { faPlus} from '@fortawesome/free-solid-svg-icons'
-import { faMinus} from '@fortawesome/free-solid-svg-icons'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+// import addItemShot from '../../asset/image/addItemShot.png';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
+// import { faSignInAlt} from '@fortawesome/free-solid-svg-icons'
+// import { faPlus} from '@fortawesome/free-solid-svg-icons'
+// import { faMinus} from '@fortawesome/free-solid-svg-icons'
+// import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import './Home.css';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);

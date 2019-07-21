@@ -13,7 +13,7 @@ class Layout extends Component {
   }
 
   dropMenuCloseHandler = () => {
-      this.setState( { showDropMenu: false } );
+    this.setState( { showDropMenu: false } );
   }
 
   dropMenuOpenHandler = () => {
@@ -28,14 +28,13 @@ class Layout extends Component {
   }
 
   render() {
-    // if (!this.state.current_user_id) {
-    // }
+    console.log(" In Layout, this.props.weatherFound: ",this.props.weatherFound);
     return (  
       <div className="Layout">
         <Toolbar
           isAuth={this.props.isAuthenticated}
           isWeather={this.props.weatherFound}
-          dropMenuClicked={this.dropMenuOpenHandler} />
+          dropMenuToggleClicked={this.dropMenuOpenHandler} />
         <DropMenu
           isAuth={this.props.isAuthenticated}
           isWeather={this.props.weatherFound}
