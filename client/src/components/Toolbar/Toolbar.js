@@ -12,9 +12,7 @@ const toolbar=(props) => (
         </div>
         <div className="DesktopOnly">
            <Nav 
-               
                 isAuthenticated={props.isAuth}
-                weatherFound={props.isWeather}
                 />
         </div>
         <DropMenuToggle clicked={props.dropMenuToggleClicked} />    

@@ -60,8 +60,8 @@ const tutorialSteps = [
       imgPath: deleteShot
     },
     {
-    label: 'Delete confirm',
-    description: 'Make sure for the deleting ',
+    label: 'Confirm Deleting',
+    description: 'Make sure the item for deleting ',
     imgPath: deleteModalShot
     },
     {

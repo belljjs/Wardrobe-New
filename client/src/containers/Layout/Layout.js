@@ -28,16 +28,13 @@ class Layout extends Component {
   }
 
   render() {
-    console.log(" In Layout, this.props.weatherFound: ",this.props.weatherFound);
     return (  
       <div className="Layout">
         <Toolbar
           isAuth={this.props.isAuthenticated}
-          isWeather={this.props.weatherFound}
           dropMenuToggleClicked={this.dropMenuOpenHandler} />
         <DropMenu
           isAuth={this.props.isAuthenticated}
-          isWeather={this.props.weatherFound}
           open={this.state.showDropMenu}
           closed={this.dropMenuCloseHandler} />
         <main className="Content" items={this.state.items}>
@@ -50,7 +47,6 @@ class Layout extends Component {
 const mapStateToProps = state =>{
   return{
     isAuthenticated: state.auth.token !== null,
-    weatherFound: state.weather.weatherName !== null
   }
 }
 export default connect(mapStateToProps)(Layout);
