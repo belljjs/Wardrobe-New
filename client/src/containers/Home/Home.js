@@ -23,33 +23,33 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
     {
-      label: 'Start with Weather',
+      label: 'Start with Finding Weather',
       description: 'Find the weather of a city and get the proposal for the weather.',
       imgPath: startWeather
     },
     {
-      label: 'Open Closet',
-      description: ' Click items to select for an outfit. ',
+      label: 'Open Your Closet',
+      description: ' Click items in the list to to add them to your outfit. ',
       imgPath: closetSelectedShot
     },
     {
       label: 'Confirm Outfit',
-      description: 'Looks good? Then save it ',
+      description: 'Looks good? Then save it as a new outfit',
       imgPath: closetModalShot
     },
     {
       label: 'Create Item',
-      description: ' Choose a image of the item from your memory ',
+      description: 'Register your new item. Choose a image file for the item ',
       imgPath: addItemShot
     },
     {
         label: 'Upload Items',
-        description: ' Input info and submit for uploading ',
+        description: 'Add infomation for the new item and submit for uploading ',
         imgPath: itemInfoShot
     },
     {
       label: 'Delete Item',
-      description: 'Choose an item to delete ',
+      description: 'Not available anymore? Choose the item to delete ',
       imgPath: deleteItem
     },
     {
@@ -66,7 +66,8 @@ const tutorialSteps = [
 
   const useStyles = makeStyles(theme => ({
     root: {
-      maxWidth: 600,
+      maxWidth: 800,
+      maxHeight: 400,
       flexGrow: 1,
       margin: 'auto',
       backgroundColor: 'whitesmoke'
@@ -86,7 +87,7 @@ const tutorialSteps = [
       maxWidth: 600,
       overflow: 'hidden',
       width: '90%',
-      margin: 'auto'
+      margin: 'auto',
     },
     autoplay: {
         backgroundColor: 'whitesmoke'
