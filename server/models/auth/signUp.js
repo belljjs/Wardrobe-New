@@ -1,7 +1,7 @@
 const db = require('../../../database');
 
 const createUser = (first_name, last_name, email, password) => {
-    console.log(" In createUser, email, password:", email, password);
+    console.log(" ***  createUser/signUp/auth/model, email, password:", email, password);
     
     const query = `
         INSERT INTO users (first_name, last_name, email, pw) 

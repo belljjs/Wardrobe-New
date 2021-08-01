@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 // const config = require('../../config');
 const { createUser } = require('../models/auth/signUp');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const tokenForUser = (user) => {
@@ -16,14 +16,13 @@ const tokenForUser = (user) => {
 }
 
 const signin = (req,res,next) => {
-    console.log( " In controller starting signin... ");
-    console.log( " varified user : ", req.user );
+    console.log( " In controller/ authentication, starting signin... ");
    
     const {email, password} = req.body;
-    console.log( " Before res.json..." );
     const token = tokenForUser(req.user);
-    console.log( " tokenForUser(req.user):",tokenForUser(req.user) );
-    console.log( " &&&&&& res:",res);
+
+    console.log( " token:",token );
+    console.log( " req.user.id:",req.user.id );
 
     res.send({
         token: token,
@@ -35,7 +34,7 @@ const signin = (req,res,next) => {
 }
 
 const signup = async(req,res,next) => {
-    console.log("In controller/auth../signIn:");
+    console.log("In controller/auth start sign up:");
 
     const {firstName, lastName, email, password} = req.body;
     saltRounds = 12
