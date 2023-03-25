@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import Item from '../Item/Item';
 import './Items.css'
 import '../../index.css';
-import ItemsCarousel from 'react-items-carousel';
-// import range from 'lodash/range';
+import Slider from "react-slick";
 
 class  Items extends Component {
-
     render() {
+        const settings = {
+            dots: true,
+            rows: 1,
+            initialSlide: 0,
+            infinite: false,  // show each item only once
+            speed: 500,
+            slidesToShow: 6,
+            slidesToScroll: 6,
+        };
         const itemsShown = [...this.props.itemsShown]
         const items = itemsShown.map( ({id, category, color, season, occasion, image_location},index) => 
             <Item 
@@ -21,15 +28,9 @@ class  Items extends Component {
         return(
             <div>
                 <p className="subTitle">ITEMS </p> 
-                <ItemsCarousel
-                    className="carousel"
-                    numberOfCards={6}
-                    gutter={0}
-                    showSlither={true}
-                    firstAndLastGutter={true}
-                    freeScrolling={true} >
-                    {items}
-                </ItemsCarousel>    
+                <Slider {...settings}>
+                {items}
+                </Slider>
             </div>
         )
     }
