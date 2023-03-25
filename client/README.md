@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
- // "proxy": "http://localhost:4646"
+ // ( in dev) "proxy": "http://localhost:4646"
 
 
 ## Available Scripts
