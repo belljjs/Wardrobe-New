@@ -7,6 +7,7 @@ import SelectedItems from '../../components/SelectedItems/SelectedItems';
 import ClosetModal from "../../UI/ClosetModal/ClosetModal";
 import { connect } from "react-redux";
 import './Closet.css';
+// need to replace materialUI with react-slick 
 
 class Closet extends Component {
     state = {
